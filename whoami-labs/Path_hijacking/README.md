@@ -1,4 +1,4 @@
-# 🐳 DockerLabs: [Path Hijacking]
+# 🐳 Whoami Labs: [Path Hijacking]
 
 | Propiedad | Detalle |
 | :--- | :--- |
@@ -22,14 +22,15 @@ Breve introducción sobre la máquina o el contexto del reto.
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
-sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 10.10.X.X -oN allPorts
+sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 172.17.0.2 -oN allPorts
 ```
 
 **Resultados del escaneo:**
-* **Puerto 22/TCP**: SSH (OpenSSH...)
-* **Puerto 80/TCP**: HTTP (Apache/Nginx...)
+* **Puerto 22/TCP**: SSH
+* **Puerto 80/TCP**: HTTP
+* **Puerto 8080/TCP**: HTTP:PROXY
 
-*(Opcional) Escaneo profundo de servicios:*
+*Escaneo profundo de servicios:*
 ```bash
 sudo nmap -p22,80,8080 -sCV 172.17.0.2 -oN targeted
 ```
@@ -43,7 +44,7 @@ sudo nmap -p22,80,8080 -sCV 172.17.0.2 -oN targeted
 ### Enumeración Web (Puerto 80)
 Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz:
 
-![Interfaz Web](img/web_home.png) <!-- Recuerda guardar tus capturas en una carpeta llamada img -->
+![Interfaz Web](img/web_home.png) 
 
 Aplicamos fuzzing de directorios para buscar rutas ocultas:
 ```bash
