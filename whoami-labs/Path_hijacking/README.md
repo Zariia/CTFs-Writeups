@@ -1,11 +1,11 @@
-# 🐳 DockerLabs: [Nombre de la Máquina]
+# 🐳 DockerLabs: [Path Hijacking]
 
 | Propiedad | Detalle |
 | :--- | :--- |
 | **Plataforma** | DockerLabs |
-| **Dificultad** | 🟢 Fácil / 🟡 Media / 🔴 Difícil |
-| **OS** | Linux / Windows |
-| **IP de la Máquina** | `10.10.X.X` |
+| **Dificultad** | 🟢 Fácil  |
+| **OS** | Linux  |
+| **IP de la Máquina** | `172.0.0.2` |
 | **Fecha de resolución** | 2026-09-02 |
 
 ---
@@ -31,8 +31,14 @@ sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 10.10.X.X -oN allPorts
 
 *(Opcional) Escaneo profundo de servicios:*
 ```bash
-sudo nmap -sCV -p 22,80 10.10.X.X -oN targeted
+sudo nmap -p22,80,8080 -sCV 172.17.0.2 -oN targeted
 ```
+| Puerto | Estado | Servicio | Versión |
+| :---: | :---: | :--- | :--- |
+| **22 / TCP** | 🟢 Abierto | SSH | OpenSSH 8.9p1 (Ubuntu Linux) |
+| **80 / TCP** | 🟢 Abierto | HTTP | SimpleHTTPServer 0.6 (Python 3.10.12) |
+| **8080 / TCP** | 🟢 Abierto | HTTP | Golang net/http server |
+
 
 ### Enumeración Web (Puerto 80)
 Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz:
