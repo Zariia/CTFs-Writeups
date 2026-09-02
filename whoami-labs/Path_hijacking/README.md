@@ -61,7 +61,8 @@ En la enumeración web, descubrimos un directorio dev con dos carpetas y un txt.
 Probamos las credenciales encontradas para conectarnos por ssh al puerto 22 y funcionan.
 Ahora somos el usuario srv_backup.
 
-<img src=".img/ssh.png" width="70%">
+<img src="./img/ssh.png" width="70%">
+
 ---
 
 ## 👑 3. Escalada de Privilegios
