@@ -7,7 +7,7 @@
 * [📁 Entrar a la carpeta de DockerLabs](./DockerLabs)
 
 ### 📦 Whoami-labs
-* [📁 Entrar a la carpeta de HackTheBox](./whoami-labs)
+* [📁 Entrar a la carpeta de Whoami-labs](./whoami-labs)
 
 ### 📦 HackTheBox
 * [📁 Entrar a la carpeta de HackTheBox](./HackTheBox)
