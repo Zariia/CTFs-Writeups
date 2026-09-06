@@ -40,6 +40,7 @@ sudo nmap -p22,80,8080 -sCV 172.17.0.2 -oN targeted
 | **80 / TCP** | 🟢 Abierto | HTTP | SimpleHTTPServer 0.6 (Python 3.10.12) |
 | **8080 / TCP** | 🟢 Abierto | HTTP | Golang net/http server |
 
+Vemos que tenemos dos sitios web y el puerto ssh pero no conocemos ninguna credencial así que empezamos revisando los sitios web.
 
 ### Enumeración Web (Puerto 80)
 Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz:
@@ -47,12 +48,19 @@ Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz:
 <img src="./img/web_home.png" width="70%">
 
 
-Aplicamos fuzzing de directorios para buscar rutas ocultas:
-```bash
-gobuster dir -u http://10.10.X.X/ -w /usr/share/wordlists/dirb/common.txt -x php,txt,html
-```
+Aplicamos fuzzing de directorios usando dirbuster para buscar rutas ocultas:
+
+<img src="./img/dirbuster.png" width="70%">
 
 ---
+
+### Enumeración Web (Puerto 8080)
+Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz:
+
+<img src="./img/web_home8080.png" width="70%">
+
+Aplicamos fuzzing de directorios pero no encontramos nada, por lo que de momento la descartamos y continuamos con la web del puerto 80.
+
 
 ## 💥 2. Fase de Explotación 
 
