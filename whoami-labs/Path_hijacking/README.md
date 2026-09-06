@@ -83,6 +83,10 @@ Analizamos el entorno buscando vectores comunes de escalada (permisos SUID, tare
 sudo -l
 ```
 
+<img src="./img/backup.png" width="70%">
+
+
+
 ### Explotación del Vector de Escalada
 Encontrado un binario o configuración débil. Explicar cómo se abusa de ello para convertirse en `root`.
 
@@ -90,6 +94,8 @@ Encontrado un binario o configuración débil. Explicar cómo se abusa de ello p
 # Ejemplo de explotación
 sudo /usr/bin/env /bin/sh
 ```
+
+<img src="./img/root.png" width="70%">
 
 ¡Ya somos **root**! 🚩
 
