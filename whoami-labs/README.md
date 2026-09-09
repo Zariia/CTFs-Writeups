@@ -14,4 +14,5 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **whoami-
 
 
 ---
-[⬅️ Volver al inicio](../)
+
+[⬅️ Volver al inicio](../README.md)
