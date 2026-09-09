@@ -155,19 +155,22 @@ El * se expande antes de que tar reciba los argumentos, incluyendo nuestros arch
 Esto provoca que tar ejecute el script run.sh.
 
 Una vez finalizada la ejecución del backup, comprobamos si se ha creado correctamente /tmp/rootbash:
-ls -l /tmp/rootbash
+`ls -l /tmp/rootbash`
 
 Si todo ha funcionado correctamente, podremos ejecutar la shell conservando los privilegios:
-/tmp/rootbash -p
+`/tmp/rootbash -p`
 
 Con esto obtenemos una shell con privilegios elevados.
 
-
 <img src="./img/root.png" width="70%">
 
-¡Ya somos **root**! 🚩
+¡Ya somos **root**! 
 
-En el fichero flag.txt tenemos la flag.
+En el fichero flag.txt tenemos la flag. 🚩
+
+Para finalizar, vamos a nuestra terminal y ponemos la flag completa.
+
+<img src="./img/bandera.png" width="70%">
 
 ---
 
