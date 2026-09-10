@@ -1,4 +1,4 @@
-# 🐳 Whoami Labs: [Breach]
+# >_ [Breach]
 
 | Propiedad | Detalle |
 | :--- | :--- |
@@ -17,3 +17,12 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 ---
 
 ## 🔍 1. Fase de Reconocimiento y Enumeración
+Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
+
+```bash
+sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 172.17.0.2 -oN allPorts
+```
+
+**Resultados del escaneo:**
+* **Puerto 22/TCP**: SSH
+* **Puerto 80/TCP**: HTTP
