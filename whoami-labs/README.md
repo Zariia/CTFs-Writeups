@@ -11,6 +11,7 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **whoami-
 | Máquina | Dificultad | Tipo / Enfoque | Writeup |
 | :--- | :---: | :--- | :---: |
 | `Path_hijacking` | 🟢 Fácil | SUID / Abuso de PATH | [👁️ Leer Writeup](./Path_hijacking/) |
+| `Breach` | 🟢 Fácil | RSA / Docker | [👁️ Leer Writeup](./Breach/) |
 
 
 ---
