@@ -75,7 +75,14 @@ Accedemos a ambas pero no encontramos nada útil en ellas que nos permita avanza
 
 <img width="812" height="302" alt="6WebServices" src="https://github.com/user-attachments/assets/b0c6eb94-30d7-435e-84f2-a308e9621059" />
 
-Una vez finalizado el escaneo, Gobuster encontró un par de rutas más, una de ella si que contiene información interesante, entramos a internal y vemos que tiene....
+Una vez finalizado el escaneo, Gobuster encontró un par de rutas más, una de ella si que contiene información interesante, entramos a internal.
+
+---
+
+## 💥 2. Fase de Explotación 
+
+### Vector de Ataque
+En la enumeración web, descubrimos un directorio ....
 
 
 <img width="707" height="232" alt="6WebInternal" src="https://github.com/user-attachments/assets/fa6441d5-cb2f-4c38-b77c-ad34b76fa5c9" />
@@ -85,7 +92,15 @@ Cuando pulsamos...
 <img width="558" height="785" alt="7Privatekey" src="https://github.com/user-attachments/assets/47700c59-1ebe-424b-bde4-8232b6382ba6" />
 
 
+---
+
+## 👑 3. Escalada de Privilegios
 
 
+
+
+---
+
+## 🏁 4. Conclusiones y Mitigación
 
 
