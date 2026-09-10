@@ -1,4 +1,4 @@
-# 🐳 Whoami Labs: [Path Hijacking]
+# >_ [Path Hijacking]
 
 | Propiedad | Detalle |
 | :--- | :--- |
