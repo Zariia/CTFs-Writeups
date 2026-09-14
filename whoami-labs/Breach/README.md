@@ -6,7 +6,7 @@
 | **Plataforma** | Whoami Labs |
 | **Dificultad** | 🟢 Fácil  |
 | **OS** | Linux  |
-| **IP de la Máquina** | `172.0.0.2` |
+| **IP de la Máquina** | `172.17.0.2` |
 | **Fecha de resolución** | 2026-09-10 |
 
 ---
@@ -46,8 +46,7 @@ nmap -p22,80 -sCV 172.17.0.2 -oN targeted
 ```
 
 <img width="1066" height="390" alt="2EscaneoPuertos" src="https://github.com/user-attachments/assets/4e7b97d4-ed72-46a7-a71a-b1c9037aa3d3" />
-
-
+<br><br>
 Tenemos un servidor web y el servicio SSH expuesto. Sin embargo, como todavía no conocemos ninguna credencial válida para acceder mediante SSH, comenzamos enumerando el servicio web.
 
 
@@ -67,7 +66,7 @@ gobuster dir -u http://172.17.0.2/ \
 
 <img width="1689" height="432" alt="3Escaneo" src="https://github.com/user-attachments/assets/35814cd7-3748-4319-86a9-41f921fb6b43" />
 
-
+<br><br>
 Le damos tiempo para ver si encuentra algo más y mientras vamos a mirar las dos que nos ha enumerado: 
 home.php y services.php 
 
@@ -75,11 +74,12 @@ Accedemos a ambas pero no encontramos nada útil en ellas que nos permita avanza
 
 <img width="1550" height="727" alt="5WebHome" src="https://github.com/user-attachments/assets/7be350de-a93d-4754-9303-3ed92e916043" />
 
+<br><br>
 
 <img width="812" height="302" alt="6WebServices" src="https://github.com/user-attachments/assets/b0c6eb94-30d7-435e-84f2-a308e9621059" />
+<br><br>
 
-
-Una vez finalizado el escaneo, Gobuster encontró un par de rutas más,about e interal. En internal si que contiene información interesante.
+Una vez finalizado el escaneo, Gobuster encontró un par de rutas más, about e interal. En internal vemos que si contiene información interesante.
 
 ---
 
@@ -90,27 +90,47 @@ En la enumeración web, descubrimos un directorio interno llamado internal que c
 
 
 <img width="707" height="232" alt="6WebInternal" src="https://github.com/user-attachments/assets/fa6441d5-cb2f-4c38-b77c-ad34b76fa5c9" />
-
+<br><br>
 Pulsamos en el enlace y nos aparece el id_rsa que es una clave privada para openssh.
 
 <img width="558" height="785" alt="7Privatekey" src="https://github.com/user-attachments/assets/47700c59-1ebe-424b-bde4-8232b6382ba6" />
-
+<br><br>
 Copiamos la clave y la guardamos en un archivo que llamaremos id_rsa, después le damos permisos.
 ```bash
 chmod 600 id_rsa
 ```
 
-En internal vimos que ponía ....
-Probamos con devops que es el usuario que ponia antes de la clave y entramos al 22
+En internal vimos que ponía "devops backup key" asi que probamos a conectarnos por el puerto 22 con el usuario devops y con el id_rsa que acabamos de obtener.
+
+<img width="1070" height="357" alt="8sshDentro" src="https://github.com/user-attachments/assets/136f6680-e730-4b4f-b969-dbf62749731f" />
+<br><br>
+
+Ya estamos dentro y somos el usuario devops.
 
 ---
 
 ## 👑 3. Escalada de Privilegios
 
+Para finalizar la máquina tenemos que escalar a root, ya que allí se encuentra la bandera.
+
+<img width="865" height="87" alt="9previaMontamos" src="https://github.com/user-attachments/assets/f032e3da-5419-4260-8493-b2babb462659" />
+<br><br>
+
+<img width="865" height="256" alt="9Montamos" src="https://github.com/user-attachments/assets/bf8463e7-dfcc-441c-adbd-3186a1d5cee9" />
+<br><br>
 Escalada de privilegios mediante pertenencia a un grupo:
 
 Al hacer esto, tu terminal "engaña" al sistema y pasa a controlar los archivos reales de la máquina víctima, no del contenedor. Entramos como root y ya podemos ver la flag
 docker run -v /:/mnt --rm -it ubuntu chroot /mnt bash
+
+<img width="918" height="378" alt="10Fin" src="https://github.com/user-attachments/assets/e798c51a-eb56-42fc-9a69-97dc1403685c" />
+<br><br>
+
+<img width="970" height="821" alt="FinnnMio" src="https://github.com/user-attachments/assets/054c810f-8a88-47c7-a480-e067a786090f" />
+
+<br><br>
+
+
 
 
 ---
