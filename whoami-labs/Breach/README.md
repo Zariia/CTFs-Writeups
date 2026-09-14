@@ -96,6 +96,7 @@ Pulsamos en el enlace y nos aparece el id_rsa que es una clave privada para open
 <img width="558" height="785" alt="7Privatekey" src="https://github.com/user-attachments/assets/47700c59-1ebe-424b-bde4-8232b6382ba6" />
 <br><br>
 Copiamos la clave y la guardamos en un archivo que llamaremos id_rsa, después le damos permisos.
+
 ```bash
 chmod 600 id_rsa
 ```
@@ -112,16 +113,21 @@ Ya estamos dentro y somos el usuario devops.
 ## 👑 3. Escalada de Privilegios
 
 Para finalizar la máquina tenemos que escalar a root, ya que allí se encuentra la bandera.
+Comenzamos revisando que grupos tenemos y vemos uno sospechoso, docker.
+Vamos a buscar todos los archivos y directorios del sistema que pertenecen al grupo docker. Aparece uno, docker.sock
 
 <img width="865" height="87" alt="9previaMontamos" src="https://github.com/user-attachments/assets/f032e3da-5419-4260-8493-b2babb462659" />
 <br><br>
+Vemos que con esto, podemos escalar privilegios mediante pertenencia al grupo docker, así que ....
+
+docker run -v /:/mnt --rm -it ubuntu chroot /mnt bash
 
 <img width="865" height="256" alt="9Montamos" src="https://github.com/user-attachments/assets/bf8463e7-dfcc-441c-adbd-3186a1d5cee9" />
 <br><br>
-Escalada de privilegios mediante pertenencia a un grupo:
+
 
 Al hacer esto, tu terminal "engaña" al sistema y pasa a controlar los archivos reales de la máquina víctima, no del contenedor. Entramos como root y ya podemos ver la flag
-docker run -v /:/mnt --rm -it ubuntu chroot /mnt bash
+
 
 <img width="918" height="378" alt="10Fin" src="https://github.com/user-attachments/assets/e798c51a-eb56-42fc-9a69-97dc1403685c" />
 <br><br>
