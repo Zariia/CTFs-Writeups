@@ -12,8 +12,8 @@
 ---
 
 ## 📝 Descripción
-SUID & xxx
-Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante x.
+Clave SSH y escalada de privilegios mediante grupos
+Máquina enfocada en la explotación de una clave id_rsa y posterior escalada de privilegios mediante la pertenencia a un grupo con permisos excesivos.
 
 ---
 
@@ -96,7 +96,7 @@ Cuando pulsamos...
 
 ## 👑 3. Escalada de Privilegios
 
-
+Escalada de privilegios mediante pertenencia a un grupo:
 
 
 ---
