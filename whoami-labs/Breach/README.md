@@ -12,7 +12,8 @@
 ---
 
 ## 📝 Descripción
-Clave SSH y escalada de privilegios mediante grupos
+Clave SSH y escalada de privilegios mediante grupos.
+
 Máquina enfocada en la explotación de una clave id_rsa y posterior escalada de privilegios mediante la pertenencia a un grupo con permisos excesivos.
 
 ---
@@ -41,10 +42,11 @@ sudo nmap -p- --open -sS --min-rate 5000 -n -Pn 172.17.0.2 -oN allPorts
 Continuamos con un escaneo más profundo de los servicios encontrados::
 
 ```bash
-sudo nmap -p22,80 -sCV 172.17.0.2 -oN targeted
+nmap -p22,80 -sCV 172.17.0.2 -oN targeted
 ```
 
 <img width="1066" height="390" alt="2EscaneoPuertos" src="https://github.com/user-attachments/assets/4e7b97d4-ed72-46a7-a71a-b1c9037aa3d3" />
+
 
 Tenemos un servidor web y el servicio SSH expuesto. Sin embargo, como todavía no conocemos ninguna credencial válida para acceder mediante SSH, comenzamos enumerando el servicio web.
 
@@ -55,6 +57,7 @@ Al acceder al sitio web, nos encontramos con la siguiente página:
 <img width="1638" height="980" alt="4Web" src="https://github.com/user-attachments/assets/d9e357e0-7da2-4603-b83b-f775e6674533" />
 
 Como la página principal no nos proporciona información relevante, vamos a aplicamos fuzzing de directorios usando gobuster para buscar rutas adicionales:
+
 
 ```bash
 gobuster dir -u http://172.17.0.2/ \
@@ -75,28 +78,39 @@ Accedemos a ambas pero no encontramos nada útil en ellas que nos permita avanza
 
 <img width="812" height="302" alt="6WebServices" src="https://github.com/user-attachments/assets/b0c6eb94-30d7-435e-84f2-a308e9621059" />
 
-Una vez finalizado el escaneo, Gobuster encontró un par de rutas más, una de ella si que contiene información interesante, entramos a internal.
+
+Una vez finalizado el escaneo, Gobuster encontró un par de rutas más,about e interal. En internal si que contiene información interesante.
 
 ---
 
 ## 💥 2. Fase de Explotación 
 
 ### Vector de Ataque
-En la enumeración web, descubrimos un directorio ....
+En la enumeración web, descubrimos un directorio interno llamado internal que contiene un id_rsa.
 
 
 <img width="707" height="232" alt="6WebInternal" src="https://github.com/user-attachments/assets/fa6441d5-cb2f-4c38-b77c-ad34b76fa5c9" />
 
-Cuando pulsamos...
+Pulsamos en el enlace y nos aparece el id_rsa que es una clave privada para openssh.
 
 <img width="558" height="785" alt="7Privatekey" src="https://github.com/user-attachments/assets/47700c59-1ebe-424b-bde4-8232b6382ba6" />
 
+Copiamos la clave y la guardamos en un archivo que llamaremos id_rsa, después le damos permisos.
+```bash
+chmod 600 id_rsa
+```
+
+En internal vimos que ponía ....
+Probamos con devops que es el usuario que ponia antes de la clave y entramos al 22
 
 ---
 
 ## 👑 3. Escalada de Privilegios
 
 Escalada de privilegios mediante pertenencia a un grupo:
+
+Al hacer esto, tu terminal "engaña" al sistema y pasa a controlar los archivos reales de la máquina víctima, no del contenedor. Entramos como root y ya podemos ver la flag
+docker run -v /:/mnt --rm -it ubuntu chroot /mnt bash
 
 
 ---
