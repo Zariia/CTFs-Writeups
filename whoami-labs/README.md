@@ -1,6 +1,4 @@
 # >_ Mis Writeups de whoami-labs
-Aquí guardaré las resoluciones de las máquinas de whoami-labs.
-
 
 Bienvenido a mi sección de resoluciones de máquinas de la plataforma **whoami-labs**. Aquí documento el proceso de explotación, herramientas utilizadas y técnicas aplicadas para comprometer cada entorno.
 
