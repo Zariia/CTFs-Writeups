@@ -1,4 +1,4 @@
-# 🐳 Mis Writeups de whoami-labs
+# >_ Mis Writeups de whoami-labs
 Aquí guardaré las resoluciones de las máquinas de whoami-labs.
 
 
