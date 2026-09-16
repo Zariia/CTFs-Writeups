@@ -55,7 +55,7 @@ Al acceder al sitio web, nos encontramos con la siguiente página:
 
 <img width="1638" height="980" alt="4Web" src="https://github.com/user-attachments/assets/d9e357e0-7da2-4603-b83b-f775e6674533" />
 
-Como la página principal no nos proporciona información relevante, vamos a aplicamos fuzzing de directorios usando gobuster para buscar rutas adicionales:
+Como la página principal no nos proporciona información relevante, vamos a aplicar fuzzing de directorios usando gobuster para buscar rutas adicionales:
 
 
 ```bash
@@ -68,7 +68,9 @@ gobuster dir -u http://172.17.0.2/ \
 
 <br><br>
 Le damos tiempo para ver si encuentra algo más y mientras vamos a mirar las dos que nos ha enumerado: 
+
 home.php y services.php 
+
 
 Accedemos a ambas pero no encontramos nada útil en ellas que nos permita avanzar en la explotación.
 
@@ -79,7 +81,7 @@ Accedemos a ambas pero no encontramos nada útil en ellas que nos permita avanza
 <img width="812" height="302" alt="6WebServices" src="https://github.com/user-attachments/assets/b0c6eb94-30d7-435e-84f2-a308e9621059" />
 <br><br>
 
-Una vez finalizado el escaneo, Gobuster encontró un par de rutas más, about e interal. En internal vemos que si contiene información interesante.
+Una vez finalizado el escaneo, Gobuster encontró un par de rutas más, about e internal. En internal vemos que si contiene información interesante.
 
 ---
 
@@ -118,29 +120,32 @@ Vamos a buscar todos los archivos y directorios del sistema que pertenecen al gr
 
 <img width="865" height="87" alt="9previaMontamos" src="https://github.com/user-attachments/assets/f032e3da-5419-4260-8493-b2babb462659" />
 <br><br>
-Vemos que con esto, podemos escalar privilegios mediante pertenencia al grupo docker, así que ....
+Vemos que con esto, podemos escalar privilegios mediante pertenencia al grupo docker, así que procedemos a montar un docker con ubuntu, por ejemplo, con el comando:
 
+```bash
 docker run -v /:/mnt --rm -it ubuntu chroot /mnt bash
+```
 
 <img width="865" height="256" alt="9Montamos" src="https://github.com/user-attachments/assets/bf8463e7-dfcc-441c-adbd-3186a1d5cee9" />
 <br><br>
 
 
-Al hacer esto, tu terminal "engaña" al sistema y pasa a controlar los archivos reales de la máquina víctima, no del contenedor. Entramos como root y ya podemos ver la flag
+Al hacer esto, la terminal engaña al sistema y pasa a controlar los archivos reales de la máquina víctima, no del contenedor, y así pasamos a ser el usuario root.
+
+Entramos como root y ya podemos ver la flag
 
 
 <img width="918" height="378" alt="10Fin" src="https://github.com/user-attachments/assets/e798c51a-eb56-42fc-9a69-97dc1403685c" />
 <br><br>
+
+Para finalizar, vamos a nuestra terminal y ponemos la flag completa.
 
 <img width="970" height="821" alt="FinnnMio" src="https://github.com/user-attachments/assets/054c810f-8a88-47c7-a480-e067a786090f" />
 
 <br><br>
 
 
-
-
 ---
 
-## 🏁 4. Conclusiones y Mitigación
 
 
