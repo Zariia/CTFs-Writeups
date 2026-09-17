@@ -12,9 +12,9 @@
 ---
 
 ## 📝 Descripción
-Clave Sgfgfupos.
+Web Exploit
 
-Máquina enfocada en la explotación de  y posteriors.
+Máquina enfocada en la explotación web para encontrar la flag.
 
 ---
 
@@ -41,12 +41,13 @@ sudo nmap -p- --open  -n -Pn 172.17.0.2 -oN allPorts
 
 
 ### Enumeración de servicios
-Continuamos con un escaneo más profundo de los servicios encontrados::
+Continuamos con un escaneo más profundo del servicio encontrados:
 
 ```bash
 nmap -p5000 -sCV 172.17.0.2 -oN targeted
 ```
 <img width="1121" height="832" alt="2Escaneo" src="https://github.com/user-attachments/assets/f70b99cf-ea5e-46ec-8500-0cff793d5825" />
+
 Por lo que muestra, hay una página web así que vamos a verla.
 
 
@@ -60,11 +61,31 @@ Al acceder al sitio web, nos encontramos con la siguiente página:
 Es una intranet a la que acceden los empleados, vamos a ir pulsando en todas las opciones que nos aparecen arriba para ver que contienen.
 
 Login
+<img width="656" height="429" alt="4logins" src="https://github.com/user-attachments/assets/5046736b-c903-431e-9667-6f516fa02161" />
+
 Perfiles
-Mi perfil
+<img width="789" height="933" alt="5profile" src="https://github.com/user-attachments/assets/27573df5-1423-4311-a91f-99a83696c3ec" />
+
+
 About
+<img width="729" height="388" alt="6about" src="https://github.com/user-attachments/assets/398b7304-c5aa-4553-929b-73974446ad05" />
 
 
+Mi perfil
+<img width="760" height="547" alt="7alice" src="https://github.com/user-attachments/assets/9ccd9e3b-1778-46ef-b817-801ae04e4b83" />
+
+Nos logeamos como alice ya que nos dejan su usuario y contraseña al ser la cuenta demo. Pasamos de ser un usuario anónimo con uid -1 a ser alice con uid 1
+
+
+<img width="665" height="441" alt="8alice" src="https://github.com/user-attachments/assets/e5eb7026-7bc2-479e-a4b5-a78d58f5d465" />
+
+
+En la lista de perfiles busco alguno que sea administrador y encuentro que el número 17 podría serlo, miramos su perfil y encontramos la flag!!
+
+<img width="974" height="457" alt="9fin" src="https://github.com/user-attachments/assets/75c20c4d-5044-4c73-b9f9-115e07445027" />
+
+
+Vamos a verificar que sea la que nos piden y efectivamente es esta.
 
 
 <img width="866" height="776" alt="final" src="https://github.com/user-attachments/assets/b2abf699-2755-4453-813f-670abe63f1bb" />
