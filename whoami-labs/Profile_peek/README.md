@@ -40,6 +40,7 @@ sudo nmap -p- --open  -n -Pn 172.17.0.2 -oN allPorts
 <img width="1139" height="208" alt="1Escaneo" src="https://github.com/user-attachments/assets/0374979a-8163-473d-a9a8-76e87e0598aa" />
 
 
+
 ### Enumeración de servicios
 Continuamos con un escaneo más profundo del servicio encontrados:
 
@@ -60,21 +61,23 @@ Al acceder al sitio web, nos encontramos con la siguiente página:
 
 Es una intranet a la que acceden los empleados, vamos a ir pulsando en todas las opciones que nos aparecen arriba para ver que contienen.
 
-Login
+Entramos a Login y vemos un panel para autentificarse pero denajo del botón de enviar está el usuario y la contraseña de una cuenta demo llamada alice.
 <img width="656" height="429" alt="4logins" src="https://github.com/user-attachments/assets/5046736b-c903-431e-9667-6f516fa02161" />
 
-Perfiles
+
+Continuamos con la siguiente opción que es Perfiles, aquí sale el uid, usuario y nombre de 20 empleados.
 <img width="789" height="933" alt="5profile" src="https://github.com/user-attachments/assets/27573df5-1423-4311-a91f-99a83696c3ec" />
 
+En Mi perfil muestra los datos del empleado seleccionado y quién tiene la sesión actual.
+<img width="760" height="547" alt="7alice" src="https://github.com/user-attachments/assets/9ccd9e3b-1778-46ef-b817-801ae04e4b83" />
 
-About
+
+En About, nos dice lo que es y los endpoints que existen, que son todas las pestañas que hemos visto anteriormente.
 <img width="729" height="388" alt="6about" src="https://github.com/user-attachments/assets/398b7304-c5aa-4553-929b-73974446ad05" />
 
 
-Mi perfil
-<img width="760" height="547" alt="7alice" src="https://github.com/user-attachments/assets/9ccd9e3b-1778-46ef-b817-801ae04e4b83" />
-
-Nos logeamos como alice ya que nos dejan su usuario y contraseña al ser la cuenta demo. Pasamos de ser un usuario anónimo con uid -1 a ser alice con uid 1
+Una vez visto todo, vamos a logeamos como alice ya que nos dejan su usuario y contraseña al ser la cuenta demo. 
+Pasamos de ser un usuario anónimo con uid -1 a ser alice con uid 1.
 
 
 <img width="665" height="441" alt="8alice" src="https://github.com/user-attachments/assets/e5eb7026-7bc2-479e-a4b5-a78d58f5d465" />
