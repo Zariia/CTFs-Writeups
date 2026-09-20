@@ -21,7 +21,8 @@ Máquina enfocada en la explotación web para encontrar la flag.
 ## 🔍 1. Fase de Reconocimiento y Enumeración
 Comenzamos realizando un ping a la máquina para ver a qué nos enfrentamos y si está accesible.
 
-<img width="906" height="164" alt="ping" src="https://github.com/user-attachments/assets/30fadd30-1f6a-4233-a163-caa9ebb7da55" />
+<img width="906" height="164" alt="ping" src="https://github.com/user-attachments/assets/27eddb6c-3e3e-4091-878d-75060cf5f14a" />
+
 
 
 Es una máquina Linux.
@@ -37,7 +38,8 @@ sudo nmap -p- --open  -n -Pn 172.17.0.2 -oN allPorts
 * **Puerto 50002/TCP**: upnp
   
 
-<img width="1139" height="208" alt="1Escaneo" src="https://github.com/user-attachments/assets/0374979a-8163-473d-a9a8-76e87e0598aa" />
+<img width="1139" height="208" alt="1Escaneo" src="https://github.com/user-attachments/assets/a6beb018-60a5-4259-b148-77a087bcdc26" />
+
 
 
 
@@ -47,7 +49,8 @@ Continuamos con un escaneo más profundo del servicio encontrados:
 ```bash
 nmap -p5000 -sCV 172.17.0.2 -oN targeted
 ```
-<img width="1121" height="832" alt="2Escaneo" src="https://github.com/user-attachments/assets/f70b99cf-ea5e-46ec-8500-0cff793d5825" />
+<img width="1121" height="832" alt="2Escaneo" src="https://github.com/user-attachments/assets/cbf1d6e3-544c-49d4-bd23-a22c9ab638ad" />
+
 
 Por lo que muestra, hay una página web así que vamos a verla.
 
