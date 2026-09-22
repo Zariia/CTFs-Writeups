@@ -64,5 +64,12 @@ gobuster dir -u http://172.17.0.2/ \
 ```
 <img width="1878" height="574" alt="4gobuster" src="https://github.com/user-attachments/assets/aff88e26-c3c6-4f45-8674-83f14e7ecf0e" />
 
+Cuando finaliza, vemos que encontró cuatro rutas, la más interesante es /backend, entramos para mirar que contiene y vemos que hay un archivo php llamado gym_console.php
+Este archivo se ejecuta en la página web y es una consola que ejecuta los comandos que le pasemos pero como el usuario www-data.
+
+<img width="1155" height="945" alt="7consolacatetc" src="https://github.com/user-attachments/assets/5154a1d4-8ea9-4e1f-bf48-d93b981609ba" />
+
+En el archivo passwd solo vemos usuarios pero ninguna clave, así que miramos con sudo -l si podemos realizar
+
 
 
