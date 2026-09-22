@@ -18,16 +18,47 @@ Máquina enfocada en la explotación web para encontrar la flag.
 ---
 
 ## 🔍 1. Fase de Reconocimiento y Enumeración
-Comenzamos realizando un ping a la máquina para ver a qué nos enfrentamos y si está accesible.
-
-
-
-
-Es una máquina Linux.
 
 ### Escaneo de Puertos (`nmap`)
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
-sudo nmap -p- --open  -n -Pn 172.17.0.2 -oN allPorts
+sudo nmap -p- --open -n 172.17.0.2 -oN allPorts
 ```
+
+<img width="1155" height="202" alt="1Escaneo" src="https://github.com/user-attachments/assets/a9ed48a8-3a30-4dfb-8aa1-ccdabaf60f77" />
+
+Descubrimos abierto solo el puerto 80 con el servicio http.
+
+**Resultados del escaneo:**
+* **Puerto 80/TCP**: HTTP
+
+### Enumeración de servicios
+Continuamos con un escaneo más profundo de los servicios encontrados::
+
+```bash
+nmap -p80 -sCV 172.17.0.2 -oN targeted
+```
+
+
+<img width="1108" height="269" alt="2Escaneopuerto" src="https://github.com/user-attachments/assets/2a2efacb-9b27-4292-9000-0b280c656e83" />
+<br><br>
+
+### Enumeración Web (Puerto 80)
+Al acceder al sitio web, nos encontramos con la siguiente página:
+<img width="1635" height="836" alt="3Pagweb" src="https://github.com/user-attachments/assets/a14b05bb-b09a-407f-913e-56db5f9bbdd8" />
+
+
+
+Como la página principal no nos proporciona información relevante, vamos a aplicar fuzzing de directorios usando gobuster para buscar rutas adicionales:
+
+
+```bash
+gobuster dir -u http://172.17.0.2/ \
+    -w /usr/share/seclists/Discovery/Web-Content/DirBuster-2007_directory-list-2.3-medium.txt \
+    -t 200 -k -r --no-error
+```
+<img width="1878" height="574" alt="4gobuster" src="https://github.com/user-attachments/assets/aff88e26-c3c6-4f45-8674-83f14e7ecf0e" />
+
+
+
