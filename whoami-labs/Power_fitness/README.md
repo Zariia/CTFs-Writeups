@@ -30,8 +30,11 @@ sudo nmap -p- --open -n 172.17.0.2 -oN allPorts
 
 Descubrimos abierto solo el puerto 80 con el servicio http.
 
+
 **Resultados del escaneo:**
 * **Puerto 80/TCP**: HTTP
+
+
 
 ### Enumeración de servicios
 Continuamos con un escaneo más profundo de los servicios encontrados::
@@ -43,6 +46,7 @@ nmap -p80 -sCV 172.17.0.2 -oN targeted
 
 <img width="1108" height="269" alt="2Escaneopuerto" src="https://github.com/user-attachments/assets/2a2efacb-9b27-4292-9000-0b280c656e83" />
 <br><br>
+
 
 ### Enumeración Web (Puerto 80)
 Al acceder al sitio web, nos encontramos con la siguiente página:
