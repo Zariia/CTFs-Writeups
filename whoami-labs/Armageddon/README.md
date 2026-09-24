@@ -19,7 +19,8 @@ Máquina enfocada en la explotación web y escalada de privilegios para encontra
 ## 🔍 1. Fase de Reconocimiento y Enumeración
 
 Lanzamos un ping a la máquina objetivo para ver si nos responde y que SO es. Es un Linux y nos responde.
-<img width="1042" height="154" alt="ping" src="https://github.com/user-attachments/assets/6bc7e442-c8f8-48ff-b39c-2c8718a3c1cf" />
+<img width="631" height="154" alt="ping" src="https://github.com/user-attachments/assets/078394cf-1b14-4a27-adb5-b436f5671847" />
+
 
 
 
