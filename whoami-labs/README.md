@@ -13,6 +13,11 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **whoami-
 | `Profile Peek` | 🟢 Fácil | Web Exploit | [👁️ Leer Writeup](./Profile_peek/) |
 | `Power fitness` | 🟢 Fácil | Revel shell / Cron | [👁️ Leer Writeup](./Power_fitness/) |
 
+
+| `x` | 🟡 Media | x / x | [👁️ Leer Writeup](./x/) |
+
+
+
 ---
 
 [⬅️ Volver al inicio](../README.md)
