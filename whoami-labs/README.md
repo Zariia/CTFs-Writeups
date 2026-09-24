@@ -12,9 +12,7 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **whoami-
 | `Breach` | 🟢 Fácil | Clave SSH / Escalada mediante grupo | [👁️ Leer Writeup](./Breach/) |
 | `Profile Peek` | 🟢 Fácil | Web Exploit | [👁️ Leer Writeup](./Profile_peek/) |
 | `Power fitness` | 🟢 Fácil | Revel shell / Cron | [👁️ Leer Writeup](./Power_fitness/) |
-
-
-| `x` | 🟡 Media | x / x | [👁️ Leer Writeup](./x/) |
+| `Armageddon` | 🟡 Media | Web Exploit | [👁️ Leer Writeup](./Armageddon/) |
 
 
 
