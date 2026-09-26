@@ -50,6 +50,8 @@ nmap -p22,80 -sCV 172.17.0.2 -oN targeted
 ### Enumeración Web (Puerto 80)
 Al acceder al sitio web, nos encontramos con una página web que tiene un login, pide un usuario y una contraseña para poder acceder al portal interno.
 Comenzamos probando a entrar dejandolo vacío y rellenando los campos pero siempre nos muestra el mismo error: Credenciales incorrectas.
+
+
 <img width="1190" height="702" alt="3Web" src="https://github.com/user-attachments/assets/2fffb034-c169-4bb0-8277-ee699101a596" />
 
 Probamos con SQL Injection en el campo del usuario y conseguimos acceder.
