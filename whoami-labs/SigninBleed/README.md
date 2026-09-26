@@ -26,7 +26,7 @@ sudo nmap -p- --open -sS --min-rate 5000 -n -Pn 172.17.0.2 -oN allPorts
 ```
 
 <img width="733" height="243" alt="1Escaneo" src="https://github.com/user-attachments/assets/3b1bcf10-17ea-4547-a60d-da583fce5ed3" />
-
+<br><br>
 
 Descubrimos abierto  el puerto 80 con el servicio http y el puerto 22.
 
@@ -57,13 +57,14 @@ Comenzamos probando a entrar dejandolo vacío y rellenando los campos pero siemp
 Probamos con SQL Injection en el campo del usuario y conseguimos acceder.
 
 <img width="1118" height="644" alt="4sql" src="https://github.com/user-attachments/assets/f77cb3d2-2724-40cd-8ae1-966038ea8e33" />
-
+<br><br>
 
 Al entrar vemos que nos muestra una nota y en ella tenemos la flag, por lo que ya no es necesario realizar una escalada de privilegios ni continuar con la explotación.
+
 <img width="664" height="516" alt="5flagWeb" src="https://github.com/user-attachments/assets/87b38e76-57d3-46ac-baad-41cde3cf9fd5" />
 <br><br>
 
 Comprobamos que es la flag de root que nos pide el laboratorio y lo damos por finalizado.
-
+<br><br>
 <img width="866" height="807" alt="flagFinal" src="https://github.com/user-attachments/assets/a49d7422-da9c-48c5-bc18-71acc6e6ea6d" />
 
