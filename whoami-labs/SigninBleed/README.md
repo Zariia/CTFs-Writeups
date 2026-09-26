@@ -1,4 +1,4 @@
-# >_ [Armageddon]
+# >_ [SigninBleed]
 
 | Propiedad | Detalle |
 | :--- | :--- |
@@ -25,13 +25,14 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 sudo nmap -p- --open -sS --min-rate 5000 -n -Pn 172.17.0.2 -oN allPorts
 ```
 
+<img width="733" height="243" alt="1Escaneo" src="https://github.com/user-attachments/assets/3b1bcf10-17ea-4547-a60d-da583fce5ed3" />
 
 
 Descubrimos abierto  el puerto 80 con el servicio http y el puerto 22.
 
 **Resultados del escaneo:**
 * **Puerto 80/TCP**: HTTP
-* * **Puerto 22/TCP**: SSH
+* **Puerto 22/TCP**: SSH
 
 
 
@@ -42,6 +43,7 @@ Continuamos con un escaneo más profundo del servicio encontrado:
 nmap -p22,80 -sCV 172.17.0.2 -oN targeted
 ```
 
+<img width="1391" height="654" alt="2Escaneo puertos" src="https://github.com/user-attachments/assets/b59e354d-3d49-4a54-bedd-92c6865e75bf" />
 
 <br><br>
 Aquí descubrimos que nos enfrentamos a u.....
