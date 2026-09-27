@@ -67,7 +67,12 @@ gobuster dir -u http://172.17.0.2/ \
 Cuando finaliza, vemos que encontró cuatro rutas, la más interesante es /backend, entramos para mirar que contiene y vemos que hay un archivo php llamado gym_console.php
 Este archivo se ejecuta en la página web y es una consola que ejecuta los comandos que le pasemos, como el usuario www-data.
 
-<br><br>
+<br>
+
+---
+
+## 💥 2. Fase de Explotación 
+<br>
 <img width="1155" height="945" alt="7consolacatetc" src="https://github.com/user-attachments/assets/5154a1d4-8ea9-4e1f-bf48-d93b981609ba" />
 <br><br>
 Vemos que hay bastantes usuarios como trainer, coach, www-data y root entre otros.
@@ -96,6 +101,10 @@ Ahora somos el usuario *trainer* pero debemos continuar buscando la forma de lle
 
 <img width="996" height="293" alt="10esperarRevel" src="https://github.com/user-attachments/assets/f2c31646-9116-428b-920b-87e72dc132db" />
 <br><br>
+
+---
+
+## 👑 3. Escalada de Privilegios
 
 Ahora tenemos que seguir buscando como escalar privilegios, comenzamos probando de nuevo sudo -l y vemos que también podemos ejecutar como el usuario coach sin usar contraseña /bin/bash.
 
