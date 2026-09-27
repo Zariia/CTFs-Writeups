@@ -6,7 +6,7 @@
 | **Dificultad** | 🟢 Fácil  |
 | **OS** | Linux  |
 | **IP de la Máquina** | `172.17.0.2` |
-| **Fecha de resolución** | 2026-09-18 |
+| **Fecha de resolución** | 2026-09-20 |
 
 ---
 
@@ -22,21 +22,21 @@ Máquina enfocada en la explotación web y en las tareas cron para encontrar la 
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
-sudo nmap -p- --open -n 172.17.0.2 -oN allPorts
+nmap -p- --open -n 172.17.0.2 -oN allPorts
 ```
 
 <img width="1155" height="202" alt="1Escaneo" src="https://github.com/user-attachments/assets/a9ed48a8-3a30-4dfb-8aa1-ccdabaf60f77" />
-
+<br><br>
 Descubrimos abierto solo el puerto 80 con el servicio http.
 
 
 **Resultados del escaneo:**
 * **Puerto 80/TCP**: HTTP
-
+<br><br>
 
 
 ### Enumeración de servicios
-Continuamos con un escaneo más profundo de los servicios encontrados::
+Continuamos con un escaneo más profundo del servicio encontrado:
 
 ```bash
 nmap -p80 -sCV 172.17.0.2 -oN targeted
@@ -62,14 +62,15 @@ gobuster dir -u http://172.17.0.2/ \
     -t 200 -k -r --no-error
 ```
 <img width="1878" height="574" alt="4gobuster" src="https://github.com/user-attachments/assets/aff88e26-c3c6-4f45-8674-83f14e7ecf0e" />
-
+<br><br>
 Cuando finaliza, vemos que encontró cuatro rutas, la más interesante es /backend, entramos para mirar que contiene y vemos que hay un archivo php llamado gym_console.php
-Este archivo se ejecuta en la página web y es una consola que ejecuta los comandos que le pasemos pero como el usuario www-data.
-
+Este archivo se ejecuta en la página web y es una consola que ejecuta los comandos que le pasemos, como el usuario www-data.
+<br><br>
 <img width="1155" height="945" alt="7consolacatetc" src="https://github.com/user-attachments/assets/5154a1d4-8ea9-4e1f-bf48-d93b981609ba" />
-
-En el archivo passwd solo vemos usuarios pero ninguna clave, así que miramos con sudo -l qué comandos podemos ejecutar con privilegios de sudo y determinar si tenemos permisos que puedan ser relevantes para la escalada de privilegios. Y vemos que podemos ejecutar como el usuario trainer, mediante sudo y sin contraseña /bin/bash.
-
+<br><br>
+En el archivo passwd solo vemos usuarios pero ninguna clave, así que miramos con sudo -l qué comandos podemos ejecutar con privilegios de sudo y determinar si tenemos permisos que puedan ser relevantes para la escalada de privilegios. 
+Y vemos que podemos ejecutar como el usuario trainer, mediante sudo y sin contraseña /bin/bash.
+<br><br>
 <img width="956" height="798" alt="8jugoso" src="https://github.com/user-attachments/assets/99e31569-d4a6-4f0e-914d-7e82b30f341a" />
 
 Así que vamos a lanzar una revel shell, nos ponemos a la escucha en el puerto 442 con el siguiente comando:
