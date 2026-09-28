@@ -64,3 +64,9 @@ Ahora necesitamos escalar privilegios para ser root. Analizamos el entorno busca
 ```bash
 sudo -l
 ```
+
+<img width="1227" height="239" alt="5escalar" src="https://github.com/user-attachments/assets/71eeb725-c5c7-4a00-aff2-be7e809a36eb" />
+
+Somos el usuario root
+<img width="586" height="102" alt="6root" src="https://github.com/user-attachments/assets/3ba3ad26-e2b2-455f-8ab4-3992ee5b73b9" />
+
