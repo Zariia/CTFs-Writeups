@@ -29,7 +29,8 @@ sudo nmap -p- --open -sS --min-rate 5000 -n -Pn 172.17.0.2 -oN allPorts
 * **Puerto 22/TCP**: SSH
 * **Puerto 80/TCP**: HTTP
 
-<img width="1691" height="263" alt="1Escaneo" src="https://github.com/user-attachments/assets/3af290e5-c915-4701-a110-16ca0e4617b2" />
+<img width="1691" height="244" alt="1Escaneo" src="https://github.com/user-attachments/assets/7e39bbe5-faa3-47b5-9546-232bfe09608a" />
+
 
 
 *Escaneo profundo de servicios:*
