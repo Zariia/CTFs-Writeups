@@ -8,7 +8,7 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **DockerL
 
 | Máquina | Dificultad | Tipo / Enfoque | Writeup |
 | :--- | :---: | :--- | :---: |
-| `Pating` | 🟢 Muy Fácil | SUID / Abuso de PATH | [👁️ Leer Writeup](./Png/) |
+| `Borazuwarah` | 🟢 Muy Fácil | SUID / xx | [👁️ Leer Writeup](./Borazuwarah/) |
 
 
 
