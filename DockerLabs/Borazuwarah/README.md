@@ -51,21 +51,39 @@ Vemos que tenemos un sitio web y el puerto ssh pero no conocemos ninguna credenc
 Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz que solo contiene una imagen, nos la descargamos.
 <img width="685" height="495" alt="3imagen" src="https://github.com/user-attachments/assets/d56ec4c4-6ce3-4647-85dd-b3d17498e054" />
 
-💥 2. Fase de Explotación
+## 💥 2. Fase de Explotación
+Vamos a analizar la imagen por si tuviera alguna información oculta, para ello usaremos ExifTool.
+
+ExifTool es una aplicación de línea de comandos gratuita y de código abierto para leer, escribir y editar metadatos en una gran variedad de archivos, como imágenes, videos y documentos.
+Es muy sencilla de usar una vez instalada, ponemos el nombre de la herramienta seguida de la imagen que queremos que analice:
+
 ```bash
 exiftool imagen.jpeg
 ```
+<img width="1029" height="597" alt="3imagenexiftool" src="https://github.com/user-attachments/assets/4a27c4bc-2e1a-42eb-837b-10da8ab75d80" />
+En la descripción de la imagen tenemos un usuario: *User: borazuwarah*
 
-User: borazuwarah
+Ahora que conocemos un usuaro válido vamos a usar fuerza bruta para sacar su contraseña y poder entrar por el puerto SSH. Para ello usaremos Hydra.
+
+Hydra es una herramienta de código abierto utilizada para realizar ataques de fuerza bruta y de diccionario contra servicios de red y sistemas de autenticación.
+Empleamos el diccionario de *rockyou.txt* y enseguida nos saca la contraseña.
 
 ```bash
 hydra -l borazuwarah -P /usr/share/rockyou.txt ssh://172.17.0.2
 ```
 
+<img width="1882" height="315" alt="3clavehydra" src="https://github.com/user-attachments/assets/693f115e-dfad-4485-a4cc-c1a9e082e66c" />
 
-👑 3. Escalada de Privilegios
-Enumeración del Sistema
-Ahora necesitamos escalar privilegios para ser root. Analizamos el entorno buscando vectores comunes de escalada y en id vemos ...
+Ya tenemos el usuario y la contraseña, así que accedemos por el puerto 22 y estamos dentro.
+
+<img width="1254" height="364" alt="4ssh" src="https://github.com/user-attachments/assets/7b20b68c-25ac-4c33-8e26-cdb643cd8707" />
+
+
+--- 
+
+## 👑 3. Escalada de Privilegios
+#### Enumeración del Sistema
+Ahora necesitamos escalar privilegios para ser root. Analizamos el entorno buscando vectores comunes de escalada y en id vemos que pertenecemos al grupo suda. Miramos que comandos podemos lanzar con sudo y podemos lanzar una bash.
 
 ```bash
 sudo -l
@@ -73,8 +91,7 @@ sudo -l
 
 <img width="1180" height="231" alt="5escalar" src="https://github.com/user-attachments/assets/0df2b851-0357-481c-ae19-e13dbc2a7726" />
 
-
-Somos el usuario root
+Tras lanzarla ya somos el usuario root y hemos concluido con la máquina Borazuwarah
 <img width="493" height="99" alt="6root" src="https://github.com/user-attachments/assets/da317840-a994-4dba-8630-9305a2d182e9" />
 
 
