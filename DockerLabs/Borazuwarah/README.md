@@ -22,22 +22,27 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
-sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 172.17.0.2 -oN allPorts
+sudo nmap -p- --open -sS --min-rate 5000 -n -Pn 172.17.0.2 -oN allPorts
 ```
 
 **Resultados del escaneo:**
 * **Puerto 22/TCP**: SSH
 * **Puerto 80/TCP**: HTTP
 
+<img width="1691" height="263" alt="1Escaneo" src="https://github.com/user-attachments/assets/3af290e5-c915-4701-a110-16ca0e4617b2" />
+
+
 *Escaneo profundo de servicios:*
 ```bash
-sudo nmap -p22,80 -sCV 172.17.0.2 -oN targeted
+ nmap -p22,80 -sCV 172.17.0.2 -oN targeted
 ```
 
 | Puerto | Estado | Servicio | Versión |
 | :---: | :---: | :--- | :--- |
 | **22 / TCP** | 🟢 Abierto | SSH | OpenSSH 9.2p1 (Debian) |
 | **80 / TCP** | 🟢 Abierto | HTTP | Apache httpd 2.4.59 |
+
+<img width="1386" height="378" alt="2Escaneopuertos" src="https://github.com/user-attachments/assets/c6a1b7e5-43e5-441d-b96c-b8bc99de8c03" />
 
 Vemos que tenemos un sitio web y el puerto ssh pero no conocemos ninguna credencial así que empezamos revisando el sitio web.
 
@@ -65,8 +70,10 @@ Ahora necesitamos escalar privilegios para ser root. Analizamos el entorno busca
 sudo -l
 ```
 
-<img width="1227" height="239" alt="5escalar" src="https://github.com/user-attachments/assets/71eeb725-c5c7-4a00-aff2-be7e809a36eb" />
+<img width="1180" height="231" alt="5escalar" src="https://github.com/user-attachments/assets/0df2b851-0357-481c-ae19-e13dbc2a7726" />
+
 
 Somos el usuario root
-<img width="586" height="102" alt="6root" src="https://github.com/user-attachments/assets/3ba3ad26-e2b2-455f-8ab4-3992ee5b73b9" />
+<img width="493" height="99" alt="6root" src="https://github.com/user-attachments/assets/da317840-a994-4dba-8630-9305a2d182e9" />
+
 
