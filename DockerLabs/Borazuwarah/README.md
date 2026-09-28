@@ -11,7 +11,7 @@
 ---
 
 ## 📝 Descripción
-SUID & Sudo
+
 Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante abuso de permisos SUDO.
 
 ---
@@ -33,17 +33,34 @@ sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 172.17.0.2 -oN allPorts
 ```bash
 sudo nmap -p22,80 -sCV 172.17.0.2 -oN targeted
 ```
+
 | Puerto | Estado | Servicio | Versión |
 | :---: | :---: | :--- | :--- |
-| **22 / TCP** | 🟢 Abierto | SSH | OpenSSH 8.9p1 (Ubuntu Linux) |
-| **80 / TCP** | 🟢 Abierto | HTTP | SimpleHTTPServer 0.6 (Python 3.10.12) |
+| **22 / TCP** | 🟢 Abierto | SSH | OpenSSH 9.2p1 (Debian) |
+| **80 / TCP** | 🟢 Abierto | HTTP | Apache httpd 2.4.59 |
 
-Vemos que tenemos dos sitios web y el puerto ssh pero no conocemos ninguna credencial así que empezamos revisando los sitios web.
+Vemos que tenemos un sitio web y el puerto ssh pero no conocemos ninguna credencial así que empezamos revisando el sitio web.
 
 ### Enumeración Web (Puerto 80)
-Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz:
+Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz que solo contiene una imagen, nos la descargamos.
+<img width="685" height="495" alt="3imagen" src="https://github.com/user-attachments/assets/d56ec4c4-6ce3-4647-85dd-b3d17498e054" />
 
+💥 2. Fase de Explotación
+```bash
+exiftool imagen.jpeg
+```
 
+User: borazuwarah
+
+```bash
 hydra -l borazuwarah -P /usr/share/rockyou.txt ssh://172.17.0.2
+```
 
-sudo -l 
+
+👑 3. Escalada de Privilegios
+Enumeración del Sistema
+Ahora necesitamos escalar privilegios para ser root. Analizamos el entorno buscando vectores comunes de escalada y en id vemos ...
+
+```bash
+sudo -l
+```
