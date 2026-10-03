@@ -9,6 +9,8 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **DockerL
 | Máquina | Dificultad | Tipo / Enfoque | Writeup |
 | :--- | :---: | :--- | :---: |
 | `Borazuwarah` | 🟢 Muy Fácil | SUID / xx | [👁️ Leer Writeup](./Borazuwarah/) |
+| `BreakMySSH` | 🟢 Muy Fácil | SSH / xx | [👁️ Leer Writeup](./BreakMySSH/) |
+| `Duque` | 🟢 Muy Fácil | x / xx | [👁️ Leer Writeup](./Duque/) |
 
 
 
