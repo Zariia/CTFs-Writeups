@@ -91,20 +91,16 @@ Hemos conseguido acceder como el usuario student dentro de la máquina!
 
 ## 👑 3. Escalada de Privilegios
 
-Para finalizar la máquina tenemos que escalar a root, ya que allí se encuentra la bandera.
-Comenzamos revisando que grupos tenemos y vemos uno sospechoso, docker.
-Vamos a buscar todos los archivos y directorios del sistema que pertenecen al grupo docker. Aparece uno, docker.sock
+Para finalizar la máquina tenemos que escalar a root, ya que allí se encuentra la segunda bandera.
 
-
-<br><br>
-Vemos que con esto, podemos escalar privilegios mediante pertenencia al grupo docker, así que procedemos a montar un docker con ubuntu, por ejemplo, con el comando:
+Miramos las capabilities y vemos que tenemos unas, con ella podemos escalar privilegios.
 
 ```bash
 getcap -r / 2>/dev/null 
 ```
+
 <img width="571" height="78" alt="8capability" src="https://github.com/user-attachments/assets/4ba7f1cf-a093-443d-8c6b-297f76e31d7c" />
 <br><br>
-
 
 
 Entramos como root y ya podemos ver la flag
@@ -112,12 +108,10 @@ Entramos como root y ya podemos ver la flag
 <img width="1053" height="336" alt="9cfcc" src="https://github.com/user-attachments/assets/6d20671c-fe58-423e-8ed6-b46e614711c2" />
 <br><br>
 
-Para finalizar, vamos a nuestra terminal y ponemos la flag completa.
+Para finalizar, vamos a nuestra terminal y ponemos la flag completa. Ambas son correctas. 
 
 
 <img width="652" height="681" alt="final" src="https://github.com/user-attachments/assets/30980b05-7fe1-4eb1-809e-e30835aa8aad" />
 
 <br><br>
-
-
 ---
