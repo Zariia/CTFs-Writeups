@@ -74,15 +74,17 @@ get .backup_config.old
 ```
 
 <img width="1903" height="185" alt="4getfichero" src="https://github.com/user-attachments/assets/b48aa784-9e05-4291-9121-1c1d2c59c9fc" />
-<img width="995" height="116" alt="5usuarioenbackup" src="https://github.com/user-attachments/assets/43cc847f-4df9-4947-a25b-a0bd132c2907" />
+<br><br>
 
+<img width="995" height="116" alt="5usuarioenbackup" src="https://github.com/user-attachments/assets/43cc847f-4df9-4947-a25b-a0bd132c2907" />
+<br><br>
 
 Al abrirlo encontramos unas credenciales que vamos a probar para acceder por ssh.
 
 <img width="1191" height="377" alt="6ssh" src="https://github.com/user-attachments/assets/04de0ba5-e026-478b-a582-f3c9d7143671" />
+<br><br>
 
 Hemos conseguido acceder como el usuario student dentro de la máquina!
-
 <img width="934" height="103" alt="7escalarajustar" src="https://github.com/user-attachments/assets/f50136ab-72fc-436a-a03c-63a4e29e8125" />
 
 ---
@@ -98,7 +100,7 @@ Vamos a buscar todos los archivos y directorios del sistema que pertenecen al gr
 Vemos que con esto, podemos escalar privilegios mediante pertenencia al grupo docker, así que procedemos a montar un docker con ubuntu, por ejemplo, con el comando:
 
 ```bash
-
+getcap -r / 2>/dev/null 
 ```
 <img width="571" height="78" alt="8capability" src="https://github.com/user-attachments/assets/4ba7f1cf-a093-443d-8c6b-297f76e31d7c" />
 <br><br>
@@ -108,8 +110,6 @@ Vemos que con esto, podemos escalar privilegios mediante pertenencia al grupo do
 Entramos como root y ya podemos ver la flag
 
 <img width="1053" height="336" alt="9cfcc" src="https://github.com/user-attachments/assets/6d20671c-fe58-423e-8ed6-b46e614711c2" />
-
-
 <br><br>
 
 Para finalizar, vamos a nuestra terminal y ponemos la flag completa.
