@@ -13,6 +13,7 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **whoami-
 | `Profile Peek` | 🟢 Fácil | Web Exploit | [👁️ Leer Writeup](./Profile_peek/) |
 | `Power fitness` | 🟢 Fácil | Revel shell / Cron | [👁️ Leer Writeup](./Power_fitness/) |
 | `Signin Bleed` | 🟢 Fácil | Web Exploit / Sql Injection |  [👁️ Leer Writeup](./SigninBleed/) |
+| `El cuervo` | 🟢 Fácil | FTP / Capabilities |  [👁️ Leer Writeup](./El_cuervo/) |
 | `Armageddon` | 🟡 Media | Web Exploit | [👁️ Leer Writeup](./Armageddon/) |
 
 
