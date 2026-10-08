@@ -1,4 +1,4 @@
-# 🐳 Whoami Labs: [Identity]
+# >_ [Identity]
 
 | Propiedad | Detalle |
 | :--- | :--- |
@@ -11,8 +11,7 @@
 ---
 
 ## 📝 Descripción
-Breve introducción sobre la máquina o el contexto del reto. 
-*Ejemplo: Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante abuso de permisos SUDO.*
+Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante abuso de permisos SUDO.
 
 ---
 
@@ -22,16 +21,15 @@ Breve introducción sobre la máquina o el contexto del reto.
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
-sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 10.10.X.X -oN allPorts
+sudo nmap -p- --open -n -Pn 172.17.0.2 -oN allPorts
 ```
 
 **Resultados del escaneo:**
-* **Puerto 22/TCP**: SSH (OpenSSH...)
-* **Puerto 80/TCP**: HTTP (Apache/Nginx...)
+* **Puerto 80/TCP**: HTTP (Apache)
 
-*(Opcional) Escaneo profundo de servicios:*
+*Escaneo profundo de servicios:*
 ```bash
-sudo nmap -sCV -p 22,80 10.10.X.X -oN targeted
+sudo nmap -sCV -p 80 172.17.0.2 -oN targeted
 ```
 
 ### Enumeración Web (Puerto 80)
