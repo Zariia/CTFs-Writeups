@@ -57,4 +57,33 @@ Aquí descubrimos que nos enfrentamos a un Apache httpd 2.438, vemos que la web 
 Al acceder al sitio web, nos encontramos con la siguiente página:
 <img width="1255" height="838" alt="3Web80Drupal" src="https://github.com/user-attachments/assets/63321a63-66b1-4287-bee6-c709314e788c" />
 
+Tiene un login para acceder al portal, se puede crear una nueva cuenta y cambiar la contraseña.
+Comenzamos probando el típico de Sql Injection pero no funciona.
+
+<img width="1417" height="872" alt="3WebPrueba" src="https://github.com/user-attachments/assets/97a03625-7686-41ef-ba97-ab98d1e3d420" />
+
+
+Si probamos a crearnos una cuenta nueva, vemos que no podemos ya que no tenemos un email del sistema.
+
+<img width="1382" height="731" alt="5Crearcuenta" src="https://github.com/user-attachments/assets/cce705ba-5bae-44ba-8371-a2958c6d3802" />
+
+Como en el escaneo del puerto 80 vimos que usaba drupal 7, vamos a tirar por ahí.
+
+TITULO
+
+Comenzamos usando la herramienta droopescan para ver que encuentra.
+<img width="1296" height="401" alt="5Drupa encontrar" src="https://github.com/user-attachments/assets/11b55ab9-bad6-4a08-803c-8f76281e82d3" />
+
+Nos muestra dos interesantes posibles urls, un changelog.txt y un login en user
+Miramos el txt para ver si hay algo relevante:
+
+<img width="880" height="779" alt="6drupalversion" src="https://github.com/user-attachments/assets/6a7577bb-f578-401f-8d4e-42041ff77e42" />
+
+Aquí tenemos la versión exacta del droopal que emplea esta web, la 7.57
+Buscamos si tiene vulnerabilidades ya que es bastante antigua.
+<img width="1898" height="377" alt="6drupalsearchsploit" src="https://github.com/user-attachments/assets/45d24516-36f3-400a-93f8-46df114d47ab" />
+
+
+
+
 
