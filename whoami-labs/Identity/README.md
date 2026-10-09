@@ -145,14 +145,13 @@ sudo find . -exec /bin/sh \; -quit
 <br><br>
 
 
-¡Ya somos **root**! 🚩
+¡Ya somos **root**! 🚩 Buscamos la flag en la carpeta personal de root.
 
-<img width="992" height="691" alt="Finaaal" src="https://github.com/user-attachments/assets/b42ae430-6909-416c-89e2-60fd0f683364" />
+<img width="1086" height="181" alt="12flag2" src="https://github.com/user-attachments/assets/6bf0cbce-83f4-4349-951a-ecf3790287f7" />
 <br><br>
 
 Por último, validamos la flag obtenida.
-<img width="1086" height="181" alt="12flag2" src="https://github.com/user-attachments/assets/6bf0cbce-83f4-4349-951a-ecf3790287f7" />
-
+<img width="992" height="691" alt="Finaaal" src="https://github.com/user-attachments/assets/b42ae430-6909-416c-89e2-60fd0f683364" />
 
 
 
