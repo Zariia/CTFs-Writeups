@@ -28,7 +28,7 @@ sudo nmap -p- --open -n -Pn 172.17.0.2 -oN allPorts
 **Resultados del escaneo:**
 * **Puerto 80/TCP**: HTTP (Apache)
 
-  <img width="1195" height="244" alt="1Escaneo" src="https://github.com/user-attachments/assets/b680b9ca-0d9f-4fc9-aa75-0b1aab6a0cc4" />
+<img width="1195" height="244" alt="1Escaneo" src="https://github.com/user-attachments/assets/b680b9ca-0d9f-4fc9-aa75-0b1aab6a0cc4" />
 <br><br>
 
 ### Enumeración de servicios
@@ -69,8 +69,9 @@ En index.php hay una consola que acepta ips para verificar la conectividad, ejec
 ```
 
 <img width="1276" height="815" alt="5preubaaa" src="https://github.com/user-attachments/assets/37517bc0-e227-457a-993d-53db16e6a283" />
-Nos muestra el ping y debajo nos ha ejecutado el *ls -la* que pusimos, por lo que es vulnerable. 
+<br><br>
 
+Nos muestra el ping y debajo nos ha ejecutado el **ls -la** que pusimos, por lo que es vulnerable. 
 Hay inyección de comandos, por lo que podemos mirar archivos como el usuario web-admin, ya que haciendo un whoami nos dijo que somos ese usuario.
 
 
@@ -84,7 +85,9 @@ Entramos al directorio del usuario web-admin para leer la flag del usuario.
 
 <img width="1506" height="885" alt="7flagusuario" src="https://github.com/user-attachments/assets/c1d26f07-a1b5-41f8-bbe6-8358db60f015" />
 <br><br>
+
 La flag es correcta, vamos a continuar obtenido una consola más interactiva para poder escalar privilegios más facilmente.
+
 
 <img width="988" height="518" alt="8flag" src="https://github.com/user-attachments/assets/cf806bdf-c760-4547-8e9a-85f08d76a89a" />
 <br><br>
@@ -128,28 +131,26 @@ export TERM=xterm
 # Comprobamos privilegios de SUDO
 sudo -l
 ```
+---
+
+### Explotación del Vector de Escalada
 
 Nos aprovechamos del permiso SUID que tenemos para ejecutar find sin contraseña y como el usuario root para convertirnos en el usuario root.
+
 ```bash
 sudo find . -exec /bin/sh \; -quit
 ```
 
 <img width="991" height="428" alt="11root" src="https://github.com/user-attachments/assets/856ffe1c-6d52-4d25-88f3-c5de7978d181" />
+<br><br>
 
-
----
-
-### Explotación del Vector de Escalada
-Encontrado un binario o configuración débil. Explicar cómo se abusa de ello para convertirse en `root`.
-
-```bash
-# Ejemplo de explotación
-sudo /usr/bin/env /bin/sh
-```
 
 ¡Ya somos **root**! 🚩
 
 <img width="992" height="691" alt="Finaaal" src="https://github.com/user-attachments/assets/b42ae430-6909-416c-89e2-60fd0f683364" />
+<br><br>
+
+Por último, validamos la flag obtenida.
 <img width="1086" height="181" alt="12flag2" src="https://github.com/user-attachments/assets/6bf0cbce-83f4-4349-951a-ecf3790287f7" />
 
 
