@@ -135,7 +135,7 @@ sudo -l
 
 ### Explotación del Vector de Escalada
 
-Nos aprovechamos del permiso SUID que tenemos para ejecutar find sin contraseña y como el usuario root para convertirnos en el usuario root.
+Nos aprovechamos del permiso SUID que tenemos para ejecutar find sin contraseña y como el usuario root para convertirnos en él.
 
 ```bash
 sudo find . -exec /bin/sh \; -quit
