@@ -45,12 +45,12 @@ Al inspeccionar el sitio web, nos encontramos con la página por defecto de Apac
 
 Aplicamos fuzzing de directorios para buscar rutas ocultas:
 ```bash
-gobuster dir -u http://10.10.X.X/ -w /usr/share/wordlists/dirb/common.txt -x php,txt,html
+gobuster dir -u http://172.17.0.2/ -w /usr/share/rockyou.txt -x php,txt,html -t 100 -k -r --no-error
 ```
 <img width="1918" height="480" alt="3gobuster" src="https://github.com/user-attachments/assets/781348f6-410a-44e6-b727-47d7c1b5c37d" />
 
 
-
+Encontramos una ruta interesante /index.php asi que vamos a mirar que hay y ver si podemos explotarlo.
 
 
 
@@ -58,17 +58,22 @@ gobuster dir -u http://10.10.X.X/ -w /usr/share/wordlists/dirb/common.txt -x php
 
 ## 💥 2. Fase de Explotación (Acceso Inicial)
 
-### Vector de Ataque
-Describir cómo se aprovecha la vulnerabilidad encontrada (ej. *Local File Inclusion*, *RCE*, *Credenciales por defecto*, etc.).
-
-```http
-# Ejemplo de Payload o petición vulnerable utilizada
-http://10.10.X.X/index.php?file=../../../../etc/passwd
-```
 
 <img width="1443" height="790" alt="4web" src="https://github.com/user-attachments/assets/f2ff8998-3424-4925-b77c-ee905582bc65" />
 
+### Vector de Ataque
+En index.php hay una consola que acepta ips para verificar la conectividad, ejecuta un ping, vamos a probar a poner un comando detrás para ver si ejecuta varios.
+
+```http
+# Ejemplo de Payload o petición vulnerable utilizada
+127.0.0.1 ; ls -la
+```
+
 <img width="1276" height="815" alt="5preubaaa" src="https://github.com/user-attachments/assets/37517bc0-e227-457a-993d-53db16e6a283" />
+Nos muestra el ping y debajo nos ha ejecutado el ls -la que pusimos, por lo que es vulnerable. 
+
+Hay inyección de comandos.
+
 
 <img width="1379" height="852" alt="6encontramos" src="https://github.com/user-attachments/assets/e2735431-3bf7-4db4-acc9-68a0e9e62059" />
 
@@ -146,6 +151,6 @@ sudo /usr/bin/env /bin/sh
 ---
 
 ## 🏁 4. Conclusiones y Mitigación
-* **Vulnerabilidad Principal**: Falta de sanitización en los parámetros web de entrada / Binarios con permisos SUDO mal configurados.
+* **Vulnerabilidad Principal**: Falta de sanitización en los parámetros web de entrada. Esto ocurre cuando una aplicación web pasa datos ingresados por el usuario directamente al sistema operativo subyacente para ejecutar un comando, sin validar ni limpiar correctamente la entrada. También hay binarios con permisos SUDO mal configurados.
 * **Remediación**: Actualizar los servicios vulnerables, implementar *whitelisting* en los inputs y aplicar el principio de menor privilegio retirando accesos SUDO innecesarios.
 
