@@ -17,73 +17,87 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 
 ## 🔍 1. Fase de Reconocimiento y Enumeración
 
-Lanzamos un ping a la máquina 
-
-
 
 ### Escaneo de Puertos (`nmap`)
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
-sudo nmap -p- --open -n -Pn `10.128.161.94
+ nmap -p- --open -n -Pn `10.128.161.94
 ```
-
 
 **Resultados del escaneo:**
 * **Puerto 22/TCP**: SSH
 * **Puerto 80/TCP**: HTTP (Apache)
 
-
+<img width="646" height="215" alt="1escaneoinicial" src="https://github.com/user-attachments/assets/72681f08-bbdc-4e47-be3f-f4acc2ec4261" />
 <br><br>
 
 ### Enumeración de servicios
 Continuamos con un escaneo más profundo del servicio encontrado:
 
 ```bash
-sudo nmap -sCV -p 80 `10.128.161.94
+nmap -p 22,80 -sCV -n 10.128.161.94
 ```
 
+<img width="866" height="374" alt="2escaneopuertos" src="https://github.com/user-attachments/assets/b1d3344c-f1f4-46bf-864d-81eb6f852257" />
 
 <br><br>
 
 
 ### Enumeración Web (Puerto 80)
-Al inspeccionar el sitio web, nos encontramos con la página por defecto de Apache, no vemos nada relevante por lo que enumeramos con gobuster.
+
+Al inspeccionar el sitio web, nos encontramos con una página para ayudar a Morty, vamos a mirar el código fuente.
+<img width="1092" height="746" alt="3web" src="https://github.com/user-attachments/assets/9df2629f-f566-4189-bc5a-182fb6295750" />
+<br><br>
+
+Hay un nombre de usuario en un comentario del código html de la web, nos lo guardamos y vamos a realizar enumeraremos con gobuster.
+<img width="1091" height="725" alt="4" src="https://github.com/user-attachments/assets/99128df5-83ee-46a9-98c5-4031be3f4a73" />
+<br><br>
+
+** Username: R1ckRul3s**
+
 
 Aplicamos fuzzing de directorios para buscar rutas ocultas:
 ```bash
-gobuster dir -u http://172.17.0.2/ -w /usr/share/rockyou.txt -x php,txt,html -t 100 -k -r --no-error
+gobuster dir -u http://10.128.161.94 -w /usr/share/wordlists/rockyou.txt -x php,txt,html -t 100 -k -r
 ```
-<img width="1918" height="480" alt="3gobuster" src="https://github.com/user-attachments/assets/781348f6-410a-44e6-b727-47d7c1b5c37d" />
+<img width="1149" height="571" alt="5enumweb" src="https://github.com/user-attachments/assets/e67acb86-8a85-4b24-8e07-286ff539f8e6" />
 <br><br>
 
-Encontramos una ruta interesante /index.php asi que vamos a mirar que hay y ver si podemos explotarlo.
+Encontramos unas rutas interesantes: login.php robots.txt y portal.php , así que vamos a mirar que hay y ver si podemos explotarlo.
 <br><br>
 
 ---
 
 ## 💥 2. Fase de Explotación (Acceso Inicial)
 
+Comenzamos entrando a login.php, aquí nos pide un usuario y una contraseña, el usuario lo tenemos porque anteriormente estaba escrito en un comentario de la página web principal, pero la contraseña no, así que vamos a ver otra página de las descubiertas.
+<img width="1831" height="825" alt="6" src="https://github.com/user-attachments/assets/cd3b50cd-96e0-4711-b75d-a6b00799e194" />
 
-<img width="1443" height="790" alt="4web" src="https://github.com/user-attachments/assets/f2ff8998-3424-4925-b77c-ee905582bc65" />
+En robots.txt solo hay una palabra que parece una contraseña, podríamos probarla junto con el usuario que descubrimos en la página de login.
+<img width="1124" height="425" alt="7" src="https://github.com/user-attachments/assets/2b5c1a07-3cca-4cdc-ae79-71272861bf98" />
+<br><br>
+
 
 ### Vector de Ataque
-En index.php hay una consola que acepta ips para verificar la conectividad, ejecuta un ping, vamos a probar a poner un comando detrás para ver si ejecuta varios.
+Escribimos el usuario y la contraseña encontrados y estamos dentro, vemos que es portal.php, una de las rutas que encontramos previamente pero a la que no podíamos acceder antes.
+<img width="1682" height="505" alt="8dentro" src="https://github.com/user-attachments/assets/b1369a21-b7a3-41cb-bec4-da1599394d7d" />
+SEGUIR 8 subida
 
 ```bash
 127.0.0.1 ; ls -la
 ```
 
-<img width="1276" height="815" alt="5preubaaa" src="https://github.com/user-attachments/assets/37517bc0-e227-457a-993d-53db16e6a283" />
+
 <br><br>
 
 Nos muestra el ping y debajo nos ha ejecutado el **ls -la** que pusimos, por lo que es vulnerable. 
 Hay inyección de comandos, por lo que podemos mirar archivos como el usuario web-admin, ya que haciendo un whoami nos dijo que somos ese usuario.
 
 
-<img width="1379" height="852" alt="6encontramos" src="https://github.com/user-attachments/assets/e2735431-3bf7-4db4-acc9-68a0e9e62059" />
+
 <br><br>
-Entramos al directorio del usuario web-admin para leer la flag del usuario.
+Entramos al directorio del usuario....
 
 ```bash
 127.0.0.1 ;  cat /home/web-admin/user.txt
