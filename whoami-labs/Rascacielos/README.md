@@ -6,7 +6,7 @@
 | **Dificultad** | 🟢 Fácil  |
 | **OS** | Linux  |
 | **IP de la Máquina** | `172.17.0.2` |
-| **Fecha de resolución** | 2026-10-18 |
+| **Fecha de resolución** | 2026-10-17 |
 
 ---
 
@@ -16,6 +16,9 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 ---
 
 ## 🔍 1. Fase de Reconocimiento y Enumeración
+
+Comenzamos realizando un ping a la máquina
+<img width="758" height="127" alt="ping" src="https://github.com/user-attachments/assets/26a7d6ec-85a3-471d-85f0-c24548294654" />
 
 
 ### Escaneo de Puertos (`nmap`)
@@ -75,6 +78,28 @@ Al ir moviendonos por /index.php vemos que en la url se va añadiendo ?page=algo
 ### Vector de Ataque
 
 
+<img width="935" height="500" alt="7passwdd" src="https://github.com/user-attachments/assets/4f6a19e0-5219-461f-8385-1c5de41020af" />
+
+<img width="1193" height="601" alt="8ueconcurl" src="https://github.com/user-attachments/assets/3d515164-bff2-44cf-95f6-a16483016bdb" />
+
+
+
+volvemos a lanzar gobuster pero esta vez añadiendo alguna extensión más. Una vez finaliza vemos varios archivos nuevos que podemos ver, 
+
+<img width="1427" height="766" alt="11info" src="https://github.com/user-attachments/assets/142a99c6-4617-4b2d-bdeb-07caa2c03d9c" />
+
+Llama la atención .ba...
+
+<img width="875" height="201" alt="11claves" src="https://github.com/user-attachments/assets/24366c2d-2cfd-4a73-b390-4e8138675271" />
+
+Hay usuario y contra...
+
+
+Como teníamos el puerto 22 y un usuario válido pero sin contraseña, vmaos aprobar a entrar....
+
+
+
+<img width="788" height="474" alt="12reutilizacioncontrasenia" src="https://github.com/user-attachments/assets/85ba70ea-0e7e-49e9-a949-5205d5b38f81" />
 
 
 
@@ -83,10 +108,25 @@ Al ir moviendonos por /index.php vemos que en la url se va añadiendo ?page=algo
 
 ### Enumeración del Sistema
 
+<img width="1149" height="143" alt="13findsudo" src="https://github.com/user-attachments/assets/d5e9a683-30c6-411f-a3ff-1cfa5f255d64" />
+
+
 ```bash
 # Comprobamos privilegios de SUDO
 sudo -l
 ```
+
+
+
 ---
 
 ### Explotación del Vector de Escalada
+
+
+<img width="654" height="189" alt="14fin" src="https://github.com/user-attachments/assets/b1109391-a3b5-474f-9c70-9eb513aa77a1" />
+
+<img width="485" height="151" alt="15d" src="https://github.com/user-attachments/assets/edf15ac4-761c-43ad-805c-4e3189d40180" />
+
+
+<img width="707" height="572" alt="15ole" src="https://github.com/user-attachments/assets/9c9d408b-03fa-4c28-a342-ac3030971bc8" />
+
