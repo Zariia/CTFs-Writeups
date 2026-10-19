@@ -1,4 +1,4 @@
-# >_ [Pickle Rick]
+# >_ [Rascacielos]
 
 | Propiedad | Detalle |
 | :--- | :--- |
@@ -22,13 +22,14 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
- nmap -p- --open -n -Pn `10.128.161.94
+ nmap -p- --open -n -Pn 172.17.0.2 -oN allPorts
 ```
 
 **Resultados del escaneo:**
 * **Puerto 22/TCP**: SSH
 * **Puerto 80/TCP**: HTTP (Apache)
 
+<img width="982" height="221" alt="1Escaneo" src="https://github.com/user-attachments/assets/ea744281-009e-4843-93b5-8ddea0cb16d7" />
 
 
 
