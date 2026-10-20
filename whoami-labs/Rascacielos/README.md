@@ -142,33 +142,39 @@ En la web no vimos ningún login pero como teníamos el puerto 22 y un usuario v
 
 
 <img width="788" height="474" alt="12reutilizacioncontrasenia" src="https://github.com/user-attachments/assets/85ba70ea-0e7e-49e9-a949-5205d5b38f81" />
-bbdd n odeja pero ssh si,reutilizacion de contraseña
-architect
+<br><br>
+
+Podemos entrar, hay reutilización de contraseñas asi que ya somos el usuario architect.
+También intenté entrar a ver la base de datos pero no se podía aunque no es relevante ya que nuestro objetivo era convertirnos en el usuario architect, continuamos con la escalada de privilegios para obtener la flag.
 
 
 ## 👑 3. Escalada de Privilegios
 
 ### Enumeración del Sistema
 
-<img width="1149" height="143" alt="13findsudo" src="https://github.com/user-attachments/assets/d5e9a683-30c6-411f-a3ff-1cfa5f255d64" />
-
+Una vez dentro y como el usuario architect, necesitamos elevar privilegios para convertirnos en root, por lo que comenzamos enumerando el sistema, empezamos con sudo -l y podemos ejecutar find sin contraña como el usuario root.
 
 ```bash
 # Comprobamos privilegios de SUDO
 sudo -l
 ```
 
+<img width="1149" height="143" alt="13findsudo" src="https://github.com/user-attachments/assets/d5e9a683-30c6-411f-a3ff-1cfa5f255d64" />
 
 
 ---
 
 ### Explotación del Vector de Escalada
 
+Vamos a aprovecharnos de este privilegios sudo que tenemos y vamos a escalar a root:
 
 <img width="654" height="189" alt="14fin" src="https://github.com/user-attachments/assets/b1109391-a3b5-474f-9c70-9eb513aa77a1" />
+<br><br>
 
+Una vez somos root, lo comprobamos y leemos la flag.
 <img width="485" height="151" alt="15d" src="https://github.com/user-attachments/assets/edf15ac4-761c-43ad-805c-4e3189d40180" />
+<br><br>
 
-
+Verificamos la flag y es correcta.
 <img width="707" height="572" alt="15ole" src="https://github.com/user-attachments/assets/9c9d408b-03fa-4c28-a342-ac3030971bc8" />
-
+<br><br>
