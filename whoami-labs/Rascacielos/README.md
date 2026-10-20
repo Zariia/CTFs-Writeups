@@ -76,7 +76,7 @@ Miramos también footer.php por si hubiera algo, pero no hay nada relevante.
 
 ---
 
-## 💥 2. Fase de Explotación (Acceso Inicial)
+## 💥 2. Fase de Explotación
 
 Al ir moviendonos por /index.php vemos que en la url se va añadiendo ?page=algo, podemos probar a leer archivos por si fueran accesibles para el usuario de Apache, así que añadimos al final de la url: 
 
@@ -87,26 +87,40 @@ Al ir moviendonos por /index.php vemos que en la url se va añadiendo ?page=algo
 ### Vector de Ataque
 
 <img width="935" height="500" alt="7passwdd" src="https://github.com/user-attachments/assets/4f6a19e0-5219-461f-8385-1c5de41020af" />
+<br><br>
+
+Podemos leer ficheros y al leer etc/passwd vemos que está el usuario root y el usuario architect. 
+Vamos ahora a leer el fichero por la terminal con curl, con el siguiente comando:
+
 
 ```
 curl -i 'http://172.17.0.2/index.php?page=../../../../../../../../etc/passwd'
 ```
 
-
+Nos lo muestra sin problemas y lo podemos ver más fácilmente:
 <img width="1193" height="601" alt="8ueconcurl" src="https://github.com/user-attachments/assets/3d515164-bff2-44cf-95f6-a16483016bdb" />
+<br><br>
 
-Ubuntu 20.04.6 LTS
+Si miramos el /etc/issue vemos que estamos ante  Ubuntu 20.04.6 LTS
+
+```
 http://172.17.0.2/index.php?page=../../../../../../../../../../etc/issue
+```
+
 
 Volvemos a lanzar gobuster pero esta vez añadiendo alguna extensión más. Una vez finaliza vemos varios archivos nuevos que podemos ver, 
 
 <img width="1427" height="766" alt="11info" src="https://github.com/user-attachments/assets/142a99c6-4617-4b2d-bdeb-07caa2c03d9c" />
+<br><br>
 
-Llama la atención .ba...
+Llama la atención el fichero .config.bak asi que vamos a mirarlo desde la terminal con curl para ver que contiene.
 
 <img width="875" height="201" alt="11claves" src="https://github.com/user-attachments/assets/24366c2d-2cfd-4a73-b390-4e8138675271" />
+<br><br>
 
-Hay usuario y contra...
+Su contenido es muy interesante, es la configuración de la base de datos con usuario y contraseña:
+
+```php
 <?php
 // Configuración de base de datos — NO EXPONER
 $db_host = "localhost";
@@ -117,9 +131,9 @@ $db_name = "rascacielos_db";
 // Credenciales sistema interno
 $admin_pass = "Sky2026!";
 ?>
+```
 
-
-Como teníamos el puerto 22 y un usuario válido pero sin contraseña, vmaos aprobar a entrar....
+Como teníamos el puerto 22 y un usuario válido pero sin contraseña, vamos aprobar a entrar....
 
 gobuster dir -u http://172.17.0.2 -w /usr/share/seclists/Discovery/Web-Content/common.txt  -x php,bak,html
 
