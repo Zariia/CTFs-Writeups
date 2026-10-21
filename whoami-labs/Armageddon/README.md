@@ -38,7 +38,7 @@ sudo nmap -p- --open -sS --min-rate 5000 -n -Pn 172.17.0.2 -oN allPorts
 * **Puerto 80/TCP**: HTTP
 
 <img width="804" height="215" alt="1Escaneo" src="https://github.com/user-attachments/assets/d6731585-3c86-4d86-8fb8-f186c0109e1d" />
-
+<br><br>
 
 Descubrimos abierto solo el puerto 80 con el servicio http.
 <br><br>
@@ -52,6 +52,7 @@ nmap -p80 -sCV 172.17.0.2 -oN targeted
 
 <img width="1229" height="419" alt="2Escaneopuerto" src="https://github.com/user-attachments/assets/193bf3ca-138e-4c3d-a2e4-3b6e59e8496e" />
 <br><br>
+
 Aquí descubrimos que nos enfrentamos a un Apache httpd 2.438, vemos que la web también contiene un robots.txt junto con unas cuantas rutas más y también que usa el gestor de contenidos Drupal en la versión 7 que es bastante vulnerable.
 
 
@@ -63,13 +64,13 @@ Tiene un login para acceder al portal, se puede crear una nueva cuenta y cambiar
 Comenzamos probando el típico de Sql Injection pero no funciona.
 
 <img width="1417" height="872" alt="3WebPrueba" src="https://github.com/user-attachments/assets/97a03625-7686-41ef-ba97-ab98d1e3d420" />
-
+<br><br>
 
 Si probamos a crearnos una cuenta nueva, vemos que no podemos ya que no tenemos un email del sistema.
 
 <img width="1382" height="731" alt="5Crearcuenta" src="https://github.com/user-attachments/assets/cce705ba-5bae-44ba-8371-a2958c6d3802" />
 
-Como en el escaneo del puerto 80 vimos que usaba drupal 7, vamos a tirar por ahí.
+Como en el escaneo del puerto 80 vimos que usaba Drupal 7, vamos a continuar mirando por ahí.
 
 ---
 
@@ -77,15 +78,19 @@ Como en el escaneo del puerto 80 vimos que usaba drupal 7, vamos a tirar por ah�
 
 Comenzamos usando la herramienta droopescan para ver que encuentra.
 <img width="1296" height="401" alt="5Drupa encontrar" src="https://github.com/user-attachments/assets/11b55ab9-bad6-4a08-803c-8f76281e82d3" />
+<br><br>
 
 Nos muestra dos interesantes posibles urls, un changelog.txt y un login en user
 Miramos el txt para ver si hay algo relevante:
 
 <img width="880" height="779" alt="6drupalversion" src="https://github.com/user-attachments/assets/6a7577bb-f578-401f-8d4e-42041ff77e42" />
+<br><br>
 
-Aquí tenemos la versión exacta del droopal que emplea esta web, la 7.57
-Buscamos si tiene vulnerabilidades ya que es bastante antigua.
+Aquí tenemos la versión exacta del droopal que emplea esta web, la 7.57 \n
+Buscamos si tiene vulnerabilidades ya que es una versión bastante antigua, del año 2018.
+
 <img width="1898" height="377" alt="6drupalsearchsploit" src="https://github.com/user-attachments/assets/45d24516-36f3-400a-93f8-46df114d47ab" />
+<br><br>
 
 ---
 
