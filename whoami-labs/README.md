@@ -14,8 +14,8 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **whoami-
 | `Power fitness` | 🟢 Fácil | Revel shell / Cron | [👁️ Leer Writeup](./Power_fitness/) |
 | `Signin Bleed` | 🟢 Fácil | Web Exploit / Sql Injection |  [👁️ Leer Writeup](./SigninBleed/) |
 | `El cuervo` | 🟢 Fácil | FTP / Capabilities |  [👁️ Leer Writeup](./El_cuervo/) |
-| `Identity ` | 🟢 Fácil | SUDO |  [👁️ Leer Writeup](./Identity/) |
-| `Rascacielos ` | 🟢 Fácil | SUDO |  [👁️ Leer Writeup](./Rascacielos/) |
+| `Identity ` | 🟢 Fácil | SUID / SUDO |  [👁️ Leer Writeup](./Identity/) |
+| `Rascacielos ` | 🟢 Fácil | Web Exploit / SUDO |  [👁️ Leer Writeup](./Rascacielos/) |
 | `Armageddon` | 🟡 Media | Web Exploit | [👁️ Leer Writeup](./Armageddon/) |
 
 
