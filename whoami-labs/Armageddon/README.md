@@ -81,61 +81,77 @@ Comenzamos usando la herramienta droopescan para ver que encuentra.
 <img width="1296" height="401" alt="5Drupa encontrar" src="https://github.com/user-attachments/assets/11b55ab9-bad6-4a08-803c-8f76281e82d3" />
 <br><br>
 
-Nos muestra dos interesantes posibles urls, un changelog.txt y un login en user
-Miramos el txt para ver si hay algo relevante:
+Nos muestra dos posibles urls muy interesantes, un changelog.txt y un login en user.
+
+
+Miramos el txt para ver si hay algo relevante y vemos la versión exacta del droopal que emplea esta web, la 7.57
+
 
 <img width="880" height="779" alt="6drupalversion" src="https://github.com/user-attachments/assets/6a7577bb-f578-401f-8d4e-42041ff77e42" />
 <br><br>
 
-Aquí tenemos la versión exacta del droopal que emplea esta web, la 7.57
 
-
-Buscamos si tiene vulnerabilidades ya que es una versión bastante antigua, del año 2018.
+Buscamos si tiene algún exploit o vulnerabilidad ya que es una versión bastante antigua, del año 2018.
 
 <img width="1898" height="377" alt="6drupalsearchsploit" src="https://github.com/user-attachments/assets/45d24516-36f3-400a-93f8-46df114d47ab" />
 <br><br>
 
-Tiene varias vulnerabilidades esta versión de droopal, vamos a probar la de remote code con Metasploit para ganar acceso al usuario www-data.
+Encontramos Drupalgeddon2 y Drupalgeddon3 las más sobresalientes.
+Así que tiene varias vulnerabilidades esta versión de droopal, vamos a probar la de remote code con Metasploit para ganar acceso al usuario www-data. Ponemos los parámetros que pos pide, como la Ip y el puerto y lo lanzamos.
 <img width="1202" height="265" alt="7vulnmeta" src="https://github.com/user-attachments/assets/dc27a081-1fd8-4db9-ba56-1002892be4a0" />
 
 
-Conseguimos entrar como el usuario www-data
+Enseguida conseguimos acceder como el usuario www-data
 <img width="1392" height="178" alt="8dentro2" src="https://github.com/user-attachments/assets/0e49bfcf-37a0-4a5b-b792-ce929f54a8cb" />
+
 
 Hay una carpeta default, entramos para mirar que contiene y vemos un settings.php, vamos a leer su contenido:
 <img width="1910" height="875" alt="9buscamosconf" src="https://github.com/user-attachments/assets/58757908-773f-433d-bab7-ba9cf11a3838" />
 
+Lo más relevante de este fichero es la información de la base de datos, ya que está en texto plano el nombre de la base de datos, del usuario y la contraseña. También nos indica que es mysql asi que vamos a probar a acceder con estas credenciales
 
+```php
 'database' => 'drupaldb',
       'username' => 'drupaluser',
       'password' => 'DrUp4l_Adm1n_S3cur3_P4ss!2018',
       'host' => '127.0.0.1',
       'port' => '',
       'driver' => 'mysql',
+```
 
-
+Entramos con mysql -u drupaluser -p, nos pide la contraseña y estamos dentro. 
 <img width="867" height="305" alt="10bbdd" src="https://github.com/user-attachments/assets/720f92e7-2a2c-4cc7-9760-be290d23a92e" />
+<br><br>
 
-
+Una vez dentro vamos a la base de datos que vimos, drupaldb, miramos las tablas que tiene. Hay un montón pero nos interesa una de las últimas tablas, la tabla users:
 <img width="813" height="798" alt="11mirarbbdd" src="https://github.com/user-attachments/assets/c4f51436-4696-4034-908b-477f364e5dbf" />
 
 
+Hacemos una select para msotrar todo el contenido de la tabla users y tenemos al usuario admin y los usuarios que creamos nosotros
 <img width="1917" height="496" alt="12ole" src="https://github.com/user-attachments/assets/9f440000-da3d-47a6-9188-1c50cc7f68e1" />
 
-
+```mysql
 1 | admin    | $S$DZbLDbsh4O5y5C/I.sEmNxKz1XQwThfFRxhgfNjfzE41DvQodxL9 | admin@example.com       |       |           | NULL             | 1789796142 |      0 | 1789796142 |      1 | UTC      |          |       0 | admin@example.com       | b:0; |
 |   2 | usuario  | $S$DvYeqaCiHp6iIsvh0G/.seanm8.aAxl/m39tWnEPhmp1jec6.I88 | usuario@hotmail.com     |       |           | filtered_html    | 1790008520 |      0 |          0 |      0 | UTC      |          |       0 | usuario@hotmail.com     | NULL |
 |   3 | usuario2 | $S$DI2.nqMoNI.3JcBLIXyQ3P7huefINz4iP6ovKZoglN37fmV/mobb | reces91372@blobapps.com | 
       |           | filtered_html    | 1790008860 |      0 |          0 |      0 | UTC      |          |       0 | reces91372@blobapps.com 
+```
 
 
+Intenté descifrar la clave con John pero después de mucho rato no lo conseguí así que como tengo acceso a la base de datos y puedo modificarla, voy a crear yo una clave, pasarla a hash y sustituirla:
 
 
-Creamos una clave nueva y la sustituimos en la bbdd por la de admin para entrar en la web en drupal.
+```
 password: clave 		hash: $S$DfICEjSbGQDWYfs1XBeknER9Th5ntVTih2tRQ8SLpnFJI.BehYRQ
+```
 
+Una vez tengo la contraseña, realizo un update en la tabla de users:
 
+```mysql
 update users set pass='$S$DfICEjSbGQDWYfs1XBeknER9Th5ntVTih2tRQ8SLpnFJI.BehYRQ' where name='admin';
+```
+
+
 <img width="1279" height="635" alt="17cambiada" src="https://github.com/user-attachments/assets/71e0b94a-3ff4-47b6-b1f6-cca378fac471" />
 
 
