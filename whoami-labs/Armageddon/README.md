@@ -164,23 +164,13 @@ Conseguimos entrar y podemos ver todo:
 
 
 
-<img width="878" height="756" alt="activarphp" src="https://github.com/user-attachments/assets/b528e06c-9c3f-4a4e-aa22-12c587097883" />
-Activar php
-
-
-   
-
-
-
 ---
 
 
 ## 👑 3. Escalada de Privilegios
 
-
+Seguimos siendo en la terminal el usuario ww-data, ya que tenemos una contraseña y usuario de la base de datos, probamos a ver si hay reutilización de contraseñas y podemos escalar privilegios
 <img width="608" height="158" alt="19soydbadmin" src="https://github.com/user-attachments/assets/a2780f71-31c6-4cc0-9613-47db9c706b66" />
-
-
 
 
 <img width="1191" height="154" alt="20sduo" src="https://github.com/user-attachments/assets/2d347a39-1245-4017-b819-63c9237357f0" />
