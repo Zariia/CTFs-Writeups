@@ -161,7 +161,7 @@ Probamos a acceder en el panel del login con la nueva contraseña:
 
 Conseguimos entrar y podemos ver todo:
 <img width="1659" height="775" alt="18dentroweb" src="https://github.com/user-attachments/assets/05feb00c-ff33-47a7-91ed-5633dbc33856" />
-
+<br><br>
 
 
 ---
@@ -169,19 +169,22 @@ Conseguimos entrar y podemos ver todo:
 
 ## 👑 3. Escalada de Privilegios
 
-Seguimos siendo en la terminal el usuario ww-data, ya que tenemos una contraseña y usuario de la base de datos, probamos a ver si hay reutilización de contraseñas y podemos escalar privilegios
+Seguimos siendo en la terminal el usuario www-data, ya que tenemos una contraseña y usuario de la base de datos, probamos a ver si hay reutilización de contraseñas y podemos escalar privilegios
 <img width="608" height="158" alt="19soydbadmin" src="https://github.com/user-attachments/assets/a2780f71-31c6-4cc0-9613-47db9c706b66" />
+<br><br>
 
-
+Si que la hay, pero necesitamos seguir escalando para ser root y poder leer la flag, asi que miramos si tiene permisos SUDO y tiene uno, find.
 <img width="1191" height="154" alt="20sduo" src="https://github.com/user-attachments/assets/2d347a39-1245-4017-b819-63c9237357f0" />
+<br><br>
 
-Somos el usuario root, vamos a su carpeta personal y ahí tenemos la flag.
+Ejecutamos find como el usuario root sin proporcionar contraseña.
+Ya somos el usuario root, vamos a su carpeta personal y ahí tenemos la flag.
 <img width="617" height="323" alt="21" src="https://github.com/user-attachments/assets/3d37fccf-a6ff-4a35-9e5a-88e452bf7d94" />
 <br><br>
 
 Verificamos la flag y es correcta.
 <img width="784" height="679" alt="fin" src="https://github.com/user-attachments/assets/1c3a361f-36af-4933-a35e-f89d58845c6e" />
-
+<br><br>
 
 
 <?php
