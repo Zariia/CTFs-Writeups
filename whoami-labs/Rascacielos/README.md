@@ -172,9 +172,11 @@ Vamos a aprovecharnos de este privilegios sudo que tenemos y vamos a escalar a r
 <br><br>
 
 Una vez somos root, lo comprobamos y leemos la flag.
+
 <img width="485" height="151" alt="15d" src="https://github.com/user-attachments/assets/edf15ac4-761c-43ad-805c-4e3189d40180" />
 <br><br>
 
 Verificamos la flag y es correcta.
+
 <img width="707" height="572" alt="15ole" src="https://github.com/user-attachments/assets/9c9d408b-03fa-4c28-a342-ac3030971bc8" />
 <br><br>
