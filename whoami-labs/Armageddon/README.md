@@ -127,7 +127,7 @@ Una vez dentro vamos a la base de datos que vimos, drupaldb, miramos las tablas 
 <img width="813" height="798" alt="11mirarbbdd" src="https://github.com/user-attachments/assets/c4f51436-4696-4034-908b-477f364e5dbf" />
 
 
-Hacemos una select para msotrar todo el contenido de la tabla users y tenemos al usuario admin y los usuarios que creamos nosotros
+Hacemos una select para mostrar todo el contenido de la tabla users y tenemos al usuario admin y los usuarios que creamos nosotros
 <img width="1917" height="496" alt="12ole" src="https://github.com/user-attachments/assets/9f440000-da3d-47a6-9188-1c50cc7f68e1" />
 
 ```mysql
@@ -151,23 +151,24 @@ Una vez tengo la contraseña, realizo un update en la tabla de users:
 update users set pass='$S$DfICEjSbGQDWYfs1XBeknER9Th5ntVTih2tRQ8SLpnFJI.BehYRQ' where name='admin';
 ```
 
-
+Una vez aplicado el cambio, revisamos si la contraseña a cambiado para el usuario admin y está la nueva que pusimos.
 <img width="1279" height="635" alt="17cambiada" src="https://github.com/user-attachments/assets/71e0b94a-3ff4-47b6-b1f6-cca378fac471" />
 
 
-
+Probamos a acceder en el panel del login con la nueva contraseña:
 <img width="1435" height="744" alt="13in" src="https://github.com/user-attachments/assets/c4422b80-5d04-4c36-8fe7-a64f96ff1dbf" />
 
+
+Conseguimos entrar y podemos ver todo:
 <img width="1659" height="775" alt="18dentroweb" src="https://github.com/user-attachments/assets/05feb00c-ff33-47a7-91ed-5633dbc33856" />
+
+
 
 <img width="878" height="756" alt="activarphp" src="https://github.com/user-attachments/assets/b528e06c-9c3f-4a4e-aa22-12c587097883" />
 Activar php
 
-<img width="608" height="158" alt="19soydbadmin" src="https://github.com/user-attachments/assets/a2780f71-31c6-4cc0-9613-47db9c706b66" />
 
-
-
-    
+   
 
 
 
@@ -175,11 +176,20 @@ Activar php
 
 
 ## 👑 3. Escalada de Privilegios
+
+
+<img width="608" height="158" alt="19soydbadmin" src="https://github.com/user-attachments/assets/a2780f71-31c6-4cc0-9613-47db9c706b66" />
+
+
+
+
 <img width="1191" height="154" alt="20sduo" src="https://github.com/user-attachments/assets/2d347a39-1245-4017-b819-63c9237357f0" />
 
-
+Somos el usuario root, vamos a su carpeta personal y ahí tenemos la flag.
 <img width="617" height="323" alt="21" src="https://github.com/user-attachments/assets/3d37fccf-a6ff-4a35-9e5a-88e452bf7d94" />
+<br><br>
 
+Verificamos la flag y es correcta.
 <img width="784" height="679" alt="fin" src="https://github.com/user-attachments/assets/1c3a361f-36af-4933-a35e-f89d58845c6e" />
 
 
