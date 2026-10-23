@@ -3,7 +3,7 @@
 | Propiedad | Detalle |
 | :--- | :--- |
 | **Plataforma** | Whoami Labs |
-| **Dificultad** | 🟢 Fácil  |
+| **Dificultad** | 🟢 Media  |
 | **OS** | Linux  |
 | **IP de la Máquina** | `172.17.0.2` |
 | **Fecha de resolución** | 2026-10-22 |
@@ -29,6 +29,7 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 * **Puerto 22/TCP**: SSH
 * **Puerto 80/TCP**: HTTP (Apache)
 
+<img width="932" height="198" alt="1escaneo" src="https://github.com/user-attachments/assets/7dd1045d-c378-4d3a-acb0-7975e1534e6c" />
 <br><br>
 
 ### Enumeración de servicios
@@ -38,7 +39,7 @@ Continuamos con un escaneo más profundo del servicio encontrado:
 nmap -p 22,80 -sCV -n 10.128.161.94
 ```
 
-
+<img width="825" height="199" alt="2Escaneopuerto" src="https://github.com/user-attachments/assets/0d33a0fa-ba96-41e7-ac3c-4c5669b59b1b" />
 <br><br>
 
 
