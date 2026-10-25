@@ -22,7 +22,7 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
- nmap -p- --open -n -Pn `10.128.161.94
+ nmap -p- --open -n -Pn 172.17.0.2
 ```
 
 **Resultados del escaneo:**
@@ -36,7 +36,7 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 Continuamos con un escaneo más profundo del servicio encontrado:
 
 ```bash
-nmap -p 22,80 -sCV -n 10.128.161.94
+nmap -p 22,80 -sCV -n 172.17.0.2
 ```
 
 <img width="825" height="199" alt="2Escaneopuerto" src="https://github.com/user-attachments/assets/0d33a0fa-ba96-41e7-ac3c-4c5669b59b1b" />
