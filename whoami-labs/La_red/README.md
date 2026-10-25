@@ -29,7 +29,7 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 * **Puerto 22/TCP**: SSH
 * **Puerto 80/TCP**: HTTP (Apache)
 
-<img width="932" height="198" alt="1escaneo" src="https://github.com/user-attachments/assets/7dd1045d-c378-4d3a-acb0-7975e1534e6c" />
+
 <br><br>
 
 ### Enumeración de servicios
