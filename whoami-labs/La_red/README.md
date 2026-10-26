@@ -29,7 +29,7 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 * **Puerto 80/TCP**: HTTP
 
 <img src="./img/1escaneo.png" width="70%">
-<br><br>
+<br>
 
 ### Enumeración de servicios
 Continuamos con un escaneo más profundo del servicio encontrado:
@@ -38,7 +38,7 @@ Continuamos con un escaneo más profundo del servicio encontrado:
 nmap -p80 -sCV -n 172.17.0.2 -oN targeted
 ```
 
-<img src="./img/2Escaneopuertos.png" width="70%">
+<img src="./img/2Escaneopuerto.png" width="70%">
 <br><br>
 
 
