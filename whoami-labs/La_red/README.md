@@ -47,19 +47,15 @@ nmap -p80 -sCV -n 172.17.0.2 -oN targeted
 Al inspeccionar el sitio web, nos encontramos con una página 
 <br><br>
 
-
+<img src="./img/3web.png" width="70%">
 <br><br>
 
 
+<img src="./img/4ping.png" width="70%">
+<img src="./img/4probando.png" width="70%">
 
-
-Aplicamos fuzzing de directorios para buscar rutas ocultas:
-```bash
-gobuster dir -u http://10.128.161.94 -w /usr/share/wordlists/rockyou.txt -x php,txt,html -t 100 -k -r
-```
 <br><br>
 
-Encontramos unas rutas interesantes: , así que vamos a mirar que hay y ver si podemos explotarlo.
 <br><br>
 
 ---
