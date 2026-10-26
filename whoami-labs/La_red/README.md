@@ -44,10 +44,10 @@ nmap -p80 -sCV -n 172.17.0.2 -oN targeted
 
 ### Enumeración Web (Puerto 80)
 
-Al inspeccionar el sitio web, nos encontramos con una página 
-<br><br>
+Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red, contiene una herramienta de diagnóstico en la que nos pide una dirección IP para hacer ping.
 
-<img src="./img/3web.png" width="70%">
+
+<img src="./img/3web.png" width="90%">
 <br><br>
 
 
