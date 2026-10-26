@@ -3,7 +3,7 @@
 | Propiedad | Detalle |
 | :--- | :--- |
 | **Plataforma** | Whoami Labs |
-| **Dificultad** | 🟢 Media  |
+| **Dificultad** | 🟡 Media  |
 | **OS** | Linux  |
 | **IP de la Máquina** | `172.17.0.2` |
 | **Fecha de resolución** | 2026-10-22 |
@@ -22,12 +22,11 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
- nmap -p- --open -n -Pn 172.17.0.2
+ sudo nmap -p- --open -n -Pn 172.17.0.2 -oN allPorts
 ```
 
 **Resultados del escaneo:**
-* **Puerto 22/TCP**: SSH
-* **Puerto 80/TCP**: HTTP (Apache)
+* **Puerto 80/TCP**: HTTP
 
 <img src="./img/1escaneo.png" width="70%">
 <br><br>
@@ -36,10 +35,10 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 Continuamos con un escaneo más profundo del servicio encontrado:
 
 ```bash
-nmap -p 22,80 -sCV -n 172.17.0.2
+nmap -p80 -sCV -n 172.17.0.2 -oN targeted
 ```
 
-<img width="825" height="199" alt="2Escaneopuerto" src="https://github.com/user-attachments/assets/0d33a0fa-ba96-41e7-ac3c-4c5669b59b1b" />
+<img src="./img/2Escaneopuertos.png" width="70%">
 <br><br>
 
 
