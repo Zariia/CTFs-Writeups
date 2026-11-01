@@ -3,7 +3,7 @@
 | Propiedad | Detalle |
 | :--- | :--- |
 | **Plataforma** | Whoami Labs |
-| **Dificultad** | 🟡 Fácil  |
+| **Dificultad** | 🟢 Fácil  |
 | **OS** | windows  |
 | **IP de la Máquina** | `192.168.0.33` |
 | **Fecha de resolución** | 2026-10-31 |
@@ -17,13 +17,21 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 
 ## 🔍 1. Fase de Reconocimiento y Enumeración
 
+Primero tenemos que buscar la IP de la máquina virtual.
+Escaneamos el rango de IP del adaptador:
+
+```
+nmap -sn 192.168.0.0/24
+```
 
 ### Escaneo de Puertos (`nmap`)
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
- sudo nmap -p- --open -n -Pn 172.17.0.2 -oN allPorts
+ sudo nmap -p- --open -n -Pn 192.168.0.33 -oN allPorts
 ```
 
 **Resultados del escaneo:**
-* **Puerto 445/TCP**: SMV
+* **Puerto 445/TCP**: SM
+
+
