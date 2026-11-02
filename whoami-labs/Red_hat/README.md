@@ -96,17 +96,18 @@ Miramos que usuario somos con getuid y somos NT AUTHORITY\SYSTEM, el usuario con
 <img width="595" height="174" alt="8" src="https://github.com/user-attachments/assets/f2c83d34-5bfc-4290-bfb9-3c78992ee346" />
 <br><br>
 
-<img width="729" height="294" alt="9" src="https://github.com/user-attachments/assets/ce4772ea-a963-4fe3-92c8-1eeee878aa0b" />
-<br><br>
 
 Vamos a las carpetas de los usuarios para ver que usuarios existen y donde podría estar la flag. Hay un usuario llamado Cyberdark, vamos a mirar su escritorio.
 Contiene una carpeta llamada HACKED, entramos dentro. Contiene un archivo llamado Flag.txt que ocupa 33 bytes por lo que debe de contener la flag.
-<img width="564" height="411" alt="10" src="https://github.com/user-attachments/assets/670f0408-cab1-4ce2-8981-e831f859f2f1" />
 
+<img width="564" height="411" alt="10" src="https://github.com/user-attachments/assets/670f0408-cab1-4ce2-8981-e831f859f2f1" />
+<br><br>
 
 <img width="559" height="522" alt="11" src="https://github.com/user-attachments/assets/90f9b737-01be-4fbb-9ac5-6ebba137904f" />
+<br><br>
 
 Copiamos la flag encontrada y la verificamos y es correcta.
-<img width="548" height="199" alt="12 clavepng" src="https://github.com/user-attachments/assets/6aea97e2-bfd2-49b8-99d3-38cd0f523a1e" />
+<img width="548" height="199" alt="12" src="https://github.com/user-attachments/assets/3c4c8f56-6f56-4cc9-98e3-6dc8427c161d" />
+<br><br>
 
 
