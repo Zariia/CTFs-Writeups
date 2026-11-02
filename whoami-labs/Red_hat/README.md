@@ -58,17 +58,18 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 Continuamos con un escaneo más profundo del servicio encontrado:
 
 ```bash
-nmap -p80 -sCV -n 192 -oN targeted
+nmap -p 135,139,445,554,2869,10243,49152,49153,49154,49155,49156,49158 -sCV -n 192.168.0.33 -oN targeted.txt
 ```
 
 <img width="1431" height="844" alt="4puertosescaneo" src="https://github.com/user-attachments/assets/38d63b57-646b-48be-9df1-392d616cb20c" />
 <br><br>
 
+Tenemos un puerto interesante, el 445 SMB:
+**445/tcp   open  microsoft-ds Windows 7 Professional 7600 microsoft-ds (workgroup: WORKGROUP)**
 
 
 ### Enumeración SMB (Puerto 445)
 
-Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red, contiene una herramienta de diagnóstico en la que nos pide una dirección IP para hacer ping.
 <img width="998" height="485" alt="5smvvuln" src="https://github.com/user-attachments/assets/ca09a643-99f4-46b2-9fa1-cd3280250ed8" />
 <br><br>
 
@@ -76,6 +77,10 @@ Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red
 ---
 
 ## 💥 2. Fase de Explotación
+Explotar MS17-010 (EternalBlue)El reporte indica que el objetivo tiene SMBv1:True y es un Windows 7 sin actualizar. Esto lo hace el candidato perfecto para la vulnerabilidad EternalBlue.Paso con NetExec: Comprueba directamente si es vulnerable usando el módulo específico:bashnxc smb 192.168.0.33 -M ms17-010
+Si da positivo (VULNERABLE): Puedes saltar directamente a Metasploit (exploit/windows/smb/ms17_010_eternalblue) para obtener una shell de NT AUTHORITY\SYSTEM.
+
+El invitado está deshabilitado y no vemos nada mas, asique al metasploit
 
 Comenzamos
 <img width="1654" height="705" alt="2026-10-26_20-25" src="https://github.com/user-attachments/assets/d48b0b81-7566-4af9-8ac1-36e858934c1a" />
