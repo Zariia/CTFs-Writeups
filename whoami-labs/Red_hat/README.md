@@ -4,7 +4,7 @@
 | :--- | :--- |
 | **Plataforma** | Whoami Labs |
 | **Dificultad** | 🟢 Fácil  |
-| **OS** | windows  |
+| **OS** | Windows  |
 | **IP de la Máquina** | `192.168.0.33` |
 | **Fecha de resolución** | 2026-10-31 |
 
@@ -37,8 +37,7 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 ```
 
 <img width="1132" height="429" alt="3puertos" src="https://github.com/user-attachments/assets/f2bc07bf-cf99-422b-a9b7-941c9c23b585" />
-
-
+<br><br>
 
 **Resultados del escaneo:**
 * **Puerto 135/tcp**: msrpc
@@ -55,3 +54,28 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 * **Puerto 49158/tcp**: unknown
 
 
+### Enumeración de servicios
+Continuamos con un escaneo más profundo del servicio encontrado:
+
+```bash
+nmap -p80 -sCV -n 192 -oN targeted
+```
+
+
+<br><br>
+
+
+### Enumeración SMB (Puerto 445)
+
+Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red, contiene una herramienta de diagnóstico en la que nos pide una dirección IP para hacer ping.
+
+
+---
+
+## 💥 2. Fase de Explotación (Acceso Inicial)
+
+Comenzamos
+
+
+
+## 👑 3. Escalada de Privilegios
