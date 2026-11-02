@@ -75,7 +75,7 @@ Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red
 
 ---
 
-## 💥 2. Fase de Explotación (Acceso Inicial)
+## 💥 2. Fase de Explotación
 
 Comenzamos
 <img width="1654" height="705" alt="2026-10-26_20-25" src="https://github.com/user-attachments/assets/d48b0b81-7566-4af9-8ac1-36e858934c1a" />
@@ -91,7 +91,12 @@ Comenzamos
 <img width="729" height="294" alt="9" src="https://github.com/user-attachments/assets/ce4772ea-a963-4fe3-92c8-1eeee878aa0b" />
 <br><br>
 
+<img width="564" height="411" alt="10" src="https://github.com/user-attachments/assets/670f0408-cab1-4ce2-8981-e831f859f2f1" />
 
 
+<img width="559" height="522" alt="11" src="https://github.com/user-attachments/assets/90f9b737-01be-4fbb-9ac5-6ebba137904f" />
 
-## 👑 3. Escalada de Privilegios
+
+<img width="548" height="199" alt="12 clavepng" src="https://github.com/user-attachments/assets/6aea97e2-bfd2-49b8-99d3-38cd0f523a1e" />
+
+
