@@ -24,14 +24,34 @@ Escaneamos el rango de IP del adaptador:
 nmap -sn 192.168.0.0/24
 ```
 
+Una vez encontramos la IP, le hacemos un ping y vemos que estamos ante una máquina Windows
+<img width="726" height="126" alt="2pingwindows" src="https://github.com/user-attachments/assets/3fba42f0-0418-4184-8d13-cfcef1f65937" />
+
+
+
 ### Escaneo de Puertos (`nmap`)
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
- sudo nmap -p- --open -n -Pn 192.168.0.33 -oN allPorts
+ sudo nmap -sS --min-rate 5000 -p- --open 192.168.0.33 -oN tcp_scan.txt
 ```
 
+<img width="1132" height="429" alt="3puertos" src="https://github.com/user-attachments/assets/f2bc07bf-cf99-422b-a9b7-941c9c23b585" />
+
+
+
 **Resultados del escaneo:**
-* **Puerto 445/TCP**: SM
+* **Puerto 135/tcp**: msrpc
+* **Puerto 139/tcp**: netbios-ssn
+* **Puerto 445/TCP**: microsoft-ds
+* **Puerto 554/tcp**: rtsp
+* **Puerto 2869/tcp**: icslap
+* **Puerto 10243/tcp**: unknown
+* **Puerto 49152/tcp**: unknown
+* **Puerto 49153/tcp**: unknown
+* **Puerto 49154/tcp**: unknown
+* **Puerto 49155/tcp**: unknown
+* **Puerto 49156/tcp**: unknown
+* **Puerto 49158/tcp**: unknown
 
 
