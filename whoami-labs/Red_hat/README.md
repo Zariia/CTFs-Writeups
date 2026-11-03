@@ -107,6 +107,8 @@ Contiene una carpeta llamada HACKED, entramos dentro. Contiene un archivo llamad
 <br><br>
 
 Copiamos la flag encontrada y la verificamos y es correcta.
+
+
 <img width="548" height="199" alt="12" src="https://github.com/user-attachments/assets/3c4c8f56-6f56-4cc9-98e3-6dc8427c161d" />
 <br><br>
 
