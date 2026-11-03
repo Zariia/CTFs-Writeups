@@ -61,7 +61,7 @@ Ahora vamos a probar a poner otro comando seguido para ver si nos lo ejecuta per
 <img src="./img/4probando.png" width="70%">
 <br><br>
 
-Vamos probando con otros caracteres hasta que descubrimos que el || si nos lo acepta y podemos ver el resultado de un ls.
+Vamos probando con otros caracteres hasta que descubrimos que el || si nos lo acepta y podemos ver el resultado de un ls, por lo que es vulnerable a inyección de comandos.
 <img width="1426" height="919" alt="5solodejaasi" src="https://github.com/user-attachments/assets/2c0ef4f0-d9d8-4541-8d6a-203e9abfc223" />
 <br><br>
 
@@ -74,10 +74,17 @@ Ya que podemos ejecutar comandos, vamos a leer el fichero index.php y vemos que 
 <img width="1355" height="954" alt="6blacklist" src="https://github.com/user-attachments/assets/ce10cc47-bba6-42b4-a06a-ba411b5f169d" />
 <br><br>
 
+Leemos el archivo /etc/passwd para ver que usuarios existen y si hay alguna contraseña en él que podamos aprovechar. Solo está el usuario root.
+<img width="1262" height="956" alt="7passwd" src="https://github.com/user-attachments/assets/babc8dca-115b-4ff5-9cce-d5c51828fe71" />
+<br><br>
+
+Ahora mismo nosotros somos el usuario www-data
+<img width="1400" height="836" alt="7yo" src="https://github.com/user-attachments/assets/92cb7540-15ec-4380-8f47-e08ef5d6a2c9" />
+<br><br>
 
 
 ### Vector de Ataque
-Escribimos el usuario y la contraseña encontrados y estamos dentro, vemos que es portal.php, una de las rutas que encontramos previamente pero a la que no podíamos acceder antes.
+
 
 
 ```bash
@@ -87,8 +94,7 @@ Escribimos el usuario y la contraseña encontrados y estamos dentro, vemos que e
 
 <br><br>
 
-Nos muestra el ping y debajo nos ha ejecutado el **ls -la** que pusimos, por lo que es vulnerable. 
-Hay inyección de comandos, por lo que podemos mirar archivos como el usuario web-admin, ya que haciendo un whoami nos dijo que somos ese usuario.
+
 
 
 
