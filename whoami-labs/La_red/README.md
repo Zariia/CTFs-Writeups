@@ -17,6 +17,9 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 
 ## 🔍 1. Fase de Reconocimiento y Enumeración
 
+Comenzamos realizando un ping a la máquina y vemos que es un Linux
+<img width="696" height="129" alt="ping" src="https://github.com/user-attachments/assets/6904cdd3-0a60-4eeb-a7a0-7fee2957ca3b" />
+<br><br>
 
 ### Escaneo de Puertos (`nmap`)
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
@@ -40,7 +43,7 @@ nmap -p80 -sCV -n 172.17.0.2 -oN targeted
 
 <img src="./img/2Escaneopuerto.png" width="70%">
 <br><br>
-
+Tenemos una página web creada con PHP 8.2.32, es una versión bastante reciente.
 
 ### Enumeración Web (Puerto 80)
 
@@ -50,22 +53,27 @@ Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red
 <img src="./img/3web.png" width="90%">
 <br><br>
 
-
+Probamos a hacernos ping a nosotros mismos y funciona.
 <img src="./img/4ping.png" width="70%">
+<br>
+
+Ahora vamos a probar a poner otro comando seguido para ver si nos lo ejecuta pero nos da error, nos dice que los caracteres no estan permitidos, así que no acepta el ;
 <img src="./img/4probando.png" width="70%">
-
 <br><br>
 
+Vamos probando con otros caracteres hasta que descubrimos que el || si nos lo acepta y podemos ver el resultado de un ls.
+<img width="1426" height="919" alt="5solodejaasi" src="https://github.com/user-attachments/assets/2c0ef4f0-d9d8-4541-8d6a-203e9abfc223" />
 <br><br>
+
 
 ---
 
 ## 💥 2. Fase de Explotación (Acceso Inicial)
 
-Comenzamos entrando a 
-
-
+Ya que podemos ejecutar comandos, vamos a leer el fichero index.php y vemos que tiene una lista negra con todos los caracteres que no permite: &,;,`,$,(,),{,}
+<img width="1355" height="954" alt="6blacklist" src="https://github.com/user-attachments/assets/ce10cc47-bba6-42b4-a06a-ba411b5f169d" />
 <br><br>
+
 
 
 ### Vector de Ataque
