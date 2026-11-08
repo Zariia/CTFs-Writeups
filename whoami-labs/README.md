@@ -18,6 +18,7 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **whoami-
 | `Rascacielos ` | 🟢 Fácil | Web Exploit / SUDO |  [👁️ Leer Writeup](./Rascacielos/) |
 | `Armageddon` | 🟡 Media | Web Exploit | [👁️ Leer Writeup](./Armageddon/) |
 | `La red` | 🟡 Media | Web Exploit | [👁️ Leer Writeup](./La_red/) |
+| `Recon Chain` | 🟡 Media | Pivoting y movimiento lateral | [👁️ Leer Writeup](./ReconChain/) |
 
 
 ---
