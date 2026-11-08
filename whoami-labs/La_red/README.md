@@ -32,7 +32,7 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 * **Puerto 80/TCP**: HTTP
 
 <img src="./img/1escaneo.png" width="70%">
-<br>
+<br><br>
 
 ### Enumeración de servicios
 Continuamos con un escaneo más profundo del servicio encontrado:
@@ -43,6 +43,7 @@ nmap -p80 -sCV -n 172.17.0.2 -oN targeted
 
 <img src="./img/2Escaneopuerto.png" width="70%">
 <br><br>
+
 Tenemos una página web creada con PHP 8.2.32, es una versión bastante reciente.
 
 ### Enumeración Web (Puerto 80)
@@ -55,7 +56,7 @@ Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red
 
 Probamos a hacernos ping a nosotros mismos y funciona.
 <img src="./img/4ping.png" width="70%">
-<br>
+<br><br>
 
 Ahora vamos a probar a poner otro comando seguido para ver si nos lo ejecuta pero nos da error, nos dice que los caracteres no estan permitidos, así que no acepta el ;
 <img src="./img/4probando.png" width="70%">
@@ -85,30 +86,24 @@ Ahora mismo nosotros somos el usuario www-data
 
 ### Vector de Ataque
 
+Ahora tenemos dos opciones para escalar privilegios, una por la página web, aunque es un poco más incómodo y otra realizando una revell shell y escalando por la terminal.
 
 
 ```bash
-127.0.0.1 ; ls -la
+127.0.0. || find / -perm -4000 2>/dev/null
 ```
+Vamos primero a mirar como podriamos escalar privilegios desde la herramienta de la página web, lanzamos un find perm para buscar...
+<img width="1349" height="764" alt="8perm" src="https://github.com/user-attachments/assets/bffb5dab-750a-4a9f-a99f-e4abd1dd6a3e" />
 
+No vemos nada, vamos a mirar las tareas cron.
 
-<br><br>
+<img width="1349" height="936" alt="10crontab" src="https://github.com/user-attachments/assets/9b131993-87ca-46a5-b5f4-570313424a47" />
 
-
-
-
-
-<br><br>
-Entramos al directorio del usuario....
 
 ```bash
-127.0.0.1 ;  cat /home/web-admin/user.txt
+
 ```
-
-<br><br>
-
-La flag es correcta, vamos a continuar obtenido una consola más interactiva para poder escalar privilegios más facilmente.
-
+<img width="1434" height="901" alt="11cron" src="https://github.com/user-attachments/assets/6e6abbf5-4eac-489a-b8d1-2c5786441d9a" />
 
 <br><br>
 
