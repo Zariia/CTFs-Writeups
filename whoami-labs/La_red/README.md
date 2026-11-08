@@ -110,10 +110,11 @@ Vamos primero a mirar como podriamos escalar privilegios desde la herramienta de
 <img width="1349" height="764" alt="8perm" src="https://github.com/user-attachments/assets/bffb5dab-750a-4a9f-a99f-e4abd1dd6a3e" />
 <br><br>
 Vamos a mirar a ver si tiene tareas cron.
-
+El archivo /etc/crontab es el planificador de tareas global de Linux. Permite definir cuándo se ejecutan comandos automáticamente y bajo qué usuario.
 <img width="1349" height="936" alt="10crontab" src="https://github.com/user-attachments/assets/9b131993-87ca-46a5-b5f4-570313424a47" />
 <br><br>
 
+El archivo /etc/crontab en Linux es un archivo de configuración que permite programar tareas automáticas del sistema para que se ejecuten en momentos específicos: cada hora, cada día, cada semana o cada mes.
 <img width="1434" height="901" alt="11cron" src="https://github.com/user-attachments/assets/6e6abbf5-4eac-489a-b8d1-2c5786441d9a" />
 <br><br>
 
@@ -185,7 +186,7 @@ Como ya le dimos permisos a la bash, ejecutamos /bin/bash -p para convertirnos e
 
 ¡Ya somos *root*! Buscamos la flag en la carpeta personal de root.
 
-<img width="403" height="166" alt="2" src="https://github.com/user-attachments/assets/f393163f-1c75-42f9-a54c-d507d91b51df" />
+<img width="403" height="155" alt="2" src="https://github.com/user-attachments/assets/b9d611cb-3a2d-49ef-a81f-e24ef0cf4b9f" />
 <br><br>
 
 Por último, validamos la flag obtenida.
