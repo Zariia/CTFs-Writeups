@@ -69,6 +69,8 @@ Ahora vamos a probar a poner otro comando seguido para ver si nos lo ejecuta per
 
 
 Vamos a probar con diferentes operadores de shell para comprobar si podemos encadenar instrucciones, hasta que descubrimos que el || si nos lo acepta y podemos ver el resultado de un ls, por lo que es vulnerable a inyección de comandos.
+Este operador || ejecuta el segundo comando cuando el primero devuelve un código de salida distinto de cero.
+Aprovechando este comportamiento, conseguimos ejecutar comandos adicionales desde el contexto del servidor web, confirmando la existencia de una vulnerabilidad de Command Injection o Inyección de Comandos.
 <img width="1426" height="919" alt="5lared" src="https://github.com/user-attachments/assets/2c0ef4f0-d9d8-4541-8d6a-203e9abfc223" />
 <br><br>
 
@@ -125,12 +127,13 @@ Miramos que contiene ese fichero cleanup y también vamos a mirar que permisos t
 <br><br>
 
 Finalmente lanzo desde la web varios comandos, primero creo un cleanup.sh dentro de la carpeta uploads, le doy permisos al fichero y a la /bin/bash
+Aprovechando que el script se ejecuta mediante la tarea cron con privilegios elevados, modificamos sus instrucciones para establecer el bit SUID sobre /bin/bash.
+De esta manera, cuando se ejecute el script, Bash pasará a tener el bit SUID activado y conservará los privilegios de su propietario, que en este caso es root.
+Una vez que la tarea cron haya ejecutado nuestro script, podremos utilizar el modo privilegiado de Bash para obtener una shell con los permisos del propietario del binario.
 
 ```
 127.0.0. || echo "#!/bin/bash" > uploads/cleanup.sh
 127.0.0. || chmod +x uploads/cleanup.sh 
-127.0.0. || echo 'chmod u+s' >> uploads/cleanup.sh
-
 127.0.0. || echo 'chmod u+s /bin/bash' >> uploads/cleanup.sh
 ```
 
