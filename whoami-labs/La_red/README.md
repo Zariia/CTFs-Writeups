@@ -151,7 +151,7 @@ sudo nc -lvnp 440
 <img width="723" height="88" alt="nc" src="https://github.com/user-attachments/assets/1dc57619-3557-4fcb-bff1-31912973d5ea" />
 <br><br>
 
-Ya somos el usuario web-admin desde una terminal, ahora podemos sanitizarla o continuar usandola tal y como está.
+Ya somos el usuario www-data desde una terminal, ahora podemos sanitizarla o continuar usandola tal y como está.
 
 ```bash
 # Tratamiento de  la TTY para tener una consola interactiva cómoda
