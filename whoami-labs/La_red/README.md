@@ -51,7 +51,7 @@ Tenemos una página web creada con PHP 8.2.32, es una versión bastante reciente
 
 ### Enumeración Web (Puerto 80)
 
-Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red, contiene una herramienta de diagnóstico en la que nos pide una dirección IP para hacer ping.
+Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red, contiene una herramienta de diagnóstico en la que nos pide una dirección IP para ejecutar un ping desde el servidor.
 
 
 <img src="./img/3web.png" width="90%">
@@ -67,7 +67,8 @@ Ahora vamos a probar a poner otro comando seguido para ver si nos lo ejecuta per
 <img src="./img/4probando.png" width="70%">
 <br><br>
 
-Vamos probando con otros caracteres hasta que descubrimos que el || si nos lo acepta y podemos ver el resultado de un ls, por lo que es vulnerable a inyección de comandos.
+
+Vamos a probar con diferentes operadores de shell para comprobar si podemos encadenar instrucciones, hasta que descubrimos que el || si nos lo acepta y podemos ver el resultado de un ls, por lo que es vulnerable a inyección de comandos.
 <img width="1426" height="919" alt="5lared" src="https://github.com/user-attachments/assets/2c0ef4f0-d9d8-4541-8d6a-203e9abfc223" />
 <br><br>
 
@@ -77,6 +78,7 @@ Vamos probando con otros caracteres hasta que descubrimos que el || si nos lo ac
 ## 💥 2. Fase de Explotación (Acceso Inicial)
 
 Ya que podemos ejecutar comandos, vamos a leer el fichero index.php y vemos que tiene una lista negra con todos los caracteres que no permite: &,;,`,$,(,),{,}
+La aplicación intenta filtrar determinados caracteres, pero no implementa una sanitización adecuada de la entrada y esto nos permite utilizar operadores no contemplados por la lista negra para alterar el comportamiento del comando.
 
 
 <img width="1355" height="954" alt="6blacklist" src="https://github.com/user-attachments/assets/ce10cc47-bba6-42b4-a06a-ba411b5f169d" />
@@ -184,3 +186,32 @@ Por último, validamos la flag obtenida.
 
 <img width="795" height="450" alt="3" src="https://github.com/user-attachments/assets/0544039d-0c31-4ea5-97da-edbeabd7c177" />
 <br><br>
+
+## 🧠 4. Conclusiones
+
+Durante la resolución de esta máquina hemos identificado
+una vulnerabilidad de ejecución de comandos en una
+aplicación web que permite ejecutar instrucciones
+arbitrarias en el sistema.
+
+La explotación ha permitido obtener acceso inicial
+con los privilegios del servicio web.
+
+Posteriormente, mediante la enumeración de los permisos
+del usuario y la identificación de configuraciones
+inseguras, hemos conseguido escalar privilegios hasta root.
+
+### Vulnerabilidades identificadas
+
+- Command Injection en la herramienta de diagnóstico.
+- Uso de una lista negra insuficiente para filtrar entradas.
+- Configuración insegura de privilegios.
+
+### Recomendaciones de seguridad
+
+- Evitar construir comandos del sistema concatenando
+  entradas proporcionadas por usuarios.
+- Utilizar funciones nativas del lenguaje cuando sea posible.
+- Aplicar validación mediante listas de valores permitidos.
+- Revisar periódicamente los permisos sudo.
+- Aplicar el principio de mínimo privilegio.
