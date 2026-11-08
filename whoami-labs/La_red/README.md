@@ -11,7 +11,7 @@
 ---
 
 ## 📝 Descripción
-Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante abuso de permisos SUDO.
+Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante abuso de tareas cron.
 
 ---
 
@@ -31,8 +31,9 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 **Resultados del escaneo:**
 * **Puerto 80/TCP**: HTTP
 
+
 <img src="./img/1escaneo.png" width="70%">
-<br><br>
+<br>
 
 ### Enumeración de servicios
 Continuamos con un escaneo más profundo del servicio encontrado:
@@ -41,10 +42,12 @@ Continuamos con un escaneo más profundo del servicio encontrado:
 nmap -p80 -sCV -n 172.17.0.2 -oN targeted
 ```
 
+
 <img src="./img/2Escaneopuerto.png" width="70%">
-<br><br>
+<br>
 
 Tenemos una página web creada con PHP 8.2.32, es una versión bastante reciente.
+
 
 ### Enumeración Web (Puerto 80)
 
@@ -52,18 +55,20 @@ Al inspeccionar el sitio web, nos encontramos con una página web llamada La Red
 
 
 <img src="./img/3web.png" width="90%">
-<br><br>
+<br>
 
 Probamos a hacernos ping a nosotros mismos y funciona.
+
 <img src="./img/4ping.png" width="70%">
-<br><br>
+<br>
 
 Ahora vamos a probar a poner otro comando seguido para ver si nos lo ejecuta pero nos da error, nos dice que los caracteres no estan permitidos, así que no acepta el ;
+
 <img src="./img/4probando.png" width="70%">
 <br><br>
 
 Vamos probando con otros caracteres hasta que descubrimos que el || si nos lo acepta y podemos ver el resultado de un ls, por lo que es vulnerable a inyección de comandos.
-<img width="1426" height="919" alt="5solodejaasi" src="https://github.com/user-attachments/assets/2c0ef4f0-d9d8-4541-8d6a-203e9abfc223" />
+<img width="1426" height="919" alt="5lared" src="https://github.com/user-attachments/assets/2c0ef4f0-d9d8-4541-8d6a-203e9abfc223" />
 <br><br>
 
 
@@ -72,27 +77,34 @@ Vamos probando con otros caracteres hasta que descubrimos que el || si nos lo ac
 ## 💥 2. Fase de Explotación (Acceso Inicial)
 
 Ya que podemos ejecutar comandos, vamos a leer el fichero index.php y vemos que tiene una lista negra con todos los caracteres que no permite: &,;,`,$,(,),{,}
+
+
 <img width="1355" height="954" alt="6blacklist" src="https://github.com/user-attachments/assets/ce10cc47-bba6-42b4-a06a-ba411b5f169d" />
 <br><br>
 
 Leemos el archivo /etc/passwd para ver que usuarios existen y si hay alguna contraseña en él que podamos aprovechar. Solo está el usuario root.
+
+
 <img width="1262" height="956" alt="7passwd" src="https://github.com/user-attachments/assets/babc8dca-115b-4ff5-9cce-d5c51828fe71" />
 <br><br>
 
-Ahora mismo nosotros somos el usuario www-data
+Miramos que usuario somos y vemos que ahora mismo nosotros somos el usuario www-data y necesitamos pasar a ser root.
 <img width="1400" height="836" alt="7yo" src="https://github.com/user-attachments/assets/92cb7540-15ec-4380-8f47-e08ef5d6a2c9" />
 <br><br>
 
 
 ### Vector de Ataque
 
-Ahora tenemos dos opciones para escalar privilegios, una por la página web, aunque es un poco más incómodo y otra realizando una revell shell y escalando por la terminal.
+Tenemos dos opciones para escalar privilegios, una por la página web, aunque es un poco más incómodo y otra realizando una revell shell y escalando por la terminal.
 
 
 ```bash
 127.0.0. || find / -perm -4000 2>/dev/null
 ```
+
 Vamos primero a mirar como podriamos escalar privilegios desde la herramienta de la página web, lanzamos un find perm para buscar...
+
+
 <img width="1349" height="764" alt="8perm" src="https://github.com/user-attachments/assets/bffb5dab-750a-4a9f-a99f-e4abd1dd6a3e" />
 
 No vemos nada, vamos a mirar las tareas cron.
