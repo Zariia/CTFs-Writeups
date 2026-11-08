@@ -189,44 +189,37 @@ La variable PATH define los directorios donde el sistema busca los ejecutables c
 ### Explotación del Vector de Escalada
 
 Como ya le dimos permisos a la bash, ejecutamos /bin/bash -p para convertirnos en root.
-<img width="213" height="89" alt="1" src="https://github.com/user-attachments/assets/2728044c-16f7-476b-98ec-faef36635cb8" />
+<img width="213" height="89" alt="escalar a root" src="https://github.com/user-attachments/assets/2728044c-16f7-476b-98ec-faef36635cb8" />
 <br><br>
 
 ¡Ya somos *root*! Buscamos el fichero que contiene la flag en la carpeta personal de root.
 
-<img width="403" height="155" alt="2" src="https://github.com/user-attachments/assets/b9d611cb-3a2d-49ef-a81f-e24ef0cf4b9f" />
+<img width="403" height="155" alt="flag root" src="https://github.com/user-attachments/assets/b9d611cb-3a2d-49ef-a81f-e24ef0cf4b9f" />
 <br><br>
 
 Por último, validamos la flag obtenida.
 
-<img width="795" height="450" alt="3" src="https://github.com/user-attachments/assets/0544039d-0c31-4ea5-97da-edbeabd7c177" />
+<img width="795" height="450" alt="flag correcta" src="https://github.com/user-attachments/assets/0544039d-0c31-4ea5-97da-edbeabd7c177" />
 <br><br>
 
 ## 🧠 4. Conclusiones
 
-Durante la resolución de esta máquina hemos identificado
-una vulnerabilidad de ejecución de comandos en una
-aplicación web que permite ejecutar instrucciones
-arbitrarias en el sistema.
+Durante la resolución de esta máquina hemos identificado una vulnerabilidad de ejecución de comandos en una aplicación web que permite ejecutar instrucciones arbitrarias en el sistema.
 
-La explotación ha permitido obtener acceso inicial
-con los privilegios del servicio web.
+La explotación ha permitido obtener acceso inicial con los privilegios del servicio web (www-data).
 
-Posteriormente, mediante la enumeración de los permisos
-del usuario y la identificación de configuraciones
-inseguras, hemos conseguido escalar privilegios hasta root.
+Posteriormente, tras enumerar los permisos disponibles y analizar la configuración de las tareas programadas mediante cron, identificamos una configuración insegura que permitía aprovechar la variable de entorno PATH para ejecutar código bajo un contexto de mayores privilegios. De esta manera, conseguimos escalar privilegios hasta obtener acceso como root.
 
 ### Vulnerabilidades identificadas
 
 - Command Injection en la herramienta de diagnóstico.
 - Uso de una lista negra insuficiente para filtrar entradas.
-- Configuración insegura de privilegios.
+- Configuración insegura de tareas cron.
 
 ### Recomendaciones de seguridad
 
-- Evitar construir comandos del sistema concatenando
-  entradas proporcionadas por usuarios.
-- Utilizar funciones nativas del lenguaje cuando sea posible.
+- Evitar construir comandos del sistema concatenando entradas proporcionadas por usuarios. Siempre que sea posible, utilizar funciones nativas del lenguaje.
 - Aplicar validación mediante listas de valores permitidos.
-- Revisar periódicamente los permisos sudo.
-- Aplicar el principio de mínimo privilegio.
+- Utilizar rutas absolutas para invocar ejecutables desde tareas programadas, evitando posibles ataques de manipulación de la variable PATH.
+- Aplicar el principio de mínimo privilegio, limitando los permisos de los servicios y procesos a las operaciones estrictamente necesarias.
+- Revisar periódicamente los permisos de escritura sobre directorios y scripts utilizados por tareas cron.
