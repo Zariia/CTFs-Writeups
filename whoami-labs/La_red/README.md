@@ -97,14 +97,14 @@ Miramos que usuario somos y vemos que ahora mismo nosotros somos el usuario www-
 
 ### Vector de Ataque
 
-Tenemos dos opciones para escalar privilegios, una por la página web, aunque es un poco más incómodo y otra realizando una revell shell y escalando por la terminal.
+Tenemos dos opciones para escalar privilegios, una por la página web, aunque es un poco más incómodo y otra realizando una reverse shell y escalando por la terminal.
 
 
 ```bash
 127.0.0. || find / -perm -4000 2>/dev/null
 ```
 
-Vamos primero a mirar como podriamos escalar privilegios desde la herramienta de la página web, lanzamos un find perm pero no vemos nada útil.
+Vamos a analizar posibles vectores para escalar privilegios desde la herramienta de la página web, lanzamos un find perm pero no vemos nada útil.
 
 
 <img width="1349" height="764" alt="8perm" src="https://github.com/user-attachments/assets/bffb5dab-750a-4a9f-a99f-e4abd1dd6a3e" />
@@ -184,7 +184,7 @@ Como ya le dimos permisos a la bash, ejecutamos /bin/bash -p para convertirnos e
 <img width="213" height="89" alt="1" src="https://github.com/user-attachments/assets/2728044c-16f7-476b-98ec-faef36635cb8" />
 <br><br>
 
-¡Ya somos *root*! Buscamos la flag en la carpeta personal de root.
+¡Ya somos *root*! Buscamos el fichero que contiene la flag en la carpeta personal de root.
 
 <img width="403" height="155" alt="2" src="https://github.com/user-attachments/assets/b9d611cb-3a2d-49ef-a81f-e24ef0cf4b9f" />
 <br><br>
