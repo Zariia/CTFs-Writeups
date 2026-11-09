@@ -63,7 +63,7 @@ gobuster dir -u http://10.128.161.94 -w /usr/share/wordlists/rockyou.txt -x php,
 <img width="1149" height="571" alt="5enumweb" src="https://github.com/user-attachments/assets/e67acb86-8a85-4b24-8e07-286ff539f8e6" />
 <br><br>
 
-Encontramos varias rutas interesantes: login.php, robots.txt y portal.php , así que vamos a mirar qué contienen y si podemos explotarlas.
+Encontramos varias rutas interesantes: login.php, robots.txt y portal.php, así que vamos a mirar qué contienen y si podemos explotarlas.
 <br><br>
 
 ---
@@ -92,7 +92,7 @@ Probamos a ejecutar un comando ping y seguido un ls para ver si nos lo ejecuta y
 <img width="1445" height="533" alt="9ls" src="https://github.com/user-attachments/assets/dbb5659d-48a9-41c8-afdd-1d3300e0e291" />
 <br><br>
 
-Nos muestra el ping y debajo nos ha ejecutado el **ls -la** que pusimos, por lo que es vulnerable. 
+Nos muestra el ping y debajo nos ha ejecutado el comando **ls -la** que pusimos, por lo que es vulnerable. 
 Hay inyección de comandos, por lo que podemos mirar archivos como el usuario web-admin, ya que haciendo un whoami nos dice que somos ese usuario.
 
 
