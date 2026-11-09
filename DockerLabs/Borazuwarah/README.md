@@ -5,7 +5,7 @@
 | **Plataforma** | Docker Labs |
 | **Dificultad** | 🟢 Muy Fácil  |
 | **OS** | Linux  |
-| **IP de la Máquina** | `172.0.0.2` |
+| **IP de la Máquina** | `172.17.0.2` |
 | **Fecha de resolución** | 2026-09-28 |
 
 ---
@@ -45,14 +45,14 @@ sudo nmap -p- --open -sS --min-rate 5000 -n -Pn 172.17.0.2 -oN allPorts
 
 <img width="1386" height="378" alt="2Escaneopuertos" src="https://github.com/user-attachments/assets/c6a1b7e5-43e5-441d-b96c-b8bc99de8c03" />
 
-Vemos que tenemos un sitio web y el puerto ssh pero no conocemos ninguna credencial así que empezamos revisando el sitio web.
+Vemos que tenemos un sitio web y el puerto ssh. Como todavía no conocemos ninguna credencial, vamos a empezamos revisando el sitio web.
 
 ### Enumeración Web (Puerto 80)
-Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz que solo contiene una imagen, nos la descargamos.
+Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz que solo contiene una única imagen, nos la descargamos para ver si contiene alguna información relevante.
 <img width="685" height="495" alt="3imagen" src="https://github.com/user-attachments/assets/d56ec4c4-6ce3-4647-85dd-b3d17498e054" />
 
 ## 💥 2. Fase de Explotación
-Vamos a analizar la imagen por si tuviera alguna información oculta, para ello usaremos ExifTool.
+Vamos a analizar la imagen por si tuviera alguna información oculta, para ello utilizaremos ExifTool.
 
 ExifTool es una aplicación de línea de comandos gratuita y de código abierto para leer, escribir y editar metadatos en una gran variedad de archivos, como imágenes, videos y documentos.
 Es muy sencilla de usar una vez instalada, ponemos el nombre de la herramienta seguida de la imagen que queremos que analice:
@@ -63,7 +63,7 @@ exiftool imagen.jpeg
 <img width="1029" height="597" alt="3imagenexiftool" src="https://github.com/user-attachments/assets/4a27c4bc-2e1a-42eb-837b-10da8ab75d80" />
 En la descripción de la imagen tenemos un usuario: *User: borazuwarah*
 
-Ahora que conocemos un usuaro válido vamos a usar fuerza bruta para sacar su contraseña y poder entrar por el puerto SSH. Para ello usaremos Hydra.
+Ahora que conocemos un usuario válido vamos a usar fuerza bruta para obtener su contraseña y poder entrar por SSH. Para ello, utilizaremos Hydra.
 
 Hydra es una herramienta de código abierto utilizada para realizar ataques de fuerza bruta y de diccionario contra servicios de red y sistemas de autenticación.
 Empleamos el diccionario de *rockyou.txt* y enseguida nos saca la contraseña.
@@ -83,7 +83,7 @@ Ya tenemos el usuario y la contraseña, así que accedemos por el puerto 22 y es
 
 ## 👑 3. Escalada de Privilegios
 #### Enumeración del Sistema
-Ahora necesitamos escalar privilegios para ser root. Analizamos el entorno buscando vectores comunes de escalada y en id vemos que pertenecemos al grupo suda. Miramos que comandos podemos lanzar con sudo y podemos lanzar una bash.
+Ahora necesitamos escalar privilegios para ser root. Analizamos el entorno buscando vectores comunes de escalada y en id vemos que pertenecemos al grupo sudo. Miramos que comandos podemos lanzar con sudo y podemos lanzar una bash.
 
 ```bash
 sudo -l
