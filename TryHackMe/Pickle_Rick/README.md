@@ -22,7 +22,7 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
 
 ```bash
- nmap -p- --open -n -Pn `10.128.161.94
+ nmap -p- --open -n -Pn 10.128.161.94
 ```
 
 **Resultados del escaneo:**
@@ -40,17 +40,16 @@ nmap -p 22,80 -sCV -n 10.128.161.94
 ```
 
 <img width="866" height="374" alt="2escaneopuertos" src="https://github.com/user-attachments/assets/b1d3344c-f1f4-46bf-864d-81eb6f852257" />
-
 <br><br>
 
 
 ### Enumeración Web (Puerto 80)
 
-Al inspeccionar el sitio web, nos encontramos con una página para ayudar a Morty, vamos a mirar el código fuente.
+Al inspeccionar el sitio web, nos encontramos con una página destinada a ayudar a Morty, vamos a mirar el código fuente.
 <img width="1092" height="746" alt="3web" src="https://github.com/user-attachments/assets/9df2629f-f566-4189-bc5a-182fb6295750" />
 <br><br>
 
-Hay un nombre de usuario en un comentario del código html de la web, nos lo guardamos y vamos a realizar enumeraremos con gobuster.
+Hay un nombre de usuario en un comentario del código HTML de la web, nos lo guardamos y vamos a continuar con la enumeración usando Gobuster.
 <img width="1091" height="725" alt="4" src="https://github.com/user-attachments/assets/99128df5-83ee-46a9-98c5-4031be3f4a73" />
 <br><br>
 
@@ -64,7 +63,7 @@ gobuster dir -u http://10.128.161.94 -w /usr/share/wordlists/rockyou.txt -x php,
 <img width="1149" height="571" alt="5enumweb" src="https://github.com/user-attachments/assets/e67acb86-8a85-4b24-8e07-286ff539f8e6" />
 <br><br>
 
-Encontramos unas rutas interesantes: login.php robots.txt y portal.php , así que vamos a mirar que hay y ver si podemos explotarlo.
+Encontramos varias rutas interesantes: login.php, robots.txt y portal.php , así que vamos a mirar qué contienen y si podemos explotarlas.
 <br><br>
 
 ---
@@ -84,7 +83,7 @@ Escribimos el usuario y la contraseña encontrados y estamos dentro, vemos que e
 <img width="1682" height="505" alt="8dentro" src="https://github.com/user-attachments/assets/b1369a21-b7a3-41cb-bec4-da1599394d7d" />
 
 
-Probamos a lanzar un ping y seguido un ls para ver si nos lo ejecuta y nos lo lanza. Ahora podemos ver todo lo que hay en el directrio actual y vemos un txt un poco sospechoso.
+Probamos a ejecutar un comando ping y seguido un ls para ver si nos lo ejecuta y nos lo lanza. Ahora podemos ver todo lo que hay en el directorio actual y vemos un archivo txt un poco sospechoso.
 
 ```bash
 127.0.0.1 ; ls -la
@@ -115,7 +114,7 @@ Entramos al directorio del usuario....
 
 <br><br>
 
-La flag es correcta, vamos a continuar obtenido una consola más interactiva para poder escalar privilegios más facilmente.
+La flag es correcta, vamos a continuar obteniendo una consola más interactiva para poder escalar privilegios más fácilmente.
 
 
 <br><br>
@@ -163,7 +162,7 @@ sudo -l
 
 ### Explotación del Vector de Escalada
 
-Nos aprovechamos del permiso SUID que tenemos para ejecutar find sin contraseña y como el usuario root para convertirnos en él.
+Nos aprovechamos del permiso configurado en sudoers que tenemos, para ejecutar find sin contraseña y como el usuario root para convertirnos en él.
 
 ```bash
 sudo find . -exec /bin/sh \; -quit
