@@ -1,7 +1,23 @@
 172.17.0.2 Apuntes
 
 
+# >_ [Duque]
 
+| Propiedad | Detalle |
+| :--- | :--- |
+| **Plataforma** | DockerLabs |
+| **Dificultad** | 🟢 Fácil  |
+| **OS** | Linux  |
+| **IP de la Máquina** | `172.17.0.2` |
+| **Fecha de resolución** | 2026-09-06 |
+
+---
+
+## 📝 Descripción
+---
+
+## 🔍 1. Fase de Reconocimiento y Enumeración
+Comenzamos realizando un ping a la máquina para ver a qué nos enfrentamos y si está accesible.
 <img width="996" height="157" alt="ping" src="https://github.com/user-attachments/assets/786d002b-7335-4856-9690-33426bcb813a" />
 
 <img width="1257" height="263" alt="1Escaneo" src="https://github.com/user-attachments/assets/6679d51c-d40c-41ae-aaf7-4a0907194a96" />
