@@ -160,17 +160,13 @@ export TERM=xterm
 
 ### Enumeración del Sistema
 
-Comenzamos comprobando los privilegios de los que disponemos mediante sudo -l
+Comenzamos comprobando los privilegios de los que disponemos mediante sudo -l. 
+Al ejecutar el comando, comprobamos que tenemos permisos para ejecutar comandos como el usuario root.
 
 ```bash
 # Comprobamos privilegios de SUDO
 sudo -l
 ```
-
-<img width="879" height="414" alt="17" src="https://github.com/user-attachments/assets/5efb0307-a014-4be4-92ff-54914985891c" />
-<br><br>
-
-Al ejecutar el comando, comprobamos que tenemos permisos para ejecutar comandos como el usuario root.
 
 ---
 
@@ -181,6 +177,9 @@ Nos aprovechamos del permiso configurado en sudoers que tenemos, para ejecutar s
 ```bash
 sudo su
 ```
+
+<img width="879" height="414" alt="17" src="https://github.com/user-attachments/assets/5efb0307-a014-4be4-92ff-54914985891c" />
+<br><br>
 
 Conseguimos ser *root*. Buscamos la flag en la carpeta personal de root.
 <img width="664" height="518" alt="18clave3 - copia" src="https://github.com/user-attachments/assets/de075313-8a68-4268-8fc7-e9f364f7bf76" />
