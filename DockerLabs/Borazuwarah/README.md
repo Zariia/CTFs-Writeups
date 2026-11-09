@@ -49,7 +49,11 @@ Vemos que tenemos un sitio web y el puerto ssh. Como todavía no conocemos ningu
 
 ### Enumeración Web (Puerto 80)
 Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz que solo contiene una única imagen, nos la descargamos para ver si contiene alguna información relevante.
+
+
 <img width="685" height="495" alt="3imagen" src="https://github.com/user-attachments/assets/d56ec4c4-6ce3-4647-85dd-b3d17498e054" />
+
+
 
 ## 💥 2. Fase de Explotación
 Vamos a analizar la imagen por si tuviera alguna información oculta, para ello utilizaremos ExifTool.
