@@ -166,7 +166,7 @@ export TERM=xterm
 sudo -l
 ```
 
-Comenzamos comprobando si tenemos permisos con sudo -l y podemos ejecutar find sin contraseña como el usuario root.
+Comenzamos comprobando si tenemos permisos con sudo -l y vemos que podemos convertirnos en el usuario root.
 
 <img width="879" height="414" alt="17" src="https://github.com/user-attachments/assets/5efb0307-a014-4be4-92ff-54914985891c" />
 <br><br>
@@ -176,10 +176,10 @@ Comenzamos comprobando si tenemos permisos con sudo -l y podemos ejecutar find s
 
 ### Explotación del Vector de Escalada
 
-Nos aprovechamos del permiso configurado en sudoers que tenemos, para ejecutar find sin contraseña y como el usuario root para convertirnos en él.
+Nos aprovechamos del permiso configurado en sudoers que tenemos, para ejecutar sudo su sin contraseña y nos convertimos en el  usuario root.
 
 ```bash
-sudo find . -exec /bin/sh \; -quit
+sudo su
 ```
 
 
