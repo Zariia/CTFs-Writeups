@@ -11,7 +11,7 @@
 ---
 
 ## 📝 Descripción
-Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante abuso de permisos SUDO.
+Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios mediante abuso de permisos de SUDO.
 
 ---
 
@@ -79,7 +79,7 @@ En robots.txt solo hay una palabra que parece una contraseña, podríamos probar
 
 
 ### Vector de Ataque
-Escribimos el usuario y la contraseña encontrados y estamos dentro, vemos que es portal.php, una de las rutas que encontramos previamente pero a la que no podíamos acceder antes.
+Escribimos el usuario y la contraseña encontrados y estamos dentro. Vemos que una vez dentro, nos encontramos en portal.php, una de las rutas que encontramos previamente pero a la cual no podíamos acceder antes de autenticarnos.
 <img width="1682" height="505" alt="8dentro" src="https://github.com/user-attachments/assets/b1369a21-b7a3-41cb-bec4-da1599394d7d" />
 
 
@@ -160,31 +160,29 @@ export TERM=xterm
 
 ### Enumeración del Sistema
 
+Comenzamos comprobando los privilegios de los que disponemos mediante sudo -l
 
 ```bash
 # Comprobamos privilegios de SUDO
 sudo -l
 ```
 
-Comenzamos comprobando si tenemos permisos con sudo -l y vemos que podemos convertirnos en el usuario root.
-
 <img width="879" height="414" alt="17" src="https://github.com/user-attachments/assets/5efb0307-a014-4be4-92ff-54914985891c" />
 <br><br>
 
+Al ejecutar el comando, comprobamos que tenemos permisos para ejecutar comandos como el usuario root.
 
 ---
 
 ### Explotación del Vector de Escalada
 
-Nos aprovechamos del permiso configurado en sudoers que tenemos, para ejecutar sudo su sin contraseña y nos convertimos en el  usuario root.
+Nos aprovechamos del permiso configurado en sudoers que tenemos, para ejecutar sudo su sin necesidad de una contraseña y nos convertimos en el usuario root.
 
 ```bash
 sudo su
 ```
 
-
-
-Conseguimos ser *root* Buscamos la flag en la carpeta personal de root.
+Conseguimos ser *root*. Buscamos la flag en la carpeta personal de root.
 <img width="664" height="518" alt="18clave3 - copia" src="https://github.com/user-attachments/assets/de075313-8a68-4268-8fc7-e9f364f7bf76" />
 <br><br>
 
