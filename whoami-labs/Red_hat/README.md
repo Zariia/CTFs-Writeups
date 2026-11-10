@@ -55,7 +55,7 @@ Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicio
 
 
 ### Enumeración de servicios
-Continuamos con un escaneo más profundo del servicio encontrado:
+Continuamos con un escaneo más profundo de todos los servicios encontrados:
 
 ```bash
 nmap -p 135,139,445,554,2869,10243,49152,49153,49154,49155,49156,49158 -sCV -n 192.168.0.33 -oN targeted.txt
@@ -84,7 +84,7 @@ Nos muestra que es vulnerable a MS17-010. Lo buscamos y vemos que es conocido co
 Abrimos Metasploit y usamos el exploit: (exploit/windows/smb/ms17_010_eternalblue) para obtener una shell de NT AUTHORITY\SYSTEM.
 
 
-Primero indicamos los campos obligatorios,  la IP y el puerto al que vamos a atacar y lo lanzamos
+Primero indicamos los campos obligatorios, la IP y el puerto al que vamos a atacar y lo lanzamos
 <img width="1654" height="705" alt="2026-10-26_20-25" src="https://github.com/user-attachments/assets/d48b0b81-7566-4af9-8ac1-36e858934c1a" />
 <br><br>
 
@@ -106,7 +106,7 @@ Contiene una carpeta llamada HACKED, entramos dentro. Contiene un archivo llamad
 <img width="559" height="522" alt="11" src="https://github.com/user-attachments/assets/90f9b737-01be-4fbb-9ac5-6ebba137904f" />
 <br><br>
 
-Copiamos la flag encontrada y la verificamos y es correcta.
+Copiamos la flag encontrada y la verificamos. La flag es correcta.
 
 
 <img width="548" height="199" alt="12" src="https://github.com/user-attachments/assets/3c4c8f56-6f56-4cc9-98e3-6dc8427c161d" />
