@@ -124,7 +124,7 @@ Copiamos la flag encontrada y la verificamos. La flag es correcta.
 
 ---
 
-## 🏁 4. Conclusiones y Mitigación
+## 🏁 3. Conclusiones y Mitigación
 
 
 La máquina Red Hat presenta una vulnerabilidad crítica en el servicio SMB, identificada como MS17-010 (EternalBlue).
