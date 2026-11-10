@@ -1,7 +1,4 @@
-172.17.0.2 Apuntes
-
-
-# >_ [Duque]
+# 🐳 [Duque]
 
 | Propiedad | Detalle |
 | :--- | :--- |
@@ -41,6 +38,9 @@ http://172.17.0.2/bills/
 
 <img width="1105" height="879" alt="6dfd" src="https://github.com/user-attachments/assets/4c074abe-5f3b-49dc-8020-5527db487599" />
 
+---
+
+## 💥 2. Fase de Explotación 
 
 or 1=1 entre a http://172.17.0.2/bills/panel.php
 Soy mario
@@ -78,6 +78,12 @@ sqlmap 'http://172.17.0.2/bills/index.php' -X POST -H 'User-Agent: Mozilla/5.0 (
 
 
 Entramos por ssh
+
+---
+
+## 👑 3. Escalada de Privilegios
+
+
 Nada en grupos id
 no peude hacer sudo -l
 nada en su carpeta
