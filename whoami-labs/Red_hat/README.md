@@ -124,12 +124,12 @@ Copiamos la flag encontrada y la verificamos. La flag es correcta.
 
 ---
 
-Conclusiones
+🏁 4. Conclusiones y Mitigación
+
+
 La máquina Red Hat presenta una vulnerabilidad crítica en el servicio SMB, identificada como MS17-010 (EternalBlue).
-
-Mediante la enumeración de servicios con Nmap identificamos el puerto 445 como principal vector de ataque. Posteriormente, utilizando Metasploit, conseguimos explotar la vulnerabilidad y obtener ejecución remota de comandos con privilegios NT AUTHORITY\SYSTEM.
-
-Finalmente, realizamos la enumeración del sistema comprometido y localizamos la flag en el escritorio del usuario Cyberdark.
+Mediante la enumeración de servicios con Nmap identificamos el puerto 445. Utilizando Metasploit, conseguimos explotar la vulnerabilidad y obtener ejecución remota de comandos con privilegios NT AUTHORITY\SYSTEM.
+Finalmente, realizamos la enumeración del sistema comprometido y localizamos la flag en una carpeta del escritorio del usuario Cyberdark.
 
 Mitigaciones
 - Aplicar el parche de seguridad MS17-010.
