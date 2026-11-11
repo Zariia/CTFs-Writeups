@@ -17,24 +17,39 @@
 Comenzamos realizando un ping a la máquina para ver a qué nos enfrentamos y si está accesible.
 <img width="996" height="157" alt="ping" src="https://github.com/user-attachments/assets/786d002b-7335-4856-9690-33426bcb813a" />
 
+```bash
+sudo nmap -p- --open -n -Pn 172.17.0.2 -oN allPorts
+```
+
+
+
 <img width="1257" height="263" alt="1Escaneo" src="https://github.com/user-attachments/assets/6679d51c-d40c-41ae-aaf7-4a0907194a96" />
+
+```bash
+nmap -p22,80 -sCV 172.17.0.2 .oN targeted
+```
 
 <img width="1173" height="379" alt="2Escaneo" src="https://github.com/user-attachments/assets/77d884cf-8ec6-4e9f-8fa5-32c0cfb0b35b" />
 
-
-<img width="1451" height="943" alt="3pag" src="https://github.com/user-attachments/assets/a46cbd08-68ee-4f2a-aa45-5c433981076c" />
-<img width="1907" height="470" alt="4gobuster" src="https://github.com/user-attachments/assets/891fc009-52d3-458e-aabf-6d07569252eb" />
-
-
+Entramos a la página web y vemos una página de bienvenida a NaturGas Solutions. Parece la página de uma empresa de gas. Miramos las opciones que tiene esta página pero no vemos nada relevante, por lo que vamos a lanzar la herramienta Gobuster por si tiene alguna dirección más que no vemos.
+```bash
 gobuster dir -u http://172.17.0.2/ -w /usr/share/rockyou.txt -x php -t 100 -k -r --exclude-length 275,11622 --no-error
+```
+<img width="1451" height="943" alt="3pag" src="https://github.com/user-attachments/assets/a46cbd08-68ee-4f2a-aa45-5c433981076c" />
 
-http://172.17.0.2/bills/
 
+Nos encuentra varioas rutas como:
 /index.php            (Status: 200) [Size: 11622]
 /intranet             (Status: 200) [Size: 1889]
 /bills                (Status: 200) [Size: 4676]
+<img width="1907" height="470" alt="4gobuster" src="https://github.com/user-attachments/assets/891fc009-52d3-458e-aabf-6d07569252eb" />
+
+
+Vamos a mirar http://172.17.0.2/bills/ Al entrar vemos un login que nos pide usuario y contraseña, como no tenemos ninguna credencial problamos con inyección sql.
+
 
 <img width="1347" height="887" alt="5login" src="https://github.com/user-attachments/assets/9dc99007-79b1-4066-922d-10831f746c9e" />
+
 
 <img width="1105" height="879" alt="6dfd" src="https://github.com/user-attachments/assets/4c074abe-5f3b-49dc-8020-5527db487599" />
 
@@ -42,8 +57,8 @@ http://172.17.0.2/bills/
 
 ## 💥 2. Fase de Explotación 
 
-or 1=1 entre a http://172.17.0.2/bills/panel.php
-Soy mario
+
+Conseguimos entrar al panel de gestión de facturas, nos lleva a http://172.17.0.2/bills/panel.php Somos el usuario Mario pero no parece que tenga apenas permisos.
 
 <img width="1168" height="908" alt="7dentro" src="https://github.com/user-attachments/assets/1ea645d4-b16a-4090-aa00-21741ac28562" />
 
