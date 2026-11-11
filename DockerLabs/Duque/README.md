@@ -45,17 +45,17 @@ Nos encuentra varioas rutas como:
 <img width="1907" height="470" alt="4gobuster" src="https://github.com/user-attachments/assets/891fc009-52d3-458e-aabf-6d07569252eb" />
 
 
-Vamos a mirar http://172.17.0.2/bills/ Al entrar vemos un login que nos pide usuario y contraseña, como no tenemos ninguna credencial problamos con inyección sql.
 
+---
+
+## 💥 2. Fase de Explotación 
+
+Vamos a mirar http://172.17.0.2/bills/ Al entrar vemos un login que nos pide usuario y contraseña, como no tenemos ninguna credencial problamos con inyección sql.
 
 <img width="1347" height="887" alt="5login" src="https://github.com/user-attachments/assets/9dc99007-79b1-4066-922d-10831f746c9e" />
 
 
 <img width="1105" height="879" alt="6dfd" src="https://github.com/user-attachments/assets/4c074abe-5f3b-49dc-8020-5527db487599" />
-
----
-
-## 💥 2. Fase de Explotación 
 
 
 Conseguimos entrar al panel de gestión de facturas, nos lleva a http://172.17.0.2/bills/panel.php Somos el usuario Mario pero no parece que tenga apenas permisos.
