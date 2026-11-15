@@ -46,7 +46,13 @@ nmap -p 21,25,80,110,139,445,6379,8888 -sCV 172.17.0.2 -oN targeted
 ### Enumeración Web (Puerto 80)
 Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz:
 
+---
 
+## 💥 2. Fase de Explotación 
+
+
+
+---
 
 ## 👑 3. Escalada de Privilegios
 
