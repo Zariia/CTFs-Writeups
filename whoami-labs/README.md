@@ -19,7 +19,7 @@ Bienvenido a mi sección de resoluciones de máquinas de la plataforma **whoami-
 | `Armageddon` | 🟡 Media | Web Exploit | [👁️ Leer Writeup](./Armageddon/) |
 | `La red` | 🟡 Media | Web Exploit | [👁️ Leer Writeup](./La_red/) |
 | `Recon Chain` | 🟡 Media | Pivoting y movimiento lateral | [👁️ Leer Writeup](./Recon_chain/) |
-
+| `Bekeeper` | 🟡 Media | Pivoting y movimiento lateral | [👁️ Leer Writeup](./Bekeeper/) |
 
 ---
 
