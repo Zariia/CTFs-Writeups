@@ -8,7 +8,7 @@ Bienvenido a mi sección de resoluciones de laboratorios de la plataforma **TryH
 
 | Máquina | Dificultad | Tipo / Enfoque | Writeup |
 | :--- | :---: | :--- | :---: |
-| `Pickle Rick` | 🟢 Fácil | x / x | [👁️ Leer Writeup](./Pickle_Rick/) |
+| `Pickle Rick` | 🟢 Fácil | Web / SUDO | [👁️ Leer Writeup](./Pickle_Rick/) |
 
 
 
