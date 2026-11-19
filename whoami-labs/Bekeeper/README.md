@@ -104,7 +104,8 @@ Nos descargamos el archivo encontrado para analizarlo en nuestro ordenador. Cont
 
 ### Explotación del Vector de Escalada
 
-
+Vamos a inicia un cliente SMB interactivo en Python utilizando la herramienta smbclient.py de Impacket para conectarnos al servidor remoto Samba usando el usuario que descubrimos anteriormente, Administrator.
+Al lograr la autenticación, se abre una consola interactiva.
 <img width="1589" height="582" alt="8impacket" src="https://github.com/user-attachments/assets/61ae977a-36c8-41e8-9724-194eb9ee99c7" />
 
 ```bash
@@ -116,11 +117,14 @@ use C$
 Una vez obtenido el acceso, revisamos los directorios personales de los dos usuarios, bk_service y administrator pero no hay nada en ellos.
 <img width="1133" height="279" alt="9nohayna" src="https://github.com/user-attachments/assets/b69ef795-6c5b-4371-a703-960708d3e36b" />
 
+
 Vamos a entrar a la carpeta personal de root, ya que tenemos acceso t descubrimos el fichero flag.txt
 <img width="586" height="159" alt="10rootflag" src="https://github.com/user-attachments/assets/d81162fb-13f4-470b-85fd-41ba891ec47c" />
 
+
 Ponemos la flag encontrada y hemos resuelto la máquina.
 <img width="569" height="565" alt="flag" src="https://github.com/user-attachments/assets/7706915a-73a4-4341-bb0c-e455277b2d4b" />
+
 
 
 ---
