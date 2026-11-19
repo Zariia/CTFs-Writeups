@@ -14,7 +14,7 @@
 
 📝 Descripción
 
-Máquina enfocada en la explotación de un servicio web vulnerable y posterior escalada de privilegios.
+Máquina enfocada en la explotación de un servicio SMB vulnerable y posterior escalada de privilegios.
 
 ---
 
@@ -22,7 +22,7 @@ Máquina enfocada en la explotación de un servicio web vulnerable y posterior e
 ## 🔍 1. Fase de Reconocimiento y Enumeración
 
 ### Escaneo de Puertos (`nmap`)
-Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios activos en la máquina objetivo:
+Lanzamos un escaneo inicial para identificar los puertos abiertos y los servicios expuestos en la máquina objetivo:
 
 ```bash
 sudo nmap -p- --open --min-rate=5000 -n -Pn 172.17.0.2 -oN allPorts.txt
@@ -42,8 +42,7 @@ sudo nmap -p- --open --min-rate=5000 -n -Pn 172.17.0.2 -oN allPorts.txt
 * **Puerto 6379/TCP**: redis
 * **Puerto 8888/TCP**: sun-answerbook
 
-
-Realizamos un escaneo más profundo de los servicios encontrados:
+Una vez identificados todos los puertos abiertos, realizamos un escaneo más profundo de los servicios encontrados:
 ```bash
 nmap -p 21,25,80,110,139,445,6379,8888 -sCV 172.17.0.2 -oN targeted
 ```
@@ -51,6 +50,9 @@ nmap -p 21,25,80,110,139,445,6379,8888 -sCV 172.17.0.2 -oN targeted
 
 <img width="1553" height="895" alt="Escaneo de puertos" src="https://github.com/user-attachments/assets/57840bf8-0b6c-4d89-bedb-a767afdd33fd" />
 
+
+Los resultados obtenidos muestran varios servicios expuestos, entre los que destacan SMB (445) y HTTP (80).
+Estos servicios serán los principales objetivos de las siguientes fases de enumeración.
 
 
 ### Enumeración Web (Puerto 80)
@@ -69,14 +71,25 @@ Comenzamos enumerando si smb tiene vulnerabilidades con los scripts de nmap
 
 ## 💥 2. Fase de Explotación 
 
+Dado que SMB es uno de los servicios expuestos, comenzamos enumerando los recursos compartidos disponibles en el servidor.
+
+Para ello, utilizamos smbclient e intentamos acceder sin proporcionar credenciales:
+```bash
 smbclient -L //172.17.0.2 -N
+```
+
 <img width="818" height="232" alt="5smb in" src="https://github.com/user-attachments/assets/86236c8f-f39a-4a81-bfc1-c741565a93cf" />
 
+```bash
 smbclient //172.17.0.2/backups -N
-<img width="951" height="219" alt="6mio" src="https://github.com/user-attachments/assets/6a38db46-67fa-4cce-b519-954bd6572f36" />
-Nos lo descargamos
+```
 
-Contiene dos hashes
+<img width="951" height="219" alt="6mio" src="https://github.com/user-attachments/assets/6a38db46-67fa-4cce-b519-954bd6572f36" />
+
+
+Nos descargamos el archivo encontrado para analizarlo en nuestro ordenador. Contiene dos hashes que podrían permitirnos acceder a la máquina.
+
+
 <img width="775" height="76" alt="7hashes" src="https://github.com/user-attachments/assets/d26346a4-6192-475b-a1a7-a55d81806e78" />
 
 
@@ -86,11 +99,11 @@ Contiene dos hashes
 ## 👑 3. Escalada de Privilegios
 
 ### Enumeración del Sistema
-Analizamos el entorno buscando vectores comunes de escalada (permisos SUID, tareas Cron, capacidades, contraseñas en texto plano).
+
 
 
 ### Explotación del Vector de Escalada
-Encontrado un binario o configuración débil. Explicar cómo se abusa de ello para convertirse en `root`......
+
 
 <img width="1589" height="582" alt="8impacket" src="https://github.com/user-attachments/assets/61ae977a-36c8-41e8-9724-194eb9ee99c7" />
 
@@ -100,7 +113,7 @@ python3 /usr/share/doc/python3-impacket/examples/smbclient.py Administrator@172.
 
 use C$
 
-Revisamos las carpetas personales de los dos usuarios, bk_service y administrator pero no hay nada en ellas.
+Una vez obtenido el acceso, revisamos los directorios personales de los dos usuarios, bk_service y administrator pero no hay nada en ellos.
 <img width="1133" height="279" alt="9nohayna" src="https://github.com/user-attachments/assets/b69ef795-6c5b-4371-a703-960708d3e36b" />
 
 Vamos a entrar a la carpeta personal de root, ya que tenemos acceso t descubrimos el fichero flag.txt
@@ -113,8 +126,18 @@ Ponemos la flag encontrada y hemos resuelto la máquina.
 ---
 
 ## 🏁 4. Conclusiones y Mitigación
-* **Vulnerabilidad Principal**: .
-* **Remediación**: .
+
+Durante la resolución de Bekeeper h trabajado con diferentes técnicas de enumeración y explotación de servicios expuestos, prestando especial atención a SMB y a la gestión de credenciales.
+
+* **Vulnerabilidad Principal**:
+* SMB: exposición de recursos compartidos sin autenticación.
+* Credenciales: presencia de información sensible en archivos accesibles.
+
+
+* **Remediación**:
+* Restringir el acceso a los recursos compartidos SMB mediante autenticación y permisos adecuados.
+* Evitar almacenar hashes, contraseñas u otra información sensible en directorios compartidos.
+* Revisar periódicamente los servicios expuestos y sus configuraciones.
 
 
 
