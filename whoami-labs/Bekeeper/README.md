@@ -57,24 +57,28 @@ nmap -p 21,25,80,110,139,445,6379,8888 -sCV 172.17.0.2 -oN targeted
 Al inspeccionar el sitio web, nos encontramos con la siguiente interfaz:
 <img width="1575" height="941" alt="3web" src="https://github.com/user-attachments/assets/79797ab2-2cbf-4a69-89e9-aa1b746d9a0f" />
 
+Tras revisarla no encontramos nada relevante que podamos explotar, así que vamos a mirar el puerto SMB que parece más interesante.
+
+
+### Enumeración SMB (Puerto 445)
+Comenzamos enumerando si smb tiene vulnerabilidades con los scripts de nmap
+<img width="1323" height="235" alt="4smb" src="https://github.com/user-attachments/assets/265e45e0-67d2-4b85-b047-87a25bd8e245" />
 
 
 ---
 
 ## 💥 2. Fase de Explotación 
 
-<img width="1323" height="235" alt="4smb" src="https://github.com/user-attachments/assets/265e45e0-67d2-4b85-b047-87a25bd8e245" />
-
+smbclient -L //172.17.0.2 -N
 <img width="818" height="232" alt="5smb in" src="https://github.com/user-attachments/assets/86236c8f-f39a-4a81-bfc1-c741565a93cf" />
 
+smbclient //172.17.0.2/backups -N
 <img width="951" height="219" alt="6mio" src="https://github.com/user-attachments/assets/6a38db46-67fa-4cce-b519-954bd6572f36" />
+Nos lo descargamos
 
-
+Contiene dos hashes
 <img width="775" height="76" alt="7hashes" src="https://github.com/user-attachments/assets/d26346a4-6192-475b-a1a7-a55d81806e78" />
 
-
-smbclient -L //172.17.0.2 -N
-smbclient //172.17.0.2/backups -N
 
 
 ---
@@ -96,19 +100,21 @@ python3 /usr/share/doc/python3-impacket/examples/smbclient.py Administrator@172.
 
 use C$
 
-
+Revisamos las carpetas personales de los dos usuarios, bk_service y administrator pero no hay nada en ellas.
 <img width="1133" height="279" alt="9nohayna" src="https://github.com/user-attachments/assets/b69ef795-6c5b-4371-a703-960708d3e36b" />
 
+Vamos a entrar a la carpeta personal de root, ya que tenemos acceso t descubrimos el fichero flag.txt
 <img width="586" height="159" alt="10rootflag" src="https://github.com/user-attachments/assets/d81162fb-13f4-470b-85fd-41ba891ec47c" />
 
+Ponemos la flag encontrada y hemos resuelto la máquina.
 <img width="569" height="565" alt="flag" src="https://github.com/user-attachments/assets/7706915a-73a4-4341-bb0c-e455277b2d4b" />
 
 
 ---
 
 ## 🏁 4. Conclusiones y Mitigación
-* **Vulnerabilidad Principal**: Falta de sanitización en los parámetros web de entrada / Binarios con permisos SUDO mal configurados.
-* **Remediación**: Actualizar los servicios vulnerables, implementar *whitelisting* en los inputs y aplicar el principio de menor privilegio retirando accesos SUDO innecesarios.
+* **Vulnerabilidad Principal**: .
+* **Remediación**: .
 
 
 
